@@ -1,0 +1,350 @@
+{
+  "metadata": {
+    "source": "Brewers Association Beer Style Guidelines",
+    "year": 2024,
+    "version": "2026 Edition",
+    "last_updated": "2024-01-01"
+  },
+  "categories": {
+    "british_origin_ales": {
+      "name": "British Origin Ale Styles",
+      "styles": [
+        {
+          "id": "BA-001",
+          "name": "Ordinary Bitter",
+          "og_min": 1.033, "og_max": 1.038,
+          "fg_min": 1.006, "fg_max": 1.012,
+          "ibu_min": 20, "ibu_max": 35,
+          "srm_min": 8, "srm_max": 14,
+          "abv_min": 3.0, "abv_max": 4.2
+        },
+        {
+          "id": "BA-002",
+          "name": "Best Bitter or Special Bitter",
+          "og_min": 1.038, "og_max": 1.045,
+          "fg_min": 1.006, "fg_max": 1.012,
+          "ibu_min": 28, "ibu_max": 46,
+          "srm_min": 8, "srm_max": 14,
+          "abv_min": 4.0, "abv_max": 4.8
+        },
+        {
+          "id": "BA-003",
+          "name": "Extra Special Bitter (ESB)",
+          "og_min": 1.046, "og_max": 1.060,
+          "fg_min": 1.010, "fg_max": 1.016,
+          "ibu_min": 30, "ibu_max": 55,
+          "srm_min": 8, "srm_max": 14,
+          "abv_min": 4.8, "abv_max": 5.8
+        },
+        {
+          "id": "BA-004",
+          "name": "English-Style Pale Ale",
+          "og_min": 1.040, "og_max": 1.056,
+          "fg_min": 1.008, "fg_max": 1.016,
+          "ibu_min": 20, "ibu_max": 40,
+          "srm_min": 5, "srm_max": 12,
+          "abv_min": 4.5, "abv_max": 5.5
+        },
+        {
+          "id": "BA-005",
+          "name": "English-Style India Pale Ale",
+          "og_min": 1.046, "og_max": 1.064,
+          "fg_min": 1.012, "fg_max": 1.018,
+          "ibu_min": 35, "ibu_max": 63,
+          "srm_min": 6, "srm_max": 14,
+          "abv_min": 4.5, "abv_max": 7.1
+        }
+      ]
+    },
+    "north_american_origin_ales": {
+      "name": "North American Origin Ale Styles",
+      "styles": [
+        {
+          "id": "BA-020",
+          "name": "Blonde Ale",
+          "og_min": 1.038, "og_max": 1.054,
+          "fg_min": 1.008, "fg_max": 1.013,
+          "ibu_min": 15, "ibu_max": 25,
+          "srm_min": 3, "srm_max": 6,
+          "abv_min": 3.8, "abv_max": 5.5
+        },
+        {
+          "id": "BA-021",
+          "name": "American Pale Ale",
+          "og_min": 1.044, "og_max": 1.050,
+          "fg_min": 1.008, "fg_max": 1.014,
+          "ibu_min": 30, "ibu_max": 50,
+          "srm_min": 4, "srm_max": 10,
+          "abv_min": 4.5, "abv_max": 5.6
+        },
+        {
+          "id": "BA-022",
+          "name": "Juicy or Hazy Pale Ale",
+          "og_min": 1.044, "og_max": 1.052,
+          "fg_min": 1.008, "fg_max": 1.016,
+          "ibu_min": 30, "ibu_max": 50,
+          "srm_min": 4, "srm_max": 7,
+          "abv_min": 4.5, "abv_max": 5.6
+        },
+        {
+          "id": "BA-023",
+          "name": "American India Pale Ale (IPA)",
+          "og_min": 1.060, "og_max": 1.070,
+          "fg_min": 1.012, "fg_max": 1.018,
+          "ibu_min": 50, "ibu_max": 70,
+          "srm_min": 6, "srm_max": 12,
+          "abv_min": 6.3, "abv_max": 7.5
+        },
+        {
+          "id": "BA-024",
+          "name": "Juicy or Hazy India Pale Ale",
+          "og_min": 1.060, "og_max": 1.070,
+          "fg_min": 1.012, "fg_max": 1.020,
+          "ibu_min": 50, "ibu_max": 70,
+          "srm_min": 5, "srm_max": 10,
+          "abv_min": 6.3, "abv_max": 7.5
+        },
+        {
+          "id": "BA-025",
+          "name": "Imperial India Pale Ale",
+          "og_min": 1.070, "og_max": 1.090,
+          "fg_min": 1.012, "fg_max": 1.020,
+          "ibu_min": 65, "ibu_max": 100,
+          "srm_min": 5, "srm_max": 13,
+          "abv_min": 7.6, "abv_max": 10.6
+        },
+        {
+          "id": "BA-026",
+          "name": "Juicy or Hazy Imperial India Pale Ale",
+          "og_min": 1.070, "og_max": 1.090,
+          "fg_min": 1.012, "fg_max": 1.020,
+          "ibu_min": 50, "ibu_max": 80,
+          "srm_min": 5, "srm_max": 10,
+          "abv_min": 7.6, "abv_max": 10.6
+        },
+        {
+          "id": "BA-027",
+          "name": "American Amber Ale",
+          "og_min": 1.048, "og_max": 1.058,
+          "fg_min": 1.012, "fg_max": 1.018,
+          "ibu_min": 30, "ibu_max": 40,
+          "srm_min": 11, "srm_max": 18,
+          "abv_min": 4.8, "abv_max": 6.1
+        },
+        {
+          "id": "BA-028",
+          "name": "American Brown Ale",
+          "og_min": 1.040, "og_max": 1.060,
+          "fg_min": 1.010, "fg_max": 1.018,
+          "ibu_min": 25, "ibu_max": 45,
+          "srm_min": 15, "srm_max": 26,
+          "abv_min": 4.0, "abv_max": 6.4
+        },
+        {
+          "id": "BA-029",
+          "name": "American Porter",
+          "og_min": 1.050, "og_max": 1.065,
+          "fg_min": 1.012, "fg_max": 1.016,
+          "ibu_min": 25, "ibu_max": 40,
+          "srm_min": 30, "srm_max": 40,
+          "abv_min": 5.1, "abv_max": 6.6
+        },
+        {
+          "id": "BA-030",
+          "name": "American Stout",
+          "og_min": 1.050, "og_max": 1.075,
+          "fg_min": 1.010, "fg_max": 1.022,
+          "ibu_min": 35, "ibu_max": 60,
+          "srm_min": 40, "srm_max": 999,
+          "abv_min": 5.7, "abv_max": 8.9
+        },
+        {
+          "id": "BA-031",
+          "name": "Imperial Stout",
+          "og_min": 1.080, "og_max": 1.100,
+          "fg_min": 1.020, "fg_max": 1.030,
+          "ibu_min": 50, "ibu_max": 80,
+          "srm_min": 40, "srm_max": 999,
+          "abv_min": 7.0, "abv_max": 12.0
+        }
+      ]
+    },
+    "german_origin_lager_styles": {
+      "name": "German Origin Lager Styles",
+      "styles": [
+        {
+          "id": "BA-070",
+          "name": "German-Style Pilsener",
+          "og_min": 1.044, "og_max": 1.050,
+          "fg_min": 1.006, "fg_max": 1.012,
+          "ibu_min": 25, "ibu_max": 40,
+          "srm_min": 3, "srm_max": 4,
+          "abv_min": 4.6, "abv_max": 5.3
+        },
+        {
+          "id": "BA-071",
+          "name": "Bohemian-Style Pilsener",
+          "og_min": 1.044, "og_max": 1.056,
+          "fg_min": 1.014, "fg_max": 1.020,
+          "ibu_min": 30, "ibu_max": 45,
+          "srm_min": 3, "srm_max": 6,
+          "abv_min": 4.1, "abv_max": 5.1
+        },
+        {
+          "id": "BA-072",
+          "name": "Munich-Style Helles",
+          "og_min": 1.044, "og_max": 1.050,
+          "fg_min": 1.008, "fg_max": 1.012,
+          "ibu_min": 18, "ibu_max": 25,
+          "srm_min": 4, "srm_max": 5,
+          "abv_min": 4.8, "abv_max": 5.6
+        },
+        {
+          "id": "BA-073",
+          "name": "German-Style Märzen",
+          "og_min": 1.050, "og_max": 1.060,
+          "fg_min": 1.012, "fg_max": 1.020,
+          "ibu_min": 18, "ibu_max": 25,
+          "srm_min": 4, "srm_max": 15,
+          "abv_min": 5.1, "abv_max": 6.0
+        },
+        {
+          "id": "BA-074",
+          "name": "German-Style Dunkel/Munich Dunkel",
+          "og_min": 1.048, "og_max": 1.056,
+          "fg_min": 1.014, "fg_max": 1.018,
+          "ibu_min": 16, "ibu_max": 25,
+          "srm_min": 15, "srm_max": 28,
+          "abv_min": 4.8, "abv_max": 5.6
+        },
+        {
+          "id": "BA-075",
+          "name": "German-Style Schwarzbier",
+          "og_min": 1.044, "og_max": 1.052,
+          "fg_min": 1.010, "fg_max": 1.016,
+          "ibu_min": 22, "ibu_max": 30,
+          "srm_min": 25, "srm_max": 40,
+          "abv_min": 3.8, "abv_max": 5.0
+        },
+        {
+          "id": "BA-076",
+          "name": "Traditional German-Style Bock",
+          "og_min": 1.066, "og_max": 1.074,
+          "fg_min": 1.018, "fg_max": 1.024,
+          "ibu_min": 20, "ibu_max": 30,
+          "srm_min": 20, "srm_max": 30,
+          "abv_min": 6.3, "abv_max": 7.6
+        },
+        {
+          "id": "BA-077",
+          "name": "German-Style Doppelbock",
+          "og_min": 1.074, "og_max": 1.080,
+          "fg_min": 1.014, "fg_max": 1.020,
+          "ibu_min": 17, "ibu_max": 27,
+          "srm_min": 12, "srm_max": 30,
+          "abv_min": 6.6, "abv_max": 7.9
+        }
+      ]
+    },
+    "north_american_origin_lager_styles": {
+      "name": "North American Origin Lager Styles",
+      "styles": [
+        {
+          "id": "BA-080",
+          "name": "American Light Lager",
+          "og_min": 1.024, "og_max": 1.040,
+          "fg_min": 1.002, "fg_max": 1.008,
+          "ibu_min": 4, "ibu_max": 10,
+          "srm_min": 2, "srm_max": 4,
+          "abv_min": 3.5, "abv_max": 4.4
+        },
+        {
+          "id": "BA-081",
+          "name": "American Lager",
+          "og_min": 1.040, "og_max": 1.048,
+          "fg_min": 1.006, "fg_max": 1.010,
+          "ibu_min": 5, "ibu_max": 13,
+          "srm_min": 2, "srm_max": 4,
+          "abv_min": 4.1, "abv_max": 5.1
+        },
+        {
+          "id": "BA-082",
+          "name": "American Amber Lager",
+          "og_min": 1.042, "og_max": 1.056,
+          "fg_min": 1.010, "fg_max": 1.018,
+          "ibu_min": 18, "ibu_max": 30,
+          "srm_min": 6, "srm_max": 14,
+          "abv_min": 4.8, "abv_max": 5.5
+        },
+        {
+          "id": "BA-083",
+          "name": "India Pale Lager / Cold IPA",
+          "og_min": 1.058, "og_max": 1.068,
+          "fg_min": 1.008, "fg_max": 1.015,
+          "ibu_min": 50, "ibu_max": 70,
+          "srm_min": 3, "srm_max": 6,
+          "abv_min": 6.0, "abv_max": 7.5
+        }
+      ]
+    },
+    "belgian_french_origin_ales": {
+      "name": "Belgian and French Origin Ale Styles",
+      "styles": [
+        {
+          "id": "BA-050",
+          "name": "Belgian-Style Witbier (White Beer)",
+          "og_min": 1.044, "og_max": 1.050,
+          "fg_min": 1.006, "fg_max": 1.010,
+          "ibu_min": 10, "ibu_max": 17,
+          "srm_min": 2, "srm_max": 4,
+          "abv_min": 4.8, "abv_max": 5.6
+        },
+        {
+          "id": "BA-051",
+          "name": "Belgian-Style Blonde Ale",
+          "og_min": 1.062, "og_max": 1.075,
+          "fg_min": 1.008, "fg_max": 1.018,
+          "ibu_min": 15, "ibu_max": 30,
+          "srm_min": 4, "srm_max": 7,
+          "abv_min": 6.3, "abv_max": 7.9
+        },
+        {
+          "id": "BA-052",
+          "name": "Saison",
+          "og_min": 1.040, "og_max": 1.060,
+          "fg_min": 1.004, "fg_max": 1.008,
+          "ibu_min": 20, "ibu_max": 38,
+          "srm_min": 4, "srm_max": 8,
+          "abv_min": 4.4, "abv_max": 6.8
+        },
+        {
+          "id": "BA-053",
+          "name": "Belgian-Style Dubbel",
+          "og_min": 1.060, "og_max": 1.075,
+          "fg_min": 1.012, "fg_max": 1.016,
+          "ibu_min": 20, "ibu_max": 30,
+          "srm_min": 16, "srm_max": 36,
+          "abv_min": 6.3, "abv_max": 7.6
+        },
+        {
+          "id": "BA-054",
+          "name": "Belgian-Style Tripel",
+          "og_min": 1.070, "og_max": 1.092,
+          "fg_min": 1.008, "fg_max": 1.018,
+          "ibu_min": 20, "ibu_max": 45,
+          "srm_min": 4, "srm_max": 7,
+          "abv_min": 7.1, "abv_max": 10.1
+        },
+        {
+          "id": "BA-055",
+          "name": "Belgian-Style Quadrupel",
+          "og_min": 1.084, "og_max": 1.120,
+          "fg_min": 1.014, "fg_max": 1.020,
+          "ibu_min": 25, "ibu_max": 50,
+          "srm_min": 8, "srm_max": 20,
+          "abv_min": 9.1, "abv_max": 14.2
+        }
+      ]
+    }
+  }
+}

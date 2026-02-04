@@ -37,6 +37,9 @@ class FinishedProductInventory(Base):
     product_type = Column(String(20), nullable=False, index=True)  # ProductType enum
     category = Column(String(30), nullable=False, index=True)      # ProductCategory enum
     
+    # Origin (WHO produces - critical for Transfer Pricing)
+    origin_type = Column(String(20), nullable=False, index=True)   # OriginType enum
+    
     # Trazabilidad (depending on type)
     production_batch_id = Column(Integer, nullable=True)           # Para cerveza propia
     supplier_id = Column(Integer, nullable=True)                   # Para comercial/guest

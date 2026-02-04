@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Recipes>
+  <Recipe>
+    <F_R_NAME>American IPA</F_R_NAME>
+    <F_R_BATCH_SIZE>20.0</F_R_BATCH_SIZE>
+    <F_R_STYLE_NAME>American IPA</F_R_STYLE_NAME>
+    <F_R_BREWER>Desert Brew Co</F_R_BREWER>
+    <F_R_OG>1.065</F_R_OG>
+    <F_R_FG>1.012</F_R_FG>
+    <F_R_ABV>6.96</F_R_ABV>
+    <F_R_IBU>65.0</F_R_IBU>
+    <F_R_COLOR>8.5</F_R_COLOR>
+    <F_R_EFFICIENCY>75.0</F_R_EFFICIENCY>
+    <F_R_NOTES>Desert Brew house IPA recipe. Big citrus and pine hop character.</F_R_NOTES>
+    <Ingredients>
+      <Grain>
+        <F_G_NAME>Pale Malt, Maris Otter</F_G_NAME>
+        <F_G_AMOUNT>5.0</F_G_AMOUNT>
+        <F_G_COLOR>3.0</F_G_COLOR>
+        <F_G_TYPE>Grain</F_G_TYPE>
+      </Grain>
+      <Grain>
+        <F_G_NAME>Caramel/Crystal Malt - 40L</F_G_NAME>
+        <F_G_AMOUNT>0.5</F_G_AMOUNT>
+        <F_G_COLOR>40.0</F_G_COLOR>
+        <F_G_TYPE>Grain</F_G_TYPE>
+      </Grain>
+      <Hops>
+        <F_H_NAME>Cascade</F_H_NAME>
+        <F_H_AMOUNT>0.050</F_H_AMOUNT>
+        <F_H_BOIL_TIME>60.0</F_H_BOIL_TIME>
+        <F_H_USE>Boil</F_H_USE>
+        <F_H_ALPHA>5.5</F_H_ALPHA>
+      </Hops>
+      <Hops>
+        <F_H_NAME>Centennial</F_H_NAME>
+        <F_H_AMOUNT>0.030</F_H_AMOUNT>
+        <F_H_BOIL_TIME>15.0</F_H_BOIL_TIME>
+        <F_H_USE>Boil</F_H_USE>
+        <F_H_ALPHA>10.0</F_H_ALPHA>
+      </Hops>
+      <Hops>
+        <F_H_NAME>Citra</F_H_NAME>
+        <F_H_AMOUNT>0.040</F_H_AMOUNT>
+        <F_H_BOIL_TIME>0.0</F_H_BOIL_TIME>
+        <F_H_USE>Dry Hop</F_H_USE>
+        <F_H_ALPHA>12.0</F_H_ALPHA>
+      </Hops>
+      <Yeast>
+        <F_Y_NAME>Safale US-05</F_Y_NAME>
+        <F_Y_LAB>Fermentis</F_Y_LAB>
+        <F_Y_PRODUCT_ID>US-05</F_Y_PRODUCT_ID>
+        <F_Y_TYPE>Ale</F_Y_TYPE>
+      </Yeast>
+    </Ingredients>
+  </Recipe>
+</Recipes>

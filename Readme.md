@@ -58,15 +58,16 @@ Desert Brew OS/
 
 ### Bounded Contexts (DDD)
 
-| Servicio | Contexto | Responsabilidad Principal | 
-|----------|----------|---------------------------|
-| **Inventory** | Activos & Logística | FSM de Barriles, FIFO de Materia Prima, Corrección Física de Volumen |
-| **Production** | Proceso | Recetas, Lotes, Embotellado/Embarrilado, Fermentación, Cocción, Telemetría IoT |
-| **Sales B2B** | Transacción Mayorista | Credit Control, Catálogo Digital (estilo BEES), Rutas, Pedidos Multi-SKU |
-| **POS Taproom** | Venta Directa | Catálogo de Alimentos/Bebidas, Cervezas Invitadas, Propinas, Nómina de Meseros |
-| **Finance** | Valuación | WAC, IEPS/IVA, Balance General, Estado de Resultados, Flujo de Efectivo |
-| **ML** | Inteligencia | Predicción Fermentación, Forecast de Ventas, Optimización de Insumos |
-| **Admin** | Administración | RH (Nóminas Producción), Proveedores, Clientes, Costos Operativos | 
+| Servicio | Contexto | Responsabilidad Principal | Status |
+|----------|----------|---------------------------|--------|
+| **Inventory** | Activos & Logística | FSM de Barriles, FIFO de Materia Prima, Corrección Física de Volumen | ✅ v0.4.0 |
+| **Production** | Proceso | Recetas BeerSmith, Lotes con State Machine, Cost Allocation FIFO, Telemetría IoT | ✅ v0.1.0 |
+| **Sales B2B** | Transacción Mayorista | Credit Control, Catálogo Digital (estilo BEES), Rutas, Pedidos Multi-SKU | 🔄 v0.1.0 (core) |
+| **POS Taproom** | Venta Directa | Catálogo de Alimentos/Bebidas, Cervezas Invitadas, Propinas, Nómina de Meseros | 📋 Planned |
+| **Finance** | Valuación | Transfer Pricing, P&L Segregation, IEPS/IVA, Balance General, Estado de Resultados | ✅ v0.1.0 |
+| **Security** | Autenticación | Device Enrollment Ed25519, Signature Verification, Offline PoD | ✅ v0.1.0 |
+| **ML** | Inteligencia | Predicción Fermentación, Forecast de Ventas, Optimización de Insumos | 📋 Planned |
+| **Admin** | Administración | RH (Nóminas Producción), Proveedores, Clientes, Costos Operativos | 📋 Planned | 
 ---
 
 ## 🔑 Reglas de Negocio Críticas

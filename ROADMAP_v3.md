@@ -123,13 +123,16 @@ Seguridad → Bridge Financiero → Producción Real → Logística → Hospital
 ### Sprint 4: Production Service (MES) Core ✅
 **Status:** 🟢 COMPLETADO (Core + Sprint 4.5 Integrations)
 
-#### A. BeerSmith Integration ✅
+#### A. BeerSmith + Manual Recipe Management ✅
 - [x] XML Parser (.bsmx → Recipe model)
 - [x] Endpoint: `POST /api/v1/production/recipes/import`
-- [x] Parse: fermentables, hops, yeast, water
-- [x] 4 recipe endpoints totales
+- [x] Endpoint: `POST /api/v1/production/recipes` (manual JSON creation)
+- [x] Endpoint: `PATCH /api/v1/production/recipes/{id}` (update)
+- [x] Parse: fermentables, hops, yeast, water, mash steps
+- [x] Validated sub-schemas: `FermentableInput`, `HopInput`, `YeastInput`, `MashStepInput`
+- [x] 6 recipe endpoints totales
 - [x] Sample .bsmx fixture (American IPA)
-- [x] 6 tests parser
+- [x] 6 parser tests + 4 manual recipe tests
 
 #### B. FIFO Cost Allocation ✅
 - [x] BatchIngredientAllocation model
@@ -155,10 +158,11 @@ Seguridad → Bridge Financiero → Producción Real → Logística → Hospital
 - [x] Mock dependency overrides for local testing
 
 **Entregables Sprint 4 + 4.5:**
-- ✅ 24 endpoints (4 recipe + 6 batch + 2 cost + 6 ingredients + 6 fixed costs)
-- ✅ 49 tests
+- ✅ 26 endpoints (6 recipe + 6 batch + 2 cost + 6 ingredients + 6 fixed costs)
+- ✅ 53 tests
+- ✅ Manual + BeerSmith recipe creation
 - ✅ Inter-service integration operational
-- ✅ Real FIFO cost allocation
+- ✅ Real FIFO cost allocation + real overhead ($32.17/L)
 
 ---
 

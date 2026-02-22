@@ -15,7 +15,15 @@
 - **Stock Batches** - Tracking de lotes individuales
 - **Movimientos** - Audit trail completo
 - **Transfers** - Movimientos entre ubicaciones
-- **Categorías:** Maltas, Lúpulos, Levaduras, Botellas, Tapas, Químicos, Etiquetas, Gases
+- **Categorías:**
+  - `MALT` — Maltas (Pale Ale, Munich, Crystal, etc.)
+  - `HOPS` — Lúpulos (Cascade, Mosaic, Saaz, etc.)
+  - `YEAST` — Levaduras (US-05, 34/70, etc.)
+  - `PACKAGING` — Barriles desechables, tapas, etiquetas
+  - `BOTTLES` — Botellas de vidrio
+  - `CHEMICALS` — Químicos de limpieza/sanitización
+  - `LABELS` — Etiquetas
+  - `GASES` — CO₂, O₂ (también en Gas Tanks)
 
 ### ✅ Proveedores (Suppliers)
 - CRUD completo de proveedores
@@ -38,14 +46,16 @@
 - **Audit Trail** - Historial completo de transiciones
 - **At-Risk Reports** - Kegs en clientes > días threshold
 
-### ✅ Producto Terminado (Cold Room) - **NUEVO v0.4.0** ✨
-- **3 Tipos de Producto:** Own Production, Commercial, Guest Craft
+### ✅ Producto Terminado (Cold Room) - **v0.4.0** ✨
+- **Cerveza propia** (`HOUSE`) — Producción Desert Brew → Transfer Pricing (+15%)
+- **Cerveza comercial** (`COMMERCIAL`) — Corona, Modelo, etc. → Passthrough
+- **Cerveza invitada** (`GUEST`) — Colaboraciones craft → Passthrough
+- **Merchandising** (`MERCHANDISE`) — Gorras, playeras, vasos, growlers
+- **Categorías:** `BEER_KEG`, `BEER_BOTTLE`, `BEER_CAN`, `MERCH_CAP`, `MERCH_SHIRT`, `MERCH_GLASS`, `MERCH_GROWLER`
 - **Temperature Monitoring** - Alertas automáticas >7°C
 - **Stock Summary** - Dashboard por tipo/categoría
 - **Slow-Moving Analysis** - Productos sin movimiento
 - **Location Tracking** - Cold rooms + shelf positions
-- **Partial Moves** - Split inventory support
-- **Audit Trail** - Todos los movimientos registrados
 
 ---
 

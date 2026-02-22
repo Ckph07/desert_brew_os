@@ -24,15 +24,15 @@ Flow: Recipe → Batch → FIFO Cost → Finished Product → Sales Note → Inv
 | Inventory | 8001 | 39 | 95 | 🟢 |
 | Sales | 8002 | 24 | 41 | 🟢 |
 | Security | 8003 | 8 | 20+ | 🟢 |
-| Production | 8004 | 24 | 37+ | 🟢 |
+| Production | 8004 | 26 | 53 | 🟢 |
 | Finance | 8005 | 5 | 20+ | 🟢 |
 | Payroll | 8006 | 11 | 21 | 🟢 |
-| **Total** | — | **111** | **234+** | — |
+| **Total** | — | **113** | **250+** | — |
 
 ### Key Capabilities
-- ✅ FIFO automatic with SQL locking (raw materials)
-- ✅ Keg Asset Management (10-state FSM, QR/RFID)
-- ✅ BeerSmith recipe import (.bsmx XML)
+- ✅ FIFO automatic with SQL locking (maltas, lúpulos, levaduras, packaging)
+- ✅ Keg Asset Management (10-state FSM, QR/RFID) + barriles desechables como PACKAGING
+- ✅ Finished products: cerveza propia, comercial, invitada + merch (gorras, playeras, vasos, growlers)
 - ✅ Production batch lifecycle (6 states)
 - ✅ Transfer Pricing (HOUSE +15%, GUEST 0%, MERCH +25%)
 - ✅ P&L segregation (Factory vs Taproom)
@@ -41,9 +41,10 @@ Flow: Recipe → Batch → FIFO Cost → Finished Product → Sales Note → Inv
 - ✅ Dual Pricing (fixed vs theoretical) with margin reports
 - ✅ Sales Notes with PDF/PNG export + inventory deduction
 - ✅ Payroll: brewery fixed + taproom (fixed/temps, tip pool, taxi)
-- ✅ **NEW:** Ingredient price CRUD (reference pricing)
-- ✅ **NEW:** Fixed monthly cost CRUD ($57,900 → $32.17/L)
-- ✅ **NEW:** CostAllocator uses real overhead instead of hardcoded values
+- ✅ Ingredient price CRUD (reference pricing)
+- ✅ Fixed monthly cost CRUD ($57,900 → $32.17/L)
+- ✅ CostAllocator uses real overhead instead of hardcoded values
+- ✅ Inter-service integration (Inventory + Finance + RabbitMQ)
 
 ---
 

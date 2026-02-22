@@ -9,6 +9,78 @@ from decimal import Decimal
 
 # Recipe Schemas
 
+class FermentableInput(BaseModel):
+    """Fermentable ingredient input."""
+    name: str = Field(..., min_length=1, max_length=100)
+    amount_kg: float = Field(..., gt=0)
+    color_srm: Optional[float] = None
+    type: Optional[str] = Field(None, description="Grain, Sugar, Extract, Dry Extract, Adjunct")
+
+
+class HopInput(BaseModel):
+    """Hop ingredient input."""
+    name: str = Field(..., min_length=1, max_length=100)
+    amount_g: float = Field(..., gt=0)
+    time_min: Optional[float] = Field(None, ge=0)
+    use: Optional[str] = Field("Boil", description="Boil, Dry Hop, First Wort, Whirlpool")
+    alpha_acid: Optional[float] = None
+
+
+class YeastInput(BaseModel):
+    """Yeast input."""
+    name: str = Field(..., min_length=1, max_length=100)
+    lab: Optional[str] = Field(None, max_length=100)
+    product_id: Optional[str] = Field(None, max_length=50)
+    type: Optional[str] = Field(None, description="Ale, Lager, Wheat, Wine, Champagne")
+
+
+class MashStepInput(BaseModel):
+    """Mash step input."""
+    step: str = Field(..., min_length=1, max_length=100)
+    temp_c: float = Field(..., gt=0)
+    time_min: float = Field(..., gt=0)
+
+
+class CreateRecipeRequest(BaseModel):
+    """Request to create a recipe manually."""
+    name: str = Field(..., min_length=1, max_length=200)
+    style: Optional[str] = Field(None, max_length=100)
+    brewer: Optional[str] = Field(None, max_length=100)
+    batch_size_liters: float = Field(..., gt=0)
+    fermentables: List[FermentableInput] = Field(..., min_length=1)
+    hops: List[HopInput] = Field(default=[])
+    yeast: List[YeastInput] = Field(..., min_length=1)
+    water_profile: Optional[Dict] = None
+    mash_steps: Optional[List[MashStepInput]] = None
+    expected_og: Optional[float] = Field(None, gt=0)
+    expected_fg: Optional[float] = Field(None, gt=0)
+    expected_abv: Optional[float] = Field(None, ge=0)
+    ibu: Optional[float] = Field(None, ge=0)
+    color_srm: Optional[float] = Field(None, ge=0)
+    brewhouse_efficiency: Optional[float] = Field(None, ge=0, le=100)
+    notes: Optional[str] = Field(None, max_length=2000)
+
+
+class UpdateRecipeRequest(BaseModel):
+    """Request to update a recipe."""
+    name: Optional[str] = Field(None, min_length=1, max_length=200)
+    style: Optional[str] = Field(None, max_length=100)
+    brewer: Optional[str] = Field(None, max_length=100)
+    batch_size_liters: Optional[float] = Field(None, gt=0)
+    fermentables: Optional[List[FermentableInput]] = None
+    hops: Optional[List[HopInput]] = None
+    yeast: Optional[List[YeastInput]] = None
+    water_profile: Optional[Dict] = None
+    mash_steps: Optional[List[MashStepInput]] = None
+    expected_og: Optional[float] = Field(None, gt=0)
+    expected_fg: Optional[float] = Field(None, gt=0)
+    expected_abv: Optional[float] = Field(None, ge=0)
+    ibu: Optional[float] = Field(None, ge=0)
+    color_srm: Optional[float] = Field(None, ge=0)
+    brewhouse_efficiency: Optional[float] = Field(None, ge=0, le=100)
+    notes: Optional[str] = Field(None, max_length=2000)
+
+
 class RecipeIngredientSummary(BaseModel):
     """Summary of recipe ingredients for display."""
     total_fermentables_kg: float
@@ -21,16 +93,20 @@ class RecipeResponse(BaseModel):
     id: int
     name: str
     style: Optional[str]
+    brewer: Optional[str] = None
     batch_size_liters: float
     fermentables: List[Dict]
     hops: List[Dict]
     yeast: List[Dict]
+    water_profile: Optional[Dict] = None
+    mash_steps: Optional[List[Dict]] = None
     expected_og: Optional[float]
     expected_fg: Optional[float]
     expected_abv: Optional[float]
     ibu: Optional[float]
-    color_srm: Optional[float]
+    color_srm: Optional[float] = None
     brewhouse_efficiency: Optional[float]
+    notes: Optional[str] = None
     imported_at: datetime
     
     class Config:

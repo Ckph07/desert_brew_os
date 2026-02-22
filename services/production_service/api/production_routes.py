@@ -14,6 +14,8 @@ from models.production_batch import ProductionBatch, BatchStatus
 from models.batch_ingredient_allocation import BatchIngredientAllocation
 from schemas.production import (
     RecipeResponse,
+    CreateRecipeRequest,
+    UpdateRecipeRequest,
     CreateBatchRequest,
     BatchResponse,
     BatchDetailResponse,
@@ -33,8 +35,42 @@ router = APIRouter(prefix="/api/v1/production", tags=["Production"])
 
 
 # =====================
-# Recipe Endpoints (4)
+# Recipe Endpoints (6)
 # =====================
+
+@router.post("/recipes", response_model=RecipeResponse, status_code=201)
+def create_recipe_manual(
+    payload: CreateRecipeRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Create a recipe manually (without BeerSmith .bsmx file).
+
+    Accepts full recipe definition as JSON.
+    """
+    recipe = Recipe(
+        name=payload.name,
+        style=payload.style,
+        brewer=payload.brewer,
+        batch_size_liters=payload.batch_size_liters,
+        fermentables=[f.model_dump() for f in payload.fermentables],
+        hops=[h.model_dump() for h in payload.hops],
+        yeast=[y.model_dump() for y in payload.yeast],
+        water_profile=payload.water_profile,
+        mash_steps=[m.model_dump() for m in payload.mash_steps] if payload.mash_steps else None,
+        expected_og=payload.expected_og,
+        expected_fg=payload.expected_fg,
+        expected_abv=payload.expected_abv,
+        ibu=payload.ibu,
+        color_srm=payload.color_srm,
+        brewhouse_efficiency=payload.brewhouse_efficiency,
+        notes=payload.notes,
+    )
+
+    db.add(recipe)
+    db.commit()
+    db.refresh(recipe)
+    return recipe
 
 @router.post("/recipes/import", response_model=RecipeResponse, status_code=201)
 async def import_beersmith_recipe(
@@ -110,6 +146,41 @@ def delete_recipe(recipe_id: int, db: Session = Depends(get_db)):
     
     db.delete(recipe)
     db.commit()
+
+
+@router.patch("/recipes/{recipe_id}", response_model=RecipeResponse)
+def update_recipe(
+    recipe_id: int,
+    payload: UpdateRecipeRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Update an existing recipe.
+
+    Only fields provided will be updated.
+    """
+    recipe = db.query(Recipe).filter(Recipe.id == recipe_id).first()
+    if not recipe:
+        raise HTTPException(404, f"Recipe {recipe_id} not found")
+
+    update_data = payload.model_dump(exclude_unset=True)
+
+    # Convert Pydantic sub-models to dicts for JSON columns
+    if "fermentables" in update_data and update_data["fermentables"] is not None:
+        update_data["fermentables"] = [f.model_dump() for f in payload.fermentables]
+    if "hops" in update_data and update_data["hops"] is not None:
+        update_data["hops"] = [h.model_dump() for h in payload.hops]
+    if "yeast" in update_data and update_data["yeast"] is not None:
+        update_data["yeast"] = [y.model_dump() for y in payload.yeast]
+    if "mash_steps" in update_data and update_data["mash_steps"] is not None:
+        update_data["mash_steps"] = [m.model_dump() for m in payload.mash_steps]
+
+    for key, value in update_data.items():
+        setattr(recipe, key, value)
+
+    db.commit()
+    db.refresh(recipe)
+    return recipe
 
 
 # ===========================

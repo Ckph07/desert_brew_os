@@ -28,6 +28,77 @@ class TestRecipeAPI:
         assert len(data['fermentables']) == 2
         assert len(data['hops']) == 3
         assert len(data['yeast']) == 1
+
+    def test_create_recipe_manual(self, client):
+        """Test creating a recipe manually via JSON."""
+        response = client.post("/api/v1/production/recipes", json={
+            "name": "Desértica Blonde Ale",
+            "style": "Blonde Ale",
+            "brewer": "Carlos",
+            "batch_size_liters": 40.0,
+            "fermentables": [
+                {"name": "Malta Pale Ale / Pilsen", "amount_kg": 7.0, "color_srm": 2.0, "type": "Grain"},
+                {"name": "Malta Munich", "amount_kg": 1.0, "color_srm": 9.0, "type": "Grain"},
+            ],
+            "hops": [
+                {"name": "Saaz", "amount_g": 30.0, "time_min": 60, "use": "Boil", "alpha_acid": 3.5},
+            ],
+            "yeast": [
+                {"name": "SafAle US-05", "lab": "Fermentis", "type": "Ale"},
+            ],
+            "mash_steps": [
+                {"step": "Mash In", "temp_c": 67.0, "time_min": 60},
+            ],
+            "expected_og": 1.048,
+            "expected_fg": 1.010,
+            "expected_abv": 4.98,
+            "ibu": 20.0,
+            "brewhouse_efficiency": 75.0,
+            "notes": "Receta para 40L, fermentar a 18°C",
+        })
+        assert response.status_code == 201
+        data = response.json()
+        assert data["name"] == "Desértica Blonde Ale"
+        assert data["brewer"] == "Carlos"
+        assert data["batch_size_liters"] == 40.0
+        assert len(data["fermentables"]) == 2
+        assert len(data["hops"]) == 1
+        assert data["mash_steps"][0]["temp_c"] == 67.0
+
+    def test_create_recipe_minimal(self, client):
+        """Test creating a recipe with only required fields."""
+        response = client.post("/api/v1/production/recipes", json={
+            "name": "Test Recipe",
+            "batch_size_liters": 20.0,
+            "fermentables": [
+                {"name": "Pale Malt", "amount_kg": 5.0},
+            ],
+            "yeast": [
+                {"name": "US-05"},
+            ],
+        })
+        assert response.status_code == 201
+        assert response.json()["hops"] == []
+
+    def test_update_recipe(self, client, sample_recipe):
+        """Test updating an existing recipe."""
+        response = client.patch(
+            f"/api/v1/production/recipes/{sample_recipe.id}",
+            json={"style": "West Coast IPA", "ibu": 75.0}
+        )
+        assert response.status_code == 200
+        assert response.json()["style"] == "West Coast IPA"
+        assert response.json()["ibu"] == 75.0
+
+    def test_create_recipe_validation_error(self, client):
+        """Test validation error — missing fermentables."""
+        response = client.post("/api/v1/production/recipes", json={
+            "name": "Bad Recipe",
+            "batch_size_liters": 20.0,
+            "fermentables": [],
+            "yeast": [{"name": "US-05"}],
+        })
+        assert response.status_code == 422
     
     def test_list_recipes(self, client, sample_recipe):
         """Test listing recipes."""

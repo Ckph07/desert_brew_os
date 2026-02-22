@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from typing import List
 import tempfile
 import os
+import httpx
 
 from database import get_db
 from models.recipe import Recipe
@@ -23,6 +24,10 @@ from schemas.production import (
 from logic.beersmith_parser import BeerSmithParser
 from logic.batch_state_machine import BatchStateMachine
 from logic.cost_allocator import CostAllocator
+from clients.inventory_client import InventoryServiceClient, get_inventory_client
+from clients.finance_client import FinanceServiceClient, get_finance_client
+from events.publisher import EventPublisher, get_event_publisher
+from exceptions import InsufficientStockError, ServiceUnavailableError
 
 router = APIRouter(prefix="/api/v1/production", tags=["Production"])
 
@@ -176,8 +181,17 @@ def get_batch(batch_id: int, db: Session = Depends(get_db)):
 
 
 @router.patch("/batches/{batch_id}/start-brewing", response_model=BatchTransitionResponse)
-def start_brewing(batch_id: int, db: Session = Depends(get_db)):
-    """Transition batch: PLANNED → BREWING and allocate costs."""
+async def start_brewing(
+    batch_id: int,
+    inventory_client: InventoryServiceClient = Depends(get_inventory_client),
+    event_publisher: EventPublisher = Depends(get_event_publisher),
+    db: Session = Depends(get_db)
+):
+    """
+    Transition batch: PLANNED → BREWING and allocate costs via real FIFO.
+    
+    Sprint 4.5: Uses real Inventory Service StockBatch for FIFO allocation.
+    """
     batch = db.query(ProductionBatch).filter(ProductionBatch.id == batch_id).first()
     if not batch:
         raise HTTPException(404, f"Batch {batch_id} not found")
@@ -190,11 +204,48 @@ def start_brewing(batch_id: int, db: Session = Depends(get_db)):
     except ValueError as e:
         raise HTTPException(400, str(e))
     
-    # Allocate costs via FIFO
+    # Allocate costs via real FIFO from Inventory Service
     recipe = db.query(Recipe).filter(Recipe.id == batch.recipe_id).first()
-    CostAllocator.allocate_batch_costs(batch, recipe, db)
+    
+    try:
+        cost_breakdown = await CostAllocator.allocate_batch_costs(
+            batch=batch,
+            recipe=recipe,
+            db=db,
+            inventory_client=inventory_client
+        )
+    except InsufficientStockError as e:
+        db.rollback()
+        raise HTTPException(
+            400,
+            f"Insufficient stock: {e.ingredient} (required: {e.required}{e.unit}, available: {e.available}{e.unit})"
+        )
+    except ServiceUnavailableError as e:
+        db.rollback()
+        raise HTTPException(503, f"Service unavailable: {e.service_name}")
+    except httpx.HTTPError as e:
+        db.rollback()
+        raise HTTPException(503, f"Inventory Service error: {str(e)}")
     
     db.commit()
+    
+    # Publish event to RabbitMQ
+    try:
+        event_publisher.publish(
+            routing_key="production.batch_started",
+            message={
+                "batch_id": batch.id,
+                "batch_number": batch.batch_number,
+                "recipe_id": batch.recipe_id,
+                "recipe_name": batch.recipe_name,
+                "planned_volume_liters": float(batch.planned_volume_liters),
+                "total_cost": float(batch.total_cost),
+                "cost_breakdown": cost_breakdown
+            }
+        )
+    except Exception as e:
+        # Don't fail the request if event publishing fails
+        print(f"Warning: Failed to publish batch_started event: {e}")
     
     return BatchTransitionResponse(
         batch_id=batch.id,
@@ -202,7 +253,7 @@ def start_brewing(batch_id: int, db: Session = Depends(get_db)):
         previous_status=previous_status,
         new_status=batch.status,
         timestamp=batch.brewing_started_at,
-        message=f"Batch started brewing. Total cost allocated: ${batch.total_cost}"
+        message=f"Batch started brewing. Total cost allocated: ${batch.total_cost} ({cost_breakdown['allocations_count']} allocations)"
     )
 
 
@@ -233,15 +284,18 @@ def start_fermenting(batch_id: int, db: Session = Depends(get_db)):
 
 
 @router.patch("/batches/{batch_id}/complete", response_model=BatchTransitionResponse)
-def complete_batch(
+async def complete_batch(
     batch_id: int,
     volume_update: UpdateBatchVolumeRequest,
+    inventory_client: InventoryServiceClient = Depends(get_inventory_client),
+    finance_client: FinanceServiceClient = Depends(get_finance_client),
+    event_publisher: EventPublisher = Depends(get_event_publisher),
     db: Session = Depends(get_db)
 ):
     """
     Mark batch COMPLETED and finalize costs.
     
-    Future: Create FinishedProductInventory and InternalTransfer (Sprint 4.5).
+    Sprint 4.5: Creates FinishedProductInventory and InternalTransfer (Factory → Taproom).
     """
     batch = db.query(ProductionBatch).filter(ProductionBatch.id == batch_id).first()
     if not batch:
@@ -254,9 +308,10 @@ def complete_batch(
     batch.actual_og = volume_update.actual_og
     batch.actual_fg = volume_update.actual_fg
     
-    # Recalculate cost per liter
+    # Recalculate cost per liter with actual volume
     if batch.total_cost:
-        batch.cost_per_liter = batch.total_cost / batch.actual_volume_liters
+        from decimal import Decimal as Dec
+        batch.cost_per_liter = batch.total_cost / Dec(str(batch.actual_volume_liters))
     
     # Calculate ABV if we have OG and FG
     if batch.actual_og and batch.actual_fg:
@@ -268,10 +323,57 @@ def complete_batch(
     except ValueError as e:
         raise HTTPException(400, str(e))
     
+    # 1. Create FinishedProductInventory in Inventory Service
+    finished_product = None
+    internal_transfer = None
+    
+    try:
+        finished_product = await inventory_client.create_finished_product(
+            production_batch_id=batch.id,
+            sku=batch.recipe_name,  # Use recipe name as SKU (TODO: map to proper SKU)
+            volume_liters=float(batch.actual_volume_liters),
+            unit_cost=float(batch.cost_per_liter),
+            container_type="KEG",
+            location="COLD_ROOM"
+        )
+    except httpx.HTTPError as e:
+        db.rollback()
+        raise HTTPException(503, f"Failed to create finished product: {str(e)}")
+    
+    # 2. Create InternalTransfer in Finance Service (Factory → Taproom)
+    try:
+        internal_transfer = await finance_client.create_internal_transfer(
+            origin_type="HOUSE",  # Production batches are always HOUSE
+            volume_liters=float(batch.actual_volume_liters),
+            unit_cost=float(batch.cost_per_liter),
+            production_batch_id=batch.id,
+            profit_center_from="factory",
+            profit_center_to="taproom"
+        )
+    except httpx.HTTPError as e:
+        db.rollback()
+        raise HTTPException(503, f"Failed to create internal transfer: {str(e)}")
+    
     db.commit()
     
-    # TODO Sprint 4.5: Create FinishedProductInventory
-    # TODO Sprint 4.5: Create InternalTransfer to Taproom
+    # 3. Publish batch_completed event
+    try:
+        event_publisher.publish(
+            routing_key="production.batch_completed",
+            message={
+                "batch_id": batch.id,
+                "batch_number": batch.batch_number,
+                "recipe_name": batch.recipe_name,
+                "actual_volume_liters": float(batch.actual_volume_liters),
+                "cost_per_liter": float(batch.cost_per_liter),
+                "total_cost": float(batch.total_cost),
+                "finished_product_id": finished_product['id'] if finished_product else None,
+                "internal_transfer_id": internal_transfer['id'] if internal_transfer else None,
+                "actual_abv": float(batch.actual_abv) if batch.actual_abv else None
+            }
+        )
+    except Exception as e:
+        print(f"Warning: Failed to publish batch_completed event: {e}")
     
     return BatchTransitionResponse(
         batch_id=batch.id,
@@ -279,7 +381,11 @@ def complete_batch(
         previous_status=previous_status,
         new_status=batch.status,
         timestamp=batch.completed_at,
-        message=f"Batch completed. Actual volume: {batch.actual_volume_liters}L, Cost/L: ${batch.cost_per_liter}"
+        message=(
+            f"Batch completed. Volume: {batch.actual_volume_liters}L, Cost/L: ${batch.cost_per_liter}. "
+            f"Created: FinishedProduct #{finished_product['id'] if finished_product else 'N/A'}, "
+            f"InternalTransfer #{internal_transfer['id'] if internal_transfer else 'N/A'}"
+        )
     )
 
 

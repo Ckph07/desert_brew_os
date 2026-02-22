@@ -1,62 +1,80 @@
-# Desert Brew Sales Service
+# Desert Brew Sales Service v0.3.0
 
-Multi-channel sales management with commission tracking.
+Multi-channel Sales Management for Desert Brew Co.
 
-## Features (Sprint 3)
+**Port:** 8002  
+**Payroll:** Extracted to [Payroll Service](../payroll_service/) (port 8006)
 
-- **Commission Tiers**: Platinum/Gold/Silver/Bronze based on monthly volume
-- **Tier Calculation**: Automatic tier assignment based on delivered liters
-- **Retroactive Commission**: Rate applied retroactively when seller moves up
+## Architecture
 
-## Endpoints
+```
+Sales Service (8002) ←→ Inventory Service (8001)
+                          ↓ (deduct finished product on note confirm)
+```
 
+## API Endpoints (24 total)
+
+### Commissions (2)
 | Method | Path | Description |
 |--------|------|-------------|
-| GET | `/api/v1/sales/commission-tiers` | Get all commission tiers |
-| GET | `/api/v1/sales/sellers/{id}/tier` | Get seller's current tier |
+| GET | `/api/v1/sales/commission-tiers` | List tiers |
+| GET | `/api/v1/sales/sellers/{id}/tier` | Seller's current tier |
 
-## Commission Structure
+### Clients (6)
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/api/v1/sales/clients` | Create client |
+| GET | `/api/v1/sales/clients` | List (filters: type, tier, search) |
+| GET | `/api/v1/sales/clients/{id}` | Get client |
+| PATCH | `/api/v1/sales/clients/{id}` | Update |
+| DELETE | `/api/v1/sales/clients/{id}` | Soft-delete |
+| GET | `/api/v1/sales/clients/{id}/balance` | Credit + keg status |
 
-| Tier | Min Monthly Liters | Rate (MXN/L) | Description |
-|------|-------------------|--------------|-------------|
-| **Platinum** | 500 L | $2.50 | Elite sellers |
-| **Gold** | 200 L | $2.00 | High performers |
-| **Silver** | 50 L | $1.50 | Standard |
-| **Bronze** | 0 L | $1.00 | Entry level |
+### Products (8)
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/api/v1/sales/products` | Create product |
+| GET | `/api/v1/sales/products` | List products |
+| GET | `/api/v1/sales/products/margin-report` | Fixed vs Theoretical margins |
+| GET | `/api/v1/sales/products/{id}` | Get with margins |
+| PATCH | `/api/v1/sales/products/{id}` | Update |
+| DELETE | `/api/v1/sales/products/{id}` | Soft-delete |
+| PATCH | `/api/v1/sales/products/{id}/prices` | Update channel prices |
+| GET | `/api/v1/sales/products/{id}/price-history` | Audit trail |
 
-## Business Rules
+### Sales Notes (8)
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/api/v1/sales/notes` | Create note with items |
+| GET | `/api/v1/sales/notes` | List (filters: client, status, channel) |
+| GET | `/api/v1/sales/notes/{id}` | Get with items |
+| PATCH | `/api/v1/sales/notes/{id}` | Update DRAFT |
+| PATCH | `/api/v1/sales/notes/{id}/confirm` | **Confirm + deduct inventory** |
+| PATCH | `/api/v1/sales/notes/{id}/cancel` | Cancel |
+| GET | `/api/v1/sales/notes/{id}/export/pdf` | PDF export |
+| GET | `/api/v1/sales/notes/{id}/export/png` | PNG export |
 
-1. **Commission calculated on DELIVERED liters** (PoD verified) - Sprint 6
-2. **Tier based on current month cumulative volume**
-3. **Retroactive application:** If seller reaches Platinum mid-month, entire month recalculated
-
-## Installation
+## Running
 
 ```bash
-cd services/sales_service
 pip install -r requirements.txt
-python seed_commission_tiers.py  # Seed tiers
-```
-
-## Run
-
-```bash
 uvicorn main:app --reload --port 8002
+
+# With inventory deduction
+ENABLE_INVENTORY_DEDUCTION=true uvicorn main:app --reload --port 8002
 ```
 
-## Database
+## Testing
 
 ```bash
-export DATABASE_URL="postgresql://user:pass@localhost:5432/desertbrew_sales"
+python -m pytest tests/ -v
+# 41 tests, ~1s
 ```
 
-## Sprint 3 Status
+## Environment Variables
 
-- [x] CommissionTier model
-- [x] 2 API endpoints
-- [x] Seed data script
-- [ ] Actual commission calculation (Sprint 6 - after PoD)
-- [ ] Tests (in progress)
-
-**Version:** 0.1.0  
-**Part of:** Sprint 3 - Security & B2B Foundations
+| Variable | Default | Description |
+|----------|---------|-------------|
+| DATABASE_URL | postgresql://...localhost:5432/desertbrew_sales | PostgreSQL |
+| INVENTORY_SERVICE_URL | http://localhost:8001 | Inventory Service |
+| ENABLE_INVENTORY_DEDUCTION | false | Stock deduction on confirm |

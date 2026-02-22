@@ -216,3 +216,138 @@ async def get_inventory_summary(db: Session = Depends(get_db)):
         }
         for row in summary
     ]
+
+
+@router.patch("/stock-batches/{batch_id}/consume")
+async def consume_stock_batch(
+    batch_id: int,
+    quantity: float = Query(..., gt=0, description="Quantity to consume"),
+    unit: str = Query(..., description="Unit of measure"),
+    reason: Optional[str] = Query(None, description="Reason for consumption"),
+    db: Session = Depends(get_db)
+):
+    """
+    Consume quantity from a specific StockBatch.
+    
+    Used by Production Service when allocating ingredients to batches.
+    Uses pessimistic locking to prevent race conditions.
+    
+    Args:
+        batch_id: ID of the StockBatch
+        quantity: Amount to consume
+        unit: Unit of measure (must match StockBatch unit)
+        reason: Optional reason (e.g., "Production Batch #IPA-001")
+    
+    Returns:
+        Updated StockBatch with new remaining_quantity
+    """
+    # Use pessimistic locking to prevent concurrent consumption
+    stock_batch = db.execute(
+        select(StockBatch)
+        .where(StockBatch.id == batch_id)
+        .with_for_update()
+    ).scalar_one_or_none()
+    
+    if not stock_batch:
+        raise HTTPException(404, f"Stock batch {batch_id} not found")
+    
+    # Validate unit matches
+    if unit.upper() != stock_batch.unit_measure.upper():
+        raise HTTPException(
+            400,
+            f"Unit mismatch: StockBatch uses {stock_batch.unit_measure}, requested {unit}"
+        )
+    
+    # Check sufficient quantity
+    if stock_batch.remaining_quantity < quantity:
+        raise HTTPException(
+            400,
+            {
+                "error": "insufficient_quantity",
+                "batch_id": batch_id,
+                "requested": quantity,
+                "available": float(stock_batch.remaining_quantity),
+                "message": f"Insufficient quantity in batch {batch_id}: "
+                          f"requested {quantity}, available {stock_batch.remaining_quantity}"
+            }
+        )
+    
+    # Consume quantity
+    old_quantity = stock_batch.remaining_quantity
+    stock_batch.remaining_quantity -= Decimal(str(quantity))
+    
+    # Create movement record (if StockMovement model exists)
+    # TODO: Add StockMovement tracking in future sprint
+    
+    db.commit()
+    db.refresh(stock_batch)
+    
+    return {
+        "status": "consumed",
+        "batch_id": batch_id,
+        "batch_number": stock_batch.batch_number,
+        "quantity_consumed": quantity,
+        "unit": unit,
+        "previous_quantity": float(old_quantity),
+        "remaining_quantity": float(stock_batch.remaining_quantity),
+        "reason": reason
+    }
+
+
+@router.get("/stock-batches")
+async def get_stock_batches(
+    ingredient_name: Optional[str] = Query(None, description="Filter by ingredient/SKU name"),
+    available_only: bool = Query(False, description="Only show batches with remaining quantity > 0"),
+    min_quantity: float = Query(0.0, description="Minimum remaining quantity"),
+    sort: str = Query("created_at_asc", description="Sort order: created_at_asc (FIFO) or created_at_desc"),
+    skip: int = Query(0, ge=0),
+    limit: int = Query(100, ge=1, le=500),
+    db: Session = Depends(get_db)
+):
+    """
+    Get StockBatches with filters (for Production Service FIFO queries).
+    
+    Args:
+        ingredient_name: Filter by SKU or ingredient name (partial match)
+        available_only: Only return batches with remaining_quantity > 0
+        min_quantity: Minimum remaining quantity threshold
+        sort: Sort order (created_at_asc for FIFO, created_at_desc for LIFO)
+    
+    Returns:
+        List of StockBatches matching criteria
+    """
+    query = select(StockBatch)
+    
+    # Filter by ingredient name (partial match on SKU)
+    if ingredient_name:
+        query = query.where(StockBatch.sku.ilike(f"%{ingredient_name}%"))
+    
+    # Filter available only
+    if available_only:
+        query = query.where(StockBatch.remaining_quantity > min_quantity)
+    
+    # Sort order (FIFO = oldest first)
+    if sort == "created_at_asc":
+        query = query.order_by(StockBatch.arrival_date.asc())
+    else:
+        query = query.order_by(StockBatch.arrival_date.desc())
+    
+    # Pagination
+    query = query.offset(skip).limit(limit)
+    
+    batches = db.execute(query).scalars().all()
+    
+    return [
+        {
+            "id": batch.id,
+            "batch_number": batch.batch_number,
+            "sku": batch.sku,
+            "category": batch.category,
+            "available_quantity": float(batch.remaining_quantity),
+            "unit_cost": float(batch.unit_cost),
+            "unit_measure": batch.unit_measure,
+            "supplier_name": batch.provider_name,
+            "arrival_date": batch.arrival_date.isoformat() if batch.arrival_date else None
+        }
+        for batch in batches
+    ]

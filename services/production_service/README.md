@@ -1,7 +1,7 @@
 # Desert Brew Production Service
 
-**Version:** 0.1.0  
-**Purpose:** Manufacturing Execution System (MES) with BeerSmith integration
+**Version:** 0.1.0 (Sprint 4.5)  
+**Purpose:** Manufacturing Execution System (MES) with full ecosystem integration
 
 ---
 
@@ -9,9 +9,14 @@
 
 Production Service tracks brewery production from recipe to finished product:
 1. **Import recipes** from BeerSmith (.bsmx files)
-2. **Track batches** through 6-state lifecycle
-3. **Allocate costs** via FIFO from raw materials
-4. **Link to Finance** for transfer pricing
+2. **Track batches** through 6-state lifecycle (PLANNED → COMPLETED)
+3. **Allocate costs** via **real FIFO** from Inventory Service StockBatch
+4. **Create finished products** in Inventory upon completion
+5. **Generate internal transfers** to Finance Service (Factory → Taproom)
+6. **Publish events** to RabbitMQ for downstream consumers
+
+**Sprint 4 (Core):** BeerSmith parser, batch FSM, mock FIFO  
+**Sprint 4.5 (Integration):** Real FIFO, Finance/Inventory integration, Event Bus
 
 ---
 
@@ -364,35 +369,183 @@ curl -X PATCH "http://localhost:8004/api/v1/production/batches/1/complete" \
 
 ---
 
-## 🔗 Integration Points
+## 🔗 Integration Points (Sprint 4.5)
 
-**Inventory Service (Sprint 1):**
-- StockBatch (FIFO cost allocation) - Sprint 4.5
+### Inventory Service
+**Purpose:** Real FIFO cost allocation from StockBatch
 
-**Finance Service (Sprint 3.5):**
-- InternalTransfer (on completion) - Sprint 4.5
+**Endpoints used:**
+- `GET /stock-batches` - Query available stock (FIFO order)
+- `PATCH /stock-batches/{id}/consume` - Consume quantity from batch
+- `POST /finished-products` - Create finished product on completion
 
-**Future (Sprint 5 - CMMS):**
-- WaterProductionRun (real water costs)
+**Flow:**
+1. `start_brewing` → Query StockBatch for ingredients
+2. Allocate from oldest batches first (FIFO)
+3. Create `BatchIngredientAllocation` with real stock_batch_id
+4. `complete_batch` → Create `FinishedProductInventory`
+
+### Finance Service
+**Purpose:** Transfer pricing (Factory → Taproom)
+
+**Endpoints used:**
+- `POST /internal-transfers` - Create transfer on batch completion
+
+**Flow:**
+1. `complete_batch` → Calculate cost_per_liter
+2. Finance applies transfer pricing (HOUSE: cost × 1.15)
+3. Creates InternalTransfer record
+4. Factory earns 15% margin, Taproom pays transfer price
+
+### Event Bus (RabbitMQ)
+**Purpose:** Notify downstream services of production events
+
+**Events published:**
+- `production.batch_started` - When brewing begins
+- `production.batch_completed` - When batch finishes
+
+**Exchange:** `production` (topic)
 
 ---
 
-## 📝 Notes
+## 📡 Sprint 4.5 Features
 
-**Sprint 4 Limitations:**
-- Cost allocation uses mock data (fixed prices)
-- No FinishedProductInventory creation
-- No InternalTransfer to Finance
-- No event publishing (RabbitMQ infrastructure pending)
+### 1. Real FIFO Integration ✅
+- **Removed:** Mock data with fixed prices
+- **Added:** HTTP client for Inventory Service
+- **Logic:** `CostAllocator` queries real StockBatch, consumes via API
+- **Error handling:** `InsufficientStockError`, `ServiceUnavailableError`
 
-**Sprint 4.5 Enhancements:**
-- Real FIFO integration with StockBatch
-- Finished product creation on completion
-- Transfer pricing integration
-- Event bus (RabbitMQ)
+**Example allocation:**
+```python
+# Production needs 5kg Maris Otter
+# Inventory has:
+#   - Batch #1: 3kg @ $15/kg (oldest)
+#   - Batch #2: 5kg @ $18/kg
+
+# FIFO consumes: 3kg from Batch #1 + 2kg from Batch #2
+# Cost: (3 × $15) + (2 × $18) = $45 + $36 = $81
+```
+
+### 2. Finance Integration ✅
+```bash
+# When batch completes:
+POST /api/v1/production/batches/1/complete
+{
+  "actual_volume_liters": 20.0
+}
+
+# Production Service:
+# 1. Updates cost_per_liter = $420 / 20L = $21/L
+# 2. Calls Inventory: POST /finished-products
+#    → Creates FinishedProductInventory (#456)
+# 3. Calls Finance: POST /internal-transfers
+#    → Creates InternalTransfer with transfer_price = $21 × 1.15 = $24.15/L
+# 4. Publishes: production.batch_completed event
+```
+
+### 3. Event Publishing ✅
+**Batch Started Event:**
+```json
+{
+  "batch_id": 1,
+  "batch_number": "IPA-2026-001",
+  "recipe_name": "American IPA",
+  "planned_volume_liters": 20.0,
+  "total_cost": 420.00,
+  "cost_breakdown": {
+    "malt_cost": 75.00,
+    "hops_cost": 45.00,
+    "yeast_cost": 15.00,
+    "water_cost": 15.00,
+    "labor_cost": 50.00,
+    "overhead_cost": 30.00
+  }
+}
+```
+
+**Batch Completed Event:**
+```json
+{
+  "batch_id": 1,
+  "batch_number": "IPA-2026-001",
+  "actual_volume_liters": 19.5,
+  "cost_per_liter": 21.54,
+  "finished_product_id": 456,
+  "internal_transfer_id": 789,
+  "actual_abv": 6.96
+}
+```
 
 ---
 
-**Status:** ✅ Core MES operational  
-**Tests:** 20+ passing  
-**Next:** Sprint 4.5 (Real FIFO + Finance integration)
+## 🧪 Testing
+
+**Test Coverage:** 40+ tests
+
+**Unit Tests:**
+- `test_beersmith_parser.py` (6 tests) - XML parsing
+- `test_batch_state_machine.py` (7 tests) - FSM transitions
+- `test_inventory_client.py` (7 tests) - HTTP client mocking
+
+**Integration Tests:**
+- `test_production_api.py` (15 tests) - Full batch lifecycle
+- `test_sprint_4_5_integration.py` (8 tests) - FIFO, Finance, Events
+
+**Run tests:**
+```bash
+cd services/production_service
+pytest -v
+pytest --cov=. --cov-report=term-missing
+```
+
+---
+
+## 📝 Configuration
+
+**Environment Variables:**
+```bash
+# Production Service
+DATABASE_URL=postgresql://user:pass@localhost/production_db
+PORT=8004
+
+# Service URLs (Sprint 4.5)
+INVENTORY_SERVICE_URL=http://localhost:8001
+FINANCE_SERVICE_URL=http://localhost:8005
+RABBITMQ_URL=amqp://guest:guest@localhost:5672/
+
+# Feature Flags
+ENABLE_REAL_FIFO=true  # Sprint 4.5
+ENABLE_EVENTS=true     # Sprint 4.5
+```
+
+---
+
+## 📊 Metrics
+
+**Sprint 4 (Core):**
+- 12 endpoints
+- 3 models
+- 20 tests
+- BeerSmith parser operational
+
+**Sprint 4.5 (Integration):**
+- +3 HTTP clients (Inventory, Finance, EventPublisher)
+- +2 endpoints (Inventory Service)
+- +15 tests
+- Real FIFO operational
+- Finance integration complete
+- Event bus operational
+
+**Total:**
+- 12 Production endpoints
+- 3 core models
+- 3 client modules
+- 40+ tests
+- Full ecosystem integration
+
+---
+
+**Status:** ✅ Sprint 4.5 COMPLETE  
+**Version:** 0.1.0  
+**Next:** Sprint 5 (CMMS & Water Treatment)

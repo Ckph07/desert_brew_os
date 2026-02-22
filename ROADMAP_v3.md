@@ -121,7 +121,7 @@ Seguridad → Bridge Financiero → Producción Real → Logística → Hospital
 > **Objetivo:** Costos reales, no estimados
 
 ### Sprint 4: Production Service (MES) Core ✅
-**Status:** 🟢 CORE COMPLETADO | 🔄 Sprint 4.5 (Integrations) PRÓXIMO
+**Status:** 🟢 COMPLETADO (Core + Sprint 4.5 Integrations)
 
 #### A. BeerSmith Integration ✅
 - [x] XML Parser (.bsmx → Recipe model)
@@ -131,12 +131,14 @@ Seguridad → Bridge Financiero → Producción Real → Logística → Hospital
 - [x] Sample .bsmx fixture (American IPA)
 - [x] 6 tests parser
 
-#### B. FIFO Cost Allocation (Mock) ✅
+#### B. FIFO Cost Allocation ✅
 - [x] BatchIngredientAllocation model
 - [x] CostAllocator logic (mock data Sprint 4)
 - [x] Cost breakdown: malt, hops, yeast, water, labor, overhead
-- [ ] 🔜 Sprint 4.5: Real StockBatch FIFO integration
-- [ ] 🔜 Sprint 4.5: Event bus `production.batch_started`
+- [x] Real StockBatch FIFO integration (Inventory Service HTTP)
+- [x] Event bus `production.batch_started` (RabbitMQ)
+- [x] Cost Management CRUD (IngredientPrice + FixedMonthlyCost + ProductionTarget)
+- [x] Real overhead: $57,900/1,800L = $32.17/L (replaced hardcoded $80)
 
 #### C. Batch State Machine ✅
 - [x] 6 estados: PLANNED → BREWING → FERMENTING → CONDITIONING → PACKAGING → COMPLETED
@@ -145,16 +147,18 @@ Seguridad → Bridge Financiero → Producción Real → Logística → Hospital
 - [x] 6 batch endpoints + 2 cost endpoints
 - [x] 7 state machine tests
 
-**Entregables Sprint 4 Core:**
-- ✅ 12 endpoints (4 recipe + 6 batch + 2 cost)
-- ✅ 20+ tests
-- ✅ BeerSmith parser operational
-- ✅ README con workflow examples
+#### D. Sprint 4.5 Inter-Service Integration ✅
+- [x] `InventoryServiceClient` — Real FIFO from StockBatch (HTTP)
+- [x] `FinanceServiceClient` — InternalTransfer on batch completion (HTTP)
+- [x] `EventPublisher` — RabbitMQ (production.batch_started, production.batch_completed)
+- [x] FinishedProductInventory auto-created on batch completion
+- [x] Mock dependency overrides for local testing
 
-**Pending Sprint 4.5:**
-- [ ] Real FIFO integration (Inventory Service StockBatch)
-- [ ] Finance integration (FinishedProductInventory + InternalTransfer)
-- [ ] RabbitMQ event publishing
+**Entregables Sprint 4 + 4.5:**
+- ✅ 24 endpoints (4 recipe + 6 batch + 2 cost + 6 ingredients + 6 fixed costs)
+- ✅ 49 tests
+- ✅ Inter-service integration operational
+- ✅ Real FIFO cost allocation
 
 ---
 
@@ -174,6 +178,58 @@ Seguridad → Bridge Financiero → Producción Real → Logística → Hospital
 - 10 endpoints
 - 20+ tests
 - CMMS operacional
+
+---
+
+### Sprint 5.5: Sales Service Expansion ✅
+**Service:** Sales Service v0.2.0  
+**Status:** 🟢 COMPLETADO  
+**Duración:** 1 semana
+
+#### A. CRUD de Clientes ✅
+- [x] Modelo `Client` (B2B/B2C/Distributor)
+- [x] Double-Gate Credit Control (financial + asset limits)
+- [x] 6 endpoints (CRUD + balance check)
+- [x] 9 tests
+
+#### B. Catálogo de Productos con Precios Duales ✅
+- [x] Modelo `ProductCatalog` (fixed_price vs theoretical_price)
+- [x] Modelo `PriceHistory` (audit trail)
+- [x] `PricingEngine` logic (margin comparison)
+- [x] Margin report endpoint (fixed vs theoretical side-by-side)
+- [x] Per-channel pricing (Taproom, Distributor, On/Off Premise, E-commerce)
+- [x] 8 endpoints + 9 tests
+
+#### C. Notas de Venta (Sales Notes) ✅
+- [x] Modelo `SalesNote` + `SalesNoteItem`
+- [x] **`include_taxes` toggle** (IEPS/IVA empty when not invoiced)
+- [x] PDF export (ReportLab) matching real Desert Brew Co. format
+- [x] PNG export (Pillow)
+- [x] Auto-numbering 8-digit (00000001...)
+- [x] Lifecycle: DRAFT → CONFIRMED → CANCELLED
+- [x] **Inventory deduction** on confirm (HTTP → Inventory Service)
+- [x] 8 endpoints + 11 tests
+
+#### D. Nómina Mejorada (Payroll + TipPool) ✅
+- [x] Modelo `Employee` (FIXED/TEMPORARY)
+- [x] **Cervecería:** 3 fijos, pago semanal estándar
+- [x] **Taproom:** 3 fijos + temporales (pago diario), propinas, taxi
+- [x] Modelo `TipPool` (distribución semanal Sun-Sat, división igualitaria)
+- [x] Taxi allowance per shift
+- [x] 9 endpoints + 15 tests
+
+#### E. Inter-Service Integration ✅
+- [x] `InventoryServiceClient` (HTTP client, async httpx)
+- [x] Deducción de inventario producto terminado al confirmar nota
+- [x] Feature flag: `ENABLE_INVENTORY_DEDUCTION`
+- [x] Graceful degradation (nota se confirma aun si Inventory no responde)
+
+**Entregables:**
+- ✅ 33 endpoints (2 commission + 6 clients + 8 products + 8 notes + 9 payroll)
+- ✅ 8 new models (Client, ProductCatalog, PriceHistory, SalesNote, SalesNoteItem, Employee, PayrollEntry, TipPool)
+- ✅ 56 tests (all passing)
+- ✅ PDF/PNG export operacional
+- ✅ Inter-service integration con Inventory Service
 
 ---
 

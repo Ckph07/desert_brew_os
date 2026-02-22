@@ -4,6 +4,7 @@ FastAPI routes for Commission Tiers.
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from typing import List, Optional
+from decimal import Decimal
 
 from database import get_db
 from models.commission_tier import CommissionTier
@@ -70,7 +71,7 @@ def get_seller_current_tier(user_id: int, db: Session = Depends(get_db)):
             "name": next_tier_obj.name,
             "min_liters": float(next_tier_obj.min_monthly_liters),
             "rate": float(next_tier_obj.commission_rate_per_liter),
-            "liters_needed": float(next_tier_obj.min_monthly_liters - volume)
+            "liters_needed": float(next_tier_obj.min_monthly_liters - Decimal(str(volume)))
         }
     
     commission_rate = float(tier.commission_rate_per_liter) if tier else 0.0

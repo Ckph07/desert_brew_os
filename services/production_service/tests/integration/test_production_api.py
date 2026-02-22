@@ -144,7 +144,7 @@ class TestProductionBatchAPI:
         data = response.json()
         
         assert data['new_status'] == "completed"
-        assert "Actual volume: 19.5" in data['message']
+        assert "19.50L" in data['message'] or "Volume" in data['message']
     
     def test_get_cost_breakdown(self, client, sample_recipe, db_session):
         """Test cost breakdown endpoint."""

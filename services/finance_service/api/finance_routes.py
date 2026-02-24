@@ -120,6 +120,8 @@ def create_internal_transfer(
         from_profit_center=internal_transfer.from_profit_center,
         to_profit_center=internal_transfer.to_profit_center,
         product_sku=internal_transfer.product_sku,
+        product_name=internal_transfer.product_name,
+        origin_type=internal_transfer.origin_type,
         quantity=float(internal_transfer.quantity),
         unit_cost=float(internal_transfer.unit_cost),
         unit_transfer_price=float(internal_transfer.unit_transfer_price),
@@ -161,6 +163,8 @@ def list_internal_transfers(
             from_profit_center=t.from_profit_center,
             to_profit_center=t.to_profit_center,
             product_sku=t.product_sku,
+            product_name=t.product_name,
+            origin_type=t.origin_type,
             quantity=float(t.quantity),
             unit_cost=float(t.unit_cost),
             unit_transfer_price=float(t.unit_transfer_price),
@@ -229,3 +233,34 @@ def get_profit_center_summary(
         profit_margin_percentage=round(profit_margin, 2),
         transfer_count=len(transfers)
     )
+
+
+# ===========================
+# Balance & Cashflow (2)
+# ===========================
+
+@router.get("/balance")
+def get_balance(
+    days: int = Query(30, ge=1, le=365, description="Days to look back"),
+    db: Session = Depends(get_db)
+):
+    """
+    Get consolidated balance: total income vs total expenses.
+
+    Includes breakdowns by category and profit center.
+    """
+    from logic.balance_calculator import BalanceCalculator
+    return BalanceCalculator.get_balance(db, days=days)
+
+
+@router.get("/cashflow")
+def get_cashflow(
+    months: int = Query(6, ge=1, le=24, description="Months to look back"),
+    db: Session = Depends(get_db)
+):
+    """
+    Get monthly cashflow: income, expenses, and net by month.
+    """
+    from logic.balance_calculator import BalanceCalculator
+    return BalanceCalculator.get_cashflow(db, months=months)
+

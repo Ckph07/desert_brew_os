@@ -25,9 +25,9 @@ Flow: Recipe → Batch → FIFO Cost → Finished Product → Sales Note → Inv
 | Sales | 8002 | 24 | 41 | 🟢 |
 | Security | 8003 | 8 | 20+ | 🟢 |
 | Production | 8004 | 26 | 53 | 🟢 |
-| Finance | 8005 | 5 | 20+ | 🟢 |
+| Finance | 8005 | 19 | 40 | 🟢 |
 | Payroll | 8006 | 11 | 21 | 🟢 |
-| **Total** | — | **113** | **250+** | — |
+| **Total** | — | **127** | **270+** | — |
 
 ### Key Capabilities
 - ✅ FIFO automatic with SQL locking (maltas, lúpulos, levaduras, packaging)
@@ -45,6 +45,9 @@ Flow: Recipe → Batch → FIFO Cost → Finished Product → Sales Note → Inv
 - ✅ Fixed monthly cost CRUD ($57,900 → $32.17/L)
 - ✅ CostAllocator uses real overhead instead of hardcoded values
 - ✅ Inter-service integration (Inventory + Finance + RabbitMQ)
+- ✅ **Income tracking** (notas pagadas, ventas directas, B2B)
+- ✅ **Expense tracking** (proveedores, nóminas, servicios, compras)
+- ✅ **Balance general** + flujo de efectivo mensual
 
 ---
 

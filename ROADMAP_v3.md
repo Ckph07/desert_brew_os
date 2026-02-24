@@ -108,11 +108,26 @@ Seguridad → Bridge Financiero → Producción Real → Logística → Hospital
 
 **Propósito:** ✅ Logrado - Shadow ledger sin CFDI operacional
 
-**Entregables:**
-- ✅ 5 endpoints
-- ✅ 20+ tests
+**Entregables Sprint 3.5:**
+- ✅ 5 endpoints (transfer pricing + shadow ledger)
+- ✅ 20 tests
 - ✅ Profit Center P&L segregation operacional
-- ✅ README con business logic
+
+#### C. Sprint 3.5b: Income/Expense Tracking & Balance ✅
+- [x] Modelo `Income` — Ingresos (notas pagadas, ventas directas, B2B)
+- [x] Modelo `Expense` — Egresos (proveedores, nóminas, servicios, compras)
+- [x] `BalanceCalculator` — Balance general + cashflow mensual
+- [x] Income CRUD: 6 endpoints (filtros por tipo, categoría, profit center)
+- [x] Expense CRUD: 6 endpoints (filtros por proveedor, tipo, categoría)
+- [x] Balance + Cashflow: 2 endpoints
+- [x] 20 tests nuevos (income 8 + expense 8 + balance 4)
+- [x] Bug fix: `InternalTransfer` UUID `gen_random_uuid()` → `uuid.uuid4` (SQLite compat)
+
+**Entregables Sprint 3.5 + 3.5b:**
+- ✅ 19 endpoints totales
+- ✅ 40 tests
+- ✅ Income/Expense tracking con desglose por categoría y profit center
+- ✅ Balance general y flujo de efectivo mensual
 
 ---
 

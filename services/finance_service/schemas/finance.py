@@ -69,6 +69,8 @@ class InternalTransferResponse(BaseModel):
     from_profit_center: str
     to_profit_center: str
     product_sku: str
+    product_name: Optional[str] = None
+    origin_type: Optional[str] = None
     quantity: float
     unit_cost: float
     unit_transfer_price: float

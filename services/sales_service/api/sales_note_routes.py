@@ -4,14 +4,16 @@ FastAPI routes for Sales Notes CRUD with PDF/PNG export.
 from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
+from sqlalchemy import func, case, and_
 from typing import Optional
-from datetime import datetime
+from datetime import datetime, date
 from decimal import Decimal
 import io
 
 from database import get_db
 from models.sales_note import SalesNote, SalesNoteItem
 from models.client import Client
+from models.product_catalog import ProductCatalog
 from schemas.sales_note import (
     SalesNoteCreate,
     SalesNoteUpdate,
@@ -288,3 +290,126 @@ def export_note_png(note_id: int, dpi: int = Query(150, ge=72, le=300), db: Sess
         media_type="image/png",
         headers={"Content-Disposition": f"attachment; filename=pedido_{note.note_number}.png"},
     )
+
+# ── Liters by Style Analytics ───────────────────────────────────────────────────────
+
+@router.get("/analytics/liters-by-style")
+def liters_by_style(
+    since: Optional[date] = Query(None, description="Start date (inclusive), YYYY-MM-DD"),
+    until: Optional[date] = Query(None, description="End date (inclusive), YYYY-MM-DD"),
+    channel: Optional[str] = Query(None, description="Filter by channel: B2B, TAPROOM, DISTRIBUTOR ..."),
+    db: Session = Depends(get_db),
+):
+    """
+    Liters sold aggregated by beer style — CONFIRMED notes only.
+
+    Joins SalesNoteItem → ProductCatalog to resolve `style`.
+    Items without a product_id (e.g. shipping) use the product_name as fallback style label.
+    Only items with unit_measure IN ('LITROS', 'L') are counted.
+
+    Returns a list ordered by total_liters DESC:
+    [
+      {"style": "Imperial IPA", "total_liters": 432.0, "note_count": 18, "revenue": 47289.60},
+      ...
+    ]
+    """
+    liter_units = ("LITROS", "L")
+
+    # Base sub-query: confirmed note IDs
+    confirmed_note_ids = (
+        db.query(SalesNote.id)
+        .filter(SalesNote.status == "CONFIRMED")
+    )
+    if since:
+        confirmed_note_ids = confirmed_note_ids.filter(
+            func.date(SalesNote.confirmed_at) >= since
+        )
+    if until:
+        confirmed_note_ids = confirmed_note_ids.filter(
+            func.date(SalesNote.confirmed_at) <= until
+        )
+    if channel:
+        confirmed_note_ids = confirmed_note_ids.filter(
+            SalesNote.channel == channel.upper()
+        )
+    confirmed_ids = [r.id for r in confirmed_note_ids.all()]
+
+    if not confirmed_ids:
+        return {
+            "since": str(since) if since else None,
+            "until": str(until) if until else None,
+            "total_liters": 0.0,
+            "styles": [],
+        }
+
+    # Aggregate: JOIN items → product_catalog, group by style
+    style_expr = func.coalesce(
+        ProductCatalog.style, SalesNoteItem.product_name
+    ).label("style")
+
+    rows = (
+        db.query(
+            style_expr,
+            func.sum(
+                case(
+                    (
+                        func.upper(SalesNoteItem.unit_measure).in_(liter_units),
+                        SalesNoteItem.quantity,
+                    ),
+                    else_=0,
+                )
+            ).label("total_liters"),
+            func.count(func.distinct(SalesNoteItem.sales_note_id)).label("note_count"),
+            func.sum(
+                case(
+                    (
+                        func.upper(SalesNoteItem.unit_measure).in_(liter_units),
+                        SalesNoteItem.line_total,
+                    ),
+                    else_=0,
+                )
+            ).label("revenue"),
+        )
+        .outerjoin(
+            ProductCatalog,
+            SalesNoteItem.product_id == ProductCatalog.id,
+        )
+        .filter(
+            SalesNoteItem.sales_note_id.in_(confirmed_ids),
+            func.upper(SalesNoteItem.unit_measure).in_(liter_units),
+        )
+        .group_by(style_expr)
+        .order_by(func.sum(
+            case(
+                (
+                    func.upper(SalesNoteItem.unit_measure).in_(liter_units),
+                    SalesNoteItem.quantity,
+                ),
+                else_=0,
+            )
+        ).desc())
+        .all()
+    )
+
+    styles = [
+        {
+            "style": row.style or "Sin estilo",
+            "total_liters": float(row.total_liters or 0),
+            "note_count": row.note_count,
+            "revenue": float(row.revenue or 0),
+        }
+        for row in rows
+    ]
+
+    grand_total = sum(s["total_liters"] for s in styles)
+    # Add percentage share per style
+    for s in styles:
+        s["pct"] = round(s["total_liters"] / grand_total * 100, 1) if grand_total else 0.0
+
+    return {
+        "since": str(since) if since else None,
+        "until": str(until) if until else None,
+        "channel": channel,
+        "total_liters": grand_total,
+        "styles": styles,
+    }

@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from typing import List
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from database import get_db
 from models.device_enrollment import DeviceEnrollment, DeviceStatus

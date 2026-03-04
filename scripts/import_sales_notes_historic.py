@@ -277,6 +277,12 @@ def quality_flags_score(flags: Iterable[str]) -> float:
         "missing_payment_method": 0.03,
         "inferred_client_name": 0.06,
         "ocr_noise": 0.08,
+        "taxes_cleared_total_equals_subtotal": 0.03,
+        "taxes_cleared_negative_delta": 0.04,
+        "taxes_cleared_inconsistent": 0.05,
+        "taxes_rebalanced_to_delta": 0.03,
+        "taxes_cleared_negative_ieps": 0.02,
+        "taxes_cleared_negative_iva": 0.02,
     }
     penalty = 0.0
     for flag in flags:
@@ -466,8 +472,17 @@ def extract_note_date(lines: list[str]) -> Optional[datetime]:
     return None
 
 
-def find_money_near(lines: list[str], idx: int) -> Optional[float]:
+def find_money_near(lines: list[str], idx: int, *, skip_total_like: bool = False) -> Optional[float]:
     for jdx in range(idx, min(idx + 4, len(lines))):
+        if skip_total_like:
+            compact = re.sub(r"[^A-Z]", "", strip_accents(lines[jdx]).upper())
+            if (
+                "TOTAL" in compact
+                and "SUBTOTAL" not in compact
+                and "IEPS" not in compact
+                and "IVA" not in compact
+            ):
+                continue
         values = all_money_values(lines[jdx])
         if values:
             return values[-1]
@@ -480,6 +495,8 @@ def parse_totals_from_lines(lines: list[str]) -> tuple[float, float, float, floa
     iva: float = 0.0
     total_candidates: list[float] = []
     flags: list[str] = []
+    ieps_labeled = False
+    iva_labeled = False
 
     for idx, line in enumerate(lines):
         norm = normalize_token(line)
@@ -492,13 +509,19 @@ def parse_totals_from_lines(lines: list[str]) -> tuple[float, float, float, floa
             if money is not None:
                 subtotal = money
         elif compact in {"IEPS", "IEPSS"} or "IEPS" in compact:
-            money = find_money_near(lines, idx)
+            money = parse_money_token(line)
+            if money is None:
+                money = find_money_near(lines, idx, skip_total_like=True)
             if money is not None:
                 ieps = money
+                ieps_labeled = True
         elif compact in {"IVA", "IVAIMPUESTOS"} or compact.startswith("IVA"):
-            money = find_money_near(lines, idx)
+            money = parse_money_token(line)
+            if money is None:
+                money = find_money_near(lines, idx, skip_total_like=True)
             if money is not None:
                 iva = money
+                iva_labeled = True
         elif "TOTAL" in compact and "SUBTOTAL" not in compact and "TOTALENVASES" not in compact:
             money = find_money_near(lines, idx)
             if money is not None:
@@ -508,11 +531,13 @@ def parse_totals_from_lines(lines: list[str]) -> tuple[float, float, float, floa
             value = parse_money_token(line)
             if value is not None:
                 iva = value
+                iva_labeled = True
         if "IEPS" in line.upper() and "$" in line:
             # Handles "Impuestos: IEPS: $0.00"
             values = all_money_values(line)
             if values:
                 ieps = values[-1]
+                ieps_labeled = True
 
     total: Optional[float] = total_candidates[-1] if total_candidates else None
 
@@ -534,6 +559,39 @@ def parse_totals_from_lines(lines: list[str]) -> tuple[float, float, float, floa
     if total is None and subtotal is not None:
         total = round(subtotal + ieps + iva, 2)
         flags.append("inferred_total")
+
+    if ieps < 0:
+        ieps = 0.0
+        flags.append("taxes_cleared_negative_ieps")
+    if iva < 0:
+        iva = 0.0
+        flags.append("taxes_cleared_negative_iva")
+
+    if total is not None and subtotal is not None:
+        tax_delta = round(total - subtotal, 2)
+        tax_sum = round(max(ieps, 0.0) + max(iva, 0.0), 2)
+
+        if tax_delta <= 0.01 and tax_sum > 0:
+            ieps = 0.0
+            iva = 0.0
+            flags.append("taxes_cleared_total_equals_subtotal")
+        elif tax_delta < 0 and tax_sum > 0:
+            ieps = 0.0
+            iva = 0.0
+            flags.append("taxes_cleared_negative_delta")
+        elif tax_delta > 0 and tax_sum > 0:
+            mismatch = abs(tax_sum - tax_delta)
+            tolerance = max(2.0, tax_delta * 0.2)
+            if mismatch > tolerance:
+                if ieps_labeled and iva_labeled and tax_sum > 0:
+                    ieps_ratio = ieps / tax_sum if tax_sum else 0.0
+                    ieps = round(tax_delta * ieps_ratio, 2)
+                    iva = round(tax_delta - ieps, 2)
+                    flags.append("taxes_rebalanced_to_delta")
+                else:
+                    ieps = 0.0
+                    iva = 0.0
+                    flags.append("taxes_cleared_inconsistent")
 
     return (
         round(float(subtotal or 0), 2),

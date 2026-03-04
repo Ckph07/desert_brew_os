@@ -235,10 +235,11 @@ class AppRouter {
             builder: (context, state) => const EmployeeListPage(),
             routes: [
               GoRoute(
-                path: 'tips',
-                name: 'tips',
+                path: 'tip-pool',
+                name: 'tip-pool',
                 builder: (context, state) => const TipPoolPage(),
               ),
+              GoRoute(path: 'tips', redirect: (_, __) => '/payroll/tip-pool'),
             ],
           ),
 

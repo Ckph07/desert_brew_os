@@ -170,8 +170,7 @@ enum KegType {
   const KegType(this.value);
   final String value;
 
-  static KegType fromString(String s) =>
-      values.firstWhere((e) => e.value == s);
+  static KegType fromString(String s) => values.firstWhere((e) => e.value == s);
 }
 
 /// Keg ownership.
@@ -314,15 +313,16 @@ enum PaymentMethod {
 
 /// Device enrollment status.
 enum DeviceStatus {
-  pending('PENDING'),
-  approved('APPROVED'),
-  revoked('REVOKED');
+  pending('pending'),
+  active('active'),
+  revoked('revoked'),
+  suspended('suspended');
 
   const DeviceStatus(this.value);
   final String value;
 
   static DeviceStatus fromString(String s) =>
-      values.firstWhere((e) => e.value == s);
+      values.firstWhere((e) => e.value.toLowerCase() == s.toLowerCase());
 }
 // ===== Finance Service Enums (Sprint 3.5b) =====
 
@@ -446,7 +446,9 @@ enum PayrollPeriodType {
 /// Department.
 enum Department {
   production('PRODUCTION'),
-  taproom('TAPROOM');
+  taproom('TAPROOM'),
+  logistics('LOGISTICS'),
+  admin('ADMIN');
 
   const Department(this.value);
   final String value;

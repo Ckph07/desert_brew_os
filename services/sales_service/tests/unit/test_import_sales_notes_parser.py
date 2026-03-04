@@ -126,3 +126,27 @@ class TestHistoricalImporterParser:
             )
             == "DESERT BREW TAP"
         )
+
+    def test_parse_text_clears_ambiguous_taxes_when_total_equals_subtotal(self):
+        content = """
+        PEDIDO 00000999
+        FECHA 12/09/2025
+        CLIENTE TEST BAR
+        IEPS
+        IVA
+        SUBTOTAL $1,000.00
+        TOTAL $1,000.00
+        """
+        note, issues = module.parse_text_like_note(
+            content=content,
+            source="ocr_txt",
+            source_ref="synthetic://ambiguous-taxes",
+            base_confidence=0.90,
+        )
+        assert note is not None
+        assert not [issue for issue in issues if issue.severity in {"skip", "error"}]
+        assert math.isclose(note.subtotal, 1000.0, rel_tol=0, abs_tol=0.01)
+        assert math.isclose(note.total, 1000.0, rel_tol=0, abs_tol=0.01)
+        assert math.isclose(note.ieps_total, 0.0, rel_tol=0, abs_tol=0.01)
+        assert math.isclose(note.iva_total, 0.0, rel_tol=0, abs_tol=0.01)
+        assert note.include_taxes is False

@@ -17,18 +17,24 @@ class OutboxService {
   }
 
   final ConnectivityMonitor connectivityMonitor;
-  final Logger _logger = Logger(
-    printer: PrettyPrinter(methodCount: 0),
-  );
+  final Logger _logger = Logger(printer: PrettyPrinter(methodCount: 0));
 
   StreamSubscription<bool>? _subscription;
+  final _pendingController = StreamController<int>.broadcast();
 
   // In-memory queue (will be backed by Isar in production)
   final List<OutboxEntry> _queue = [];
 
+  Stream<int> get onPendingCountChanged => _pendingController.stream;
+
+  void _emitPendingCount() {
+    _pendingController.add(_queue.length);
+  }
+
   /// Queue an operation for later execution.
   void enqueue(OutboxEntry entry) {
     _queue.add(entry);
+    _emitPendingCount();
     _logger.d(
       'Outbox: queued ${entry.method} ${entry.path} (${_queue.length} pending)',
     );
@@ -48,6 +54,7 @@ class OutboxService {
       try {
         await entry.execute();
         _queue.remove(entry);
+        _emitPendingCount();
         _logger.d('Outbox: ✓ ${entry.method} ${entry.path}');
       } catch (e) {
         entry.retryCount++;
@@ -58,6 +65,7 @@ class OutboxService {
         // Exponential backoff: 2^retryCount seconds, max 5 min
         if (entry.retryCount > 10) {
           _queue.remove(entry);
+          _emitPendingCount();
           _logger.e('Outbox: abandoned ${entry.path} after 10 retries');
         }
       }
@@ -66,6 +74,7 @@ class OutboxService {
 
   void dispose() {
     _subscription?.cancel();
+    _pendingController.close();
   }
 }
 

@@ -10,7 +10,7 @@ Scope: notes with metadata `"import":"historic_sales_notes"` in `desertbrew_sale
 - IVA MXN: **290,558.31**
 - Total MXN: **743,910.97**
 
-## By month (MXN)
+## Top months by total (MXN)
 | Month | Notes | Subtotal | IEPS | IVA | Total |
 |---|---:|---:|---:|---:|---:|
 | 2025-12 | 10 | 59,747.00 | 27,232.04 | 55,150.52 | 60,622.52 |

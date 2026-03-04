@@ -2,56 +2,62 @@
 
 ## Estado actual (2026-03-04)
 
-Objetivo de este corte: estabilizar contratos reales de backend y cerrar P0+P1 de frontend en flujos criticos.
+Objetivo de este corte: cerrar F6 (Payroll + Security) y arrancar F7 (dashboard global + base offline) sobre contratos backend reales.
 
-Referencia de cambios implementados:
-- `docs/implementaciones_2026-03-04.md`
+## Contratos backend verificados
 
-## Estado real por modulo
+| Servicio | Puerto | Endpoints útiles para frontend | Estado de integración frontend |
+|---|---:|---:|---|
+| Inventory | 8001 | 39 | Operativo (F1/F2) + usado por Dashboard global |
+| Sales | 8002 | 24+ | Operativo (F3/F3+) + usado por Dashboard global |
+| Production | 8004 | 26 | Operativo (F4) + usado por Dashboard global |
+| Finance | 8005 | 19 | Operativo (F5) |
+| Payroll | 8006 | 11 | Operativo (F6): empleados, entries, tip-pools |
+| Security | 8003 | 7 (+root/health) | Operativo (F6): enrollment, approve/revoke, heartbeat, stats |
+
+Nota backend aplicada en este corte:
+- `services/security_service/api/enrollment_routes.py`: import de `timedelta` corregido para `/api/v1/security/enrollments/stats`.
+
+## Estado real por módulo
 
 | Modulo | Estado | Entregado en este corte | Gaps actuales |
 |---|---|---|---|
-| Inventory | P0+P1 operativo | Stock dashboard y Receive Stock usando `/api/v1/inventory/stock`; mapping real de `StockBatch`; summary primario en `/api/v1/inventory/summary` con fallback a `/api/v1/inventory/stock/summary`; vista `Lotes/Insumos`; catalogo de insumos CRUD (`/inventory/ingredients`) conectado a selector en Receive Stock; payload de suppliers alineado (`contact_person`, `payment_terms`). | Falta migracion Alembic para `ingredient_catalog`; UX avanzada de Kegs/Cold Room pendiente. |
-| Sales | P0+P1 operativo | Rutas `sales/*` alineadas; notas con `offset`; confirm/cancel por `PATCH`; nuevo pago `PATCH /api/v1/sales/notes/{id}/payment`; create note con `product_id + sku`; detalle de nota con export PDF/PNG; analytics liters-by-style activo. | Client detail sigue en placeholder; sharing/download de export en dispositivo (flujo nativo) queda para siguiente corte. |
-| Production | P0+P1 operativo | Costos corregidos a `/ingredients`, `/costs/fixed`, `/costs/summary`; parser UI usa `monthly_amount`; `completeBatch(...)` implementado en repo/bloc/ui; recetas con CRUD + import BeerSmith (`.bsmx`) en frontend; editor manual/edicion de receta ahora soporta multiples fermentables, lupulos y levaduras con `sku`; reglas por estilo activas en formularios de receta y batch (validacion OG/FG/ABV/IBU + escala de volumen por estilo); reglas avanzadas por estilo activas (SRM + perfil de agua por ion), con sugerencia automatica de targets desde el formulario de receta; catálogo BA 2025 completo extraído desde PDF oficial y cargado en runtime desde `assets/data/ba_beer_styles_2025.json` (con fallback canónico); transiciones de batch habilitadas para `conditioning`, `packaging` y `cancel`; validacion de insumos (`validate-stock`) desde frontend; `start-brewing` bloquea si la validacion de stock falla; snapshot inmutable de receta para costos de batch. | Falta cobertura de agua/targets por estilo para el 100% del catálogo BA (hoy se hereda por arquetipo) y publicar catálogo/versionado desde backend para evitar drift de assets locales. |
-| Finance | P1 operativo | CRUD completo de incomes y expenses (create/update/delete); dashboard enlaza a pricing rules, internal transfers y profit-center summary (lectura). | Edicion/alta de pricing rules e internal transfers aun no expuesta en UI. |
-| Payroll | Fuera de corte | Estructura base y pantallas existentes. | Data layer completo + flujos operativos quedan para siguiente fase. |
-| Security | Fuera de corte | Estructura base y device list existente. | Enrollment operativo, heartbeat y acciones administrativas quedan para siguiente fase. |
+| Inventory | P0+P1 operativo | Stock dashboard, Receive Stock, ingredientes, suppliers, kegs, finished products. | UX avanzada de kegs/cold room y mejoras de performance de listados grandes. |
+| Sales | P0+P1 operativo | Notas de venta con confirm/cancel/payment, analytics litros por estilo, detalle/export. | Client detail sigue en placeholder. |
+| Production | P0+P1 operativo | Recetas CRUD/import, batches FSM, costos FIFO, validación de stock por receta. | Externalizar reglas de estilo al backend para evitar drift local. |
+| Finance | P1 operativo | CRUD incomes/expenses, balance/cashflow, vistas de pricing rules/internal transfers/profit summary. | Alta/edición de pricing rules e internal transfers aún no expuesta. |
+| Payroll | P0+P1 operativo | `/payroll`: lista real de empleados + entradas de nómina + alta de empleado + alta de entry + marcar pagado. `/payroll/tip-pool`: lista y creación de tip pools con participantes. | Edición de empleado y reportes de nómina consolidados pendientes. |
+| Security | P0+P1 operativo | `/security`: listado real de dispositivos, filtros por estado, stats, enrollment, approve/revoke, heartbeat. | RBAC real de acciones admin y flujo de asignación de admin_user_id desde auth. |
+| Dashboard global + Offline | F7 base operativa | Home dashboard con KPIs reales multi-servicio + fallback a snapshot en memoria + estado online/offline + contador outbox + flush manual. | Persistencia offline (Isar) para snapshot/outbox aún pendiente; cola sigue in-memory. |
 
-## Entregables cerrados (P0 + P1)
+## Entregables cerrados en este corte
 
-1. Sales contracts + endpoint de pago de nota.
-2. Inventory contracts + stock mapping + summary derivado en frontend.
-3. Production costos con rutas reales.
-4. Complete batch end-to-end con integracion Production -> Inventory/Finance.
-5. Finance CRUD de ingresos/egresos + navegacion de cards pendientes.
-6. Sales note con lineas ligadas a catalogo (`product_id`) + detalle/export.
-7. Documentacion de integracion y roadmap actualizados.
-8. Catalogo de insumos (Inventory) con CRUD y seleccion desde Receive Stock.
-9. Production recetas CRUD + import BeerSmith en frontend y flujo completo de estados `planned -> ... -> completed`.
-10. Production recetas manuales/editables con multiples lineas de ingredientes y `sku`, mas bloqueo de inicio de lote cuando no hay stock suficiente.
-11. Validaciones por estilo en formularios de Produccion: receta (OG/FG/ABV/IBU/SRM/perfil de agua) con sugerencia automatica de targets, y batch (escala de volumen + cumplimiento de objetivos de estilo).
+1. Data layer completo de Payroll (datasource + repo + modelos + entidades).
+2. UI operativa de Payroll (empleados, payroll entries, tip pools).
+3. Data layer completo de Security (datasource + repo + modelos + entidades).
+4. UI operativa de Security (enrollment + lifecycle admin + stats).
+5. Dashboard global con KPIs reales (Inventory, Production, Sales, Payroll, Security).
+6. Integración offline base en frontend con `SyncManager` + outbox reactivo.
+7. Ruta de payroll alineada: `/payroll/tip-pool` (con compatibilidad legacy `/payroll/tips` → redirect).
+8. Corrección backend en endpoint de stats de Security.
 
-## Calidad y validacion ejecutada
+## Calidad y validación esperada
 
 - Frontend:
-  - `flutter analyze` sin errores de compilacion (solo lints informativos existentes).
-  - Tests agregados y pasando:
-    - `test/features/inventory/data/repositories/inventory_repository_impl_test.dart`
-    - `test/features/production/presentation/bloc/batch/batch_bloc_test.dart`
-    - `test/features/production/domain/entities/style_guidelines_test.dart`
+  - `flutter analyze` sin errores de compilación.
+  - Validar manualmente rutas nuevas:
+    - `/payroll`
+    - `/payroll/tip-pool`
+    - `/security`
+    - `/` (dashboard global + offline indicators)
 - Backend:
-  - `services/sales_service`: `41 passed`
-  - `services/production_service`: `53 passed`
-  - `services/inventory_service`: modulos nuevos compilando via `py_compile`.
-  - Nota: tests de integracion con SQLite estan impactados por incompatibilidad preexistente de tipos `JSONB`.
+  - Confirmar `/api/v1/security/enrollments/stats` respondiendo sin `NameError`.
 
 ## Backlog siguiente corte (P2)
 
-1. Payroll y Security con data layer + casos operativos completos.
-2. Client Detail de Sales (sin placeholder) con historial y estado de credito.
-3. Eliminacion del fallback legacy de inventory summary cuando backend lo depreque oficialmente.
-4. Migracion Alembic para `ingredient_catalog` y estrategia de tests sin bloqueo por `JSONB`.
-5. Auth/RBAC y controles de permisos por modulo.
-6. Offline/outbox y sync status transversal.
-7. Externalizar reglas de estilo (rangos y targets de agua) a backend/configuracion central versionada.
+1. Persistencia offline real (Isar) para outbox y snapshots de dashboard.
+2. RBAC/Auth para acciones sensibles de Security y Payroll.
+3. Reportes consolidados de nómina (semanal/quincenal/mensual + export).
+4. Client Detail completo en Sales (sin placeholder).
+5. Alta/edición de pricing rules e internal transfers en Finance.
+6. Telemetría de sync: latencia de cola, reintentos y fallas por endpoint.

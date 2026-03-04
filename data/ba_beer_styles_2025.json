@@ -1,0 +1,4300 @@
+{
+  "metadata": {
+    "source": "Brewers Association Beer Style Guidelines",
+    "year": 2025,
+    "version": "Updated 5/30/2025",
+    "source_pdf": "data/2025_BA_Beer_Style_Guidelines.pdf",
+    "extracted_from": "pdftotext -layout",
+    "parser": "extract_ba_styles_2025.py",
+    "total_styles": 126,
+    "numeric_og_styles": 112,
+    "varies_og_styles": 14,
+    "notes": "Styles with non-numeric ranges keep raw text and null min/max."
+  },
+  "styles": [
+    {
+      "id": "BA-2025-001",
+      "name": "Ordinary Bitter",
+      "toc_page": 1,
+      "og_min": 1.033,
+      "og_max": 1.038,
+      "fg_min": 1.006,
+      "fg_max": 1.012,
+      "abv_min": 3.0,
+      "abv_max": 4.2,
+      "ibu_min": 20.0,
+      "ibu_max": 35.0,
+      "srm_min": 5.0,
+      "srm_max": 12.0,
+      "raw": {
+        "og": "1.033-1.038",
+        "fg": "1.006-1.012",
+        "abv": "3.0-4.2",
+        "ibu": "20-35",
+        "srm": "5-12"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 9,
+        "matched_heading": "Ordinary Bitter",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-002",
+      "name": "Special Bitter or Best Bitter",
+      "toc_page": 1,
+      "og_min": 1.038,
+      "og_max": 1.045,
+      "fg_min": 1.006,
+      "fg_max": 1.012,
+      "abv_min": 4.2,
+      "abv_max": 4.8,
+      "ibu_min": 28.0,
+      "ibu_max": 40.0,
+      "srm_min": 6.0,
+      "srm_max": 14.0,
+      "raw": {
+        "og": "1.038-1.045",
+        "fg": "1.006-1.012",
+        "abv": "4.2-4.8",
+        "ibu": "28-40",
+        "srm": "6-14"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 9,
+        "matched_heading": "Special Bitter or Best Bitter",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-003",
+      "name": "Extra Special Bitter",
+      "toc_page": 1,
+      "og_min": 1.046,
+      "og_max": 1.06,
+      "fg_min": 1.01,
+      "fg_max": 1.016,
+      "abv_min": 4.8,
+      "abv_max": 5.8,
+      "ibu_min": 30.0,
+      "ibu_max": 45.0,
+      "srm_min": 8.0,
+      "srm_max": 17.0,
+      "raw": {
+        "og": "1.046-1.060",
+        "fg": "1.010-1.016",
+        "abv": "4.8-5.8",
+        "ibu": "30-45",
+        "srm": "8-17"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 9,
+        "matched_heading": "Extra Special Bitter",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-004",
+      "name": "Scottish-Style Light Ale",
+      "toc_page": 1,
+      "og_min": 1.03,
+      "og_max": 1.035,
+      "fg_min": 1.006,
+      "fg_max": 1.01,
+      "abv_min": 2.8,
+      "abv_max": 3.5,
+      "ibu_min": 9.0,
+      "ibu_max": 20.0,
+      "srm_min": 6.0,
+      "srm_max": 15.0,
+      "raw": {
+        "og": "1.030-1.035",
+        "fg": "1.006-1.010",
+        "abv": "2.8-3.5",
+        "ibu": "9-20",
+        "srm": "6-15"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 9,
+        "matched_heading": "Scottish-Style Light Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-005",
+      "name": "Scottish-Style Heavy Ale",
+      "toc_page": 2,
+      "og_min": 1.035,
+      "og_max": 1.04,
+      "fg_min": 1.01,
+      "fg_max": 1.014,
+      "abv_min": 3.5,
+      "abv_max": 4.1,
+      "ibu_min": 12.0,
+      "ibu_max": 20.0,
+      "srm_min": 8.0,
+      "srm_max": 30.0,
+      "raw": {
+        "og": "1.035-1.040",
+        "fg": "1.010-1.014",
+        "abv": "3.5-4.1",
+        "ibu": "12-20",
+        "srm": "8-30"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 10,
+        "matched_heading": "Scottish-Style Heavy Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-006",
+      "name": "Scottish-Style Export Ale",
+      "toc_page": 2,
+      "og_min": 1.04,
+      "og_max": 1.05,
+      "fg_min": 1.01,
+      "fg_max": 1.018,
+      "abv_min": 4.1,
+      "abv_max": 6.0,
+      "ibu_min": 15.0,
+      "ibu_max": 25.0,
+      "srm_min": 9.0,
+      "srm_max": 19.0,
+      "raw": {
+        "og": "1.040-1.050",
+        "fg": "1.010-1.018",
+        "abv": "4.1-6.0",
+        "ibu": "15-25",
+        "srm": "9-19"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 10,
+        "matched_heading": "Scottish-Style Export Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-007",
+      "name": "English-Style Summer Ale",
+      "toc_page": 3,
+      "og_min": 1.036,
+      "og_max": 1.05,
+      "fg_min": 1.006,
+      "fg_max": 1.012,
+      "abv_min": 3.7,
+      "abv_max": 5.1,
+      "ibu_min": 20.0,
+      "ibu_max": 30.0,
+      "srm_min": 3.0,
+      "srm_max": 6.0,
+      "raw": {
+        "og": "1.036-1.050",
+        "fg": "1.006-1.012",
+        "abv": "3.7-5.1",
+        "ibu": "20-30",
+        "srm": "3-6"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 11,
+        "matched_heading": "English-Style Summer Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-008",
+      "name": "Classic English-Style Pale Ale",
+      "toc_page": 3,
+      "og_min": 1.04,
+      "og_max": 1.056,
+      "fg_min": 1.008,
+      "fg_max": 1.016,
+      "abv_min": 4.4,
+      "abv_max": 5.3,
+      "ibu_min": 20.0,
+      "ibu_max": 40.0,
+      "srm_min": 5.0,
+      "srm_max": 12.0,
+      "raw": {
+        "og": "1.040-1.056",
+        "fg": "1.008-1.016",
+        "abv": "4.4-5.3",
+        "ibu": "20-40",
+        "srm": "5-12"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 11,
+        "matched_heading": "Classic English-Style Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-009",
+      "name": "British-Style India Pale Ale",
+      "toc_page": 3,
+      "og_min": 1.046,
+      "og_max": 1.064,
+      "fg_min": 1.012,
+      "fg_max": 1.018,
+      "abv_min": 4.5,
+      "abv_max": 7.1,
+      "ibu_min": 35.0,
+      "ibu_max": 63.0,
+      "srm_min": 6.0,
+      "srm_max": 14.0,
+      "raw": {
+        "og": "1.046-1.064",
+        "fg": "1.012-1.018",
+        "abv": "4.5-7.1",
+        "ibu": "35-63",
+        "srm": "6-14"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 11,
+        "matched_heading": "British-Style India Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-010",
+      "name": "Strong Ale",
+      "toc_page": 4,
+      "og_min": 1.06,
+      "og_max": 1.125,
+      "fg_min": 1.014,
+      "fg_max": 1.04,
+      "abv_min": 7.0,
+      "abv_max": 11.3,
+      "ibu_min": 30.0,
+      "ibu_max": 60.0,
+      "srm_min": 8.0,
+      "srm_max": 21.0,
+      "raw": {
+        "og": "1.060-1.125",
+        "fg": "1.014-1.040",
+        "abv": "7.0-11.3",
+        "ibu": "30-60",
+        "srm": "8-21"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 12,
+        "matched_heading": "Strong Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-011",
+      "name": "English-Style Pale Mild Ale",
+      "toc_page": 4,
+      "og_min": 1.03,
+      "og_max": 1.036,
+      "fg_min": 1.004,
+      "fg_max": 1.008,
+      "abv_min": 3.4,
+      "abv_max": 4.4,
+      "ibu_min": 10.0,
+      "ibu_max": 20.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.030-1.036",
+        "fg": "1.004-1.008",
+        "abv": "3.4-4.4",
+        "ibu": "10-20",
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 12,
+        "matched_heading": "English-Style Pale Mild Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-012",
+      "name": "English-Style Dark Mild Ale",
+      "toc_page": 5,
+      "og_min": 1.03,
+      "og_max": 1.036,
+      "fg_min": 1.004,
+      "fg_max": 1.008,
+      "abv_min": 3.4,
+      "abv_max": 4.4,
+      "ibu_min": 10.0,
+      "ibu_max": 24.0,
+      "srm_min": 17.0,
+      "srm_max": 34.0,
+      "raw": {
+        "og": "1.030-1.036",
+        "fg": "1.004-1.008",
+        "abv": "3.4-4.4",
+        "ibu": "10-24",
+        "srm": "17-34"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 13,
+        "matched_heading": "English-Style Dark Mild Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-013",
+      "name": "English-Style Brown Ale",
+      "toc_page": 5,
+      "og_min": 1.04,
+      "og_max": 1.05,
+      "fg_min": 1.008,
+      "fg_max": 1.014,
+      "abv_min": 4.2,
+      "abv_max": 6.0,
+      "ibu_min": 12.0,
+      "ibu_max": 25.0,
+      "srm_min": 12.0,
+      "srm_max": 24.0,
+      "raw": {
+        "og": "1.040-1.050",
+        "fg": "1.008-1.014",
+        "abv": "4.2-6.0",
+        "ibu": "12-25",
+        "srm": "12-24"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 13,
+        "matched_heading": "English-Style Brown Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-014",
+      "name": "Brown Porter",
+      "toc_page": 5,
+      "og_min": 1.04,
+      "og_max": 1.05,
+      "fg_min": 1.006,
+      "fg_max": 1.014,
+      "abv_min": 4.4,
+      "abv_max": 6.0,
+      "ibu_min": 20.0,
+      "ibu_max": 30.0,
+      "srm_min": 20.0,
+      "srm_max": 35.0,
+      "raw": {
+        "og": "1.040-1.050",
+        "fg": "1.006-1.014",
+        "abv": "4.4-6.0",
+        "ibu": "20-30",
+        "srm": "20-35"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 13,
+        "matched_heading": "Brown Porter",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-015",
+      "name": "Robust Porter",
+      "toc_page": 5,
+      "og_min": 1.045,
+      "og_max": 1.06,
+      "fg_min": 1.008,
+      "fg_max": 1.016,
+      "abv_min": 5.1,
+      "abv_max": 6.6,
+      "ibu_min": 25.0,
+      "ibu_max": 40.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.045-1.060",
+        "fg": "1.008-1.016",
+        "abv": "5.1-6.6",
+        "ibu": "25-40",
+        "srm": "30+ (60+ EBC) Sweet Stout or Cream Stout"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "unknown"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 13,
+        "matched_heading": "Robust Porter",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-016",
+      "name": "Sweet Stout or Cream Stout",
+      "toc_page": 5,
+      "og_min": 1.045,
+      "og_max": 1.056,
+      "fg_min": 1.012,
+      "fg_max": 1.02,
+      "abv_min": 3.2,
+      "abv_max": 6.3,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.045-1.056",
+        "fg": "1.012-1.020",
+        "abv": "3.2-6.3",
+        "ibu": null,
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "missing",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 13,
+        "matched_heading": "Sweet Stout or Cream Stout",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-017",
+      "name": "Oatmeal Stout",
+      "toc_page": 6,
+      "og_min": 1.038,
+      "og_max": 1.056,
+      "fg_min": 1.008,
+      "fg_max": 1.02,
+      "abv_min": 3.8,
+      "abv_max": 6.1,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.038-1.056",
+        "fg": "1.008-1.020",
+        "abv": "3.8-6.1",
+        "ibu": null,
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "missing",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 14,
+        "matched_heading": "Oatmeal Stout",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-018",
+      "name": "British-Style Imperial Stout",
+      "toc_page": 6,
+      "og_min": 1.08,
+      "og_max": 1.1,
+      "fg_min": 1.02,
+      "fg_max": 1.03,
+      "abv_min": 7.0,
+      "abv_max": 12.0,
+      "ibu_min": 45.0,
+      "ibu_max": 65.0,
+      "srm_min": 20.0,
+      "srm_max": 35.0,
+      "raw": {
+        "og": "1.080-1.100",
+        "fg": "1.020-1.030",
+        "abv": "7.0-12.0",
+        "ibu": "45-65",
+        "srm": "20-35+"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 14,
+        "matched_heading": "British-Style Imperial Stout",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-019",
+      "name": "British-Style Barley Wine Ale",
+      "toc_page": 7,
+      "og_min": 1.085,
+      "og_max": 1.12,
+      "fg_min": 1.024,
+      "fg_max": 1.028,
+      "abv_min": 8.5,
+      "abv_max": 12.2,
+      "ibu_min": 40.0,
+      "ibu_max": 65.0,
+      "srm_min": 11.0,
+      "srm_max": 36.0,
+      "raw": {
+        "og": "1.085-1.120",
+        "fg": "1.024-1.028",
+        "abv": "8.5-12.2",
+        "ibu": "40-65",
+        "srm": "11-36"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 15,
+        "matched_heading": "British-Style Barley Wine Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-020",
+      "name": "Irish-Style Red Ale",
+      "toc_page": 7,
+      "og_min": 1.04,
+      "og_max": 1.048,
+      "fg_min": 1.01,
+      "fg_max": 1.014,
+      "abv_min": 4.0,
+      "abv_max": 4.8,
+      "ibu_min": 20.0,
+      "ibu_max": 28.0,
+      "srm_min": 11.0,
+      "srm_max": 18.0,
+      "raw": {
+        "og": "1.040-1.048",
+        "fg": "1.010-1.014",
+        "abv": "4.0-4.8",
+        "ibu": "20-28",
+        "srm": "11-18"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 15,
+        "matched_heading": "Irish-Style Red Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-021",
+      "name": "Classic Irish-Style Dry Stout",
+      "toc_page": 7,
+      "og_min": 1.038,
+      "og_max": 1.048,
+      "fg_min": 1.008,
+      "fg_max": 1.012,
+      "abv_min": 4.1,
+      "abv_max": 5.3,
+      "ibu_min": 30.0,
+      "ibu_max": 40.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.038-1.048",
+        "fg": "1.008-1.012",
+        "abv": "4.1-5.3",
+        "ibu": "30-40",
+        "srm": "40+ (80+ EBC) Export-Style Stout"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "unknown"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 15,
+        "matched_heading": "Classic Irish-Style Dry Stout",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-022",
+      "name": "Export-Style Stout",
+      "toc_page": 8,
+      "og_min": 1.052,
+      "og_max": 1.072,
+      "fg_min": 1.008,
+      "fg_max": 1.02,
+      "abv_min": 5.6,
+      "abv_max": 8.0,
+      "ibu_min": 30.0,
+      "ibu_max": 60.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.052-1.072",
+        "fg": "1.008-1.020",
+        "abv": "5.6-8.0",
+        "ibu": "30-60",
+        "srm": "40+ (80+ EBC) NORTH AMERICAN ORIGIN ALE STYLES"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "unknown"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 16,
+        "matched_heading": "Export-Style Stout",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-023",
+      "name": "Golden or Blonde Ale",
+      "toc_page": 8,
+      "og_min": 1.045,
+      "og_max": 1.054,
+      "fg_min": 1.008,
+      "fg_max": 1.016,
+      "abv_min": 4.1,
+      "abv_max": 5.1,
+      "ibu_min": 15.0,
+      "ibu_max": 25.0,
+      "srm_min": 3.0,
+      "srm_max": 7.0,
+      "raw": {
+        "og": "1.045-1.054",
+        "fg": "1.008-1.016",
+        "abv": "4.1-5.1",
+        "ibu": "15-25",
+        "srm": "3-7"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 16,
+        "matched_heading": "Golden or Blonde Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-024",
+      "name": "Session India Pale Ale",
+      "toc_page": 8,
+      "og_min": 1.008,
+      "og_max": 1.052,
+      "fg_min": 1.005,
+      "fg_max": 1.014,
+      "abv_min": 0.5,
+      "abv_max": 5.0,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.008-1.052",
+        "fg": "1.005-1.014",
+        "abv": "0.5-5.0",
+        "ibu": null,
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "missing",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 16,
+        "matched_heading": "Session India Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-025",
+      "name": "American-Style Pale Ale",
+      "toc_page": 9,
+      "og_min": 1.044,
+      "og_max": 1.05,
+      "fg_min": 1.008,
+      "fg_max": 1.014,
+      "abv_min": 4.4,
+      "abv_max": 5.4,
+      "ibu_min": 30.0,
+      "ibu_max": 50.0,
+      "srm_min": 4.0,
+      "srm_max": 7.0,
+      "raw": {
+        "og": "1.044-1.050",
+        "fg": "1.008-1.014",
+        "abv": "4.4-5.4",
+        "ibu": "30-50",
+        "srm": "4-7"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 17,
+        "matched_heading": "American-Style Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-026",
+      "name": "Juicy or Hazy Pale Ale",
+      "toc_page": 9,
+      "og_min": 1.044,
+      "og_max": 1.05,
+      "fg_min": 1.008,
+      "fg_max": 1.014,
+      "abv_min": 4.4,
+      "abv_max": 5.4,
+      "ibu_min": 5.0,
+      "ibu_max": 30.0,
+      "srm_min": 3.0,
+      "srm_max": 7.0,
+      "raw": {
+        "og": "1.044-1.050",
+        "fg": "1.008-1.014",
+        "abv": "4.4-5.4",
+        "ibu": "5-30",
+        "srm": "3-7"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 17,
+        "matched_heading": "Juicy or Hazy Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-027",
+      "name": "American-Style Strong Pale Ale",
+      "toc_page": 9,
+      "og_min": 1.05,
+      "og_max": 1.058,
+      "fg_min": 1.006,
+      "fg_max": 1.01,
+      "abv_min": 5.6,
+      "abv_max": 6.4,
+      "ibu_min": 40.0,
+      "ibu_max": 50.0,
+      "srm_min": 3.0,
+      "srm_max": 8.0,
+      "raw": {
+        "og": "1.050-1.058",
+        "fg": "1.006-1.010",
+        "abv": "5.6-6.4",
+        "ibu": "40-50",
+        "srm": "3-8"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 17,
+        "matched_heading": "American-Style Strong Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-028",
+      "name": "Juicy or Hazy Strong Pale Ale",
+      "toc_page": 10,
+      "og_min": 1.05,
+      "og_max": 1.058,
+      "fg_min": 1.006,
+      "fg_max": 1.01,
+      "abv_min": 5.6,
+      "abv_max": 6.4,
+      "ibu_min": 15.0,
+      "ibu_max": 40.0,
+      "srm_min": 3.0,
+      "srm_max": 8.0,
+      "raw": {
+        "og": "1.050-1.058",
+        "fg": "1.006-1.010",
+        "abv": "5.6-6.4",
+        "ibu": "15-40",
+        "srm": "3-8"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 18,
+        "matched_heading": "Juicy or Hazy Strong Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-029",
+      "name": "American-Style India Pale Ale",
+      "toc_page": 10,
+      "og_min": 1.06,
+      "og_max": 1.07,
+      "fg_min": 1.01,
+      "fg_max": 1.016,
+      "abv_min": 6.3,
+      "abv_max": 7.5,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.060-1.070",
+        "fg": "1.010-1.016",
+        "abv": "6.3-7.5",
+        "ibu": null,
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "missing",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 18,
+        "matched_heading": "American-Style India Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-030",
+      "name": "Juicy or Hazy India Pale Ale",
+      "toc_page": 11,
+      "og_min": 1.06,
+      "og_max": 1.07,
+      "fg_min": 1.008,
+      "fg_max": 1.02,
+      "abv_min": 6.3,
+      "abv_max": 7.5,
+      "ibu_min": 20.0,
+      "ibu_max": 50.0,
+      "srm_min": 3.0,
+      "srm_max": 7.0,
+      "raw": {
+        "og": "1.060-1.070",
+        "fg": "1.008-1.020",
+        "abv": "6.3-7.5",
+        "ibu": "20-50",
+        "srm": "3-7"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 19,
+        "matched_heading": "Juicy or Hazy India Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-031",
+      "name": "American-Belgo-Style Ale",
+      "toc_page": 12,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "Varies with style",
+        "fg": "Varies with style",
+        "abv": "Varies with style",
+        "ibu": "Varies with style",
+        "srm": "Varies with style"
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "varies"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 20,
+        "matched_heading": "American-Belgo-Style Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-032",
+      "name": "American-Style Brown Ale",
+      "toc_page": 12,
+      "og_min": 1.04,
+      "og_max": 1.06,
+      "fg_min": 1.01,
+      "fg_max": 1.018,
+      "abv_min": 4.2,
+      "abv_max": 6.3,
+      "ibu_min": 30.0,
+      "ibu_max": 45.0,
+      "srm_min": 15.0,
+      "srm_max": 26.0,
+      "raw": {
+        "og": "1.040-1.060",
+        "fg": "1.010-1.018",
+        "abv": "4.2-6.3",
+        "ibu": "30-45",
+        "srm": "15-26"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 20,
+        "matched_heading": "American-Style Brown Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-033",
+      "name": "American-Style Black Ale",
+      "toc_page": 12,
+      "og_min": 1.06,
+      "og_max": 1.07,
+      "fg_min": 1.008,
+      "fg_max": 1.02,
+      "abv_min": 6.3,
+      "abv_max": 7.5,
+      "ibu_min": 20.0,
+      "ibu_max": 50.0,
+      "srm_min": 3.0,
+      "srm_max": 7.0,
+      "raw": {
+        "og": "1.060-1.070",
+        "fg": "1.008-1.020",
+        "abv": "6.3-7.5",
+        "ibu": "20-50",
+        "srm": "3-7"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 20,
+        "matched_heading": "American-Style Black Ale.",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-034",
+      "name": "American-Style Imperial Porter",
+      "toc_page": 13,
+      "og_min": 1.08,
+      "og_max": 1.1,
+      "fg_min": 1.02,
+      "fg_max": 1.03,
+      "abv_min": 7.0,
+      "abv_max": 12.0,
+      "ibu_min": 35.0,
+      "ibu_max": 50.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.080-1.100",
+        "fg": "1.020-1.030",
+        "abv": "7.0-12.0",
+        "ibu": "35-50",
+        "srm": "40+ (80+ EBC) American-Style Imperial Stout"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "unknown"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 21,
+        "matched_heading": "American-Style Imperial Porter",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-035",
+      "name": "American-Style Imperial Stout",
+      "toc_page": 13,
+      "og_min": 1.08,
+      "og_max": 1.1,
+      "fg_min": 1.02,
+      "fg_max": 1.03,
+      "abv_min": 7.0,
+      "abv_max": 12.0,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.080-1.100",
+        "fg": "1.020-1.030",
+        "abv": "7.0-12.0",
+        "ibu": null,
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "missing",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 21,
+        "matched_heading": "American-Style Imperial Stout",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-036",
+      "name": "Double Hoppy Red Ale",
+      "toc_page": 14,
+      "og_min": 1.058,
+      "og_max": 1.08,
+      "fg_min": 1.015,
+      "fg_max": 1.024,
+      "abv_min": 6.1,
+      "abv_max": 7.9,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.058-1.080",
+        "fg": "1.015-1.024",
+        "abv": "6.1-7.9",
+        "ibu": null,
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "missing",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 22,
+        "matched_heading": "Double Hoppy Red Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-037",
+      "name": "American-Style Imperial or Double India Pale Ale",
+      "toc_page": 14,
+      "og_min": 1.067,
+      "og_max": 1.087,
+      "fg_min": 1.009,
+      "fg_max": 1.016,
+      "abv_min": 7.6,
+      "abv_max": 10.6,
+      "ibu_min": 65.0,
+      "ibu_max": 100.0,
+      "srm_min": 2.0,
+      "srm_max": 7.0,
+      "raw": {
+        "og": "1.067-1.087",
+        "fg": "1.009-1.016",
+        "abv": "7.6-10.6",
+        "ibu": "65-100",
+        "srm": "2-7"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 22,
+        "matched_heading": "American-Style Imperial or Double",
+        "match_score": 70.0
+      }
+    },
+    {
+      "id": "BA-2025-038",
+      "name": "American-Style Barley Wine Ale",
+      "toc_page": 15,
+      "og_min": 1.09,
+      "og_max": 1.12,
+      "fg_min": 1.024,
+      "fg_max": 1.028,
+      "abv_min": 8.5,
+      "abv_max": 12.2,
+      "ibu_min": 60.0,
+      "ibu_max": 100.0,
+      "srm_min": 11.0,
+      "srm_max": 18.0,
+      "raw": {
+        "og": "1.090-1.120",
+        "fg": "1.024-1.028",
+        "abv": "8.5-12.2",
+        "ibu": "60-100",
+        "srm": "11-18"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 23,
+        "matched_heading": "American-Style Barley Wine Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-039",
+      "name": "American-Style Wheat Wine Ale",
+      "toc_page": 15,
+      "og_min": 1.088,
+      "og_max": 1.12,
+      "fg_min": 1.024,
+      "fg_max": 1.032,
+      "abv_min": 8.5,
+      "abv_max": 12.2,
+      "ibu_min": 45.0,
+      "ibu_max": 85.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.088-1.120",
+        "fg": "1.024-1.032",
+        "abv": "8.5-12.2",
+        "ibu": "45-85",
+        "srm": "5+ (10+ EBC)"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "unknown"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 23,
+        "matched_heading": "American-Style Wheat Wine Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-040",
+      "name": "Smoke Porter",
+      "toc_page": 16,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "Varies with porter style",
+        "fg": "Varies with porter style",
+        "abv": "Varies with porter style",
+        "ibu": "Varies",
+        "srm": null
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 24,
+        "matched_heading": "Smoke Porter",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-041",
+      "name": "American-Style Sour Ale",
+      "toc_page": 16,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "May vary widely",
+        "fg": "May vary widely",
+        "abv": "May vary widely",
+        "ibu": "May vary widely",
+        "srm": "May vary widely"
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "varies"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 24,
+        "matched_heading": "American-Style Sour Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-042",
+      "name": "American-Style Fruited Sour Ale",
+      "toc_page": 16,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "May vary widely",
+        "fg": "May vary widely",
+        "abv": "May vary widely",
+        "ibu": "May vary widely",
+        "srm": "May vary widely"
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "varies"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 24,
+        "matched_heading": "American-Style Fruited Sour Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-043",
+      "name": "German-Style Koelsch",
+      "toc_page": 17,
+      "og_min": 1.042,
+      "og_max": 1.048,
+      "fg_min": 1.006,
+      "fg_max": 1.01,
+      "abv_min": 4.8,
+      "abv_max": 5.3,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.042-1.048",
+        "fg": "1.006-1.010",
+        "abv": "4.8-5.3",
+        "ibu": null,
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "missing",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 25,
+        "matched_heading": "German-Style Koelsch",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-044",
+      "name": "Berliner-Style Weisse",
+      "toc_page": 18,
+      "og_min": 1.028,
+      "og_max": 1.044,
+      "fg_min": 1.004,
+      "fg_max": 1.006,
+      "abv_min": 2.8,
+      "abv_max": 5.0,
+      "ibu_min": 3.0,
+      "ibu_max": 6.0,
+      "srm_min": 2.0,
+      "srm_max": 4.0,
+      "raw": {
+        "og": "1.028-1.044",
+        "fg": "1.004-1.006",
+        "abv": "2.8-5.0",
+        "ibu": "3-6",
+        "srm": "2-4"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 26,
+        "matched_heading": "Berliner-Style Weisse",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-045",
+      "name": "Leipzig-Style Gose",
+      "toc_page": 18,
+      "og_min": 1.036,
+      "og_max": 1.056,
+      "fg_min": 1.008,
+      "fg_max": 1.012,
+      "abv_min": 4.4,
+      "abv_max": 5.4,
+      "ibu_min": 5.0,
+      "ibu_max": 15.0,
+      "srm_min": 2.0,
+      "srm_max": 7.0,
+      "raw": {
+        "og": "1.036-1.056",
+        "fg": "1.008-1.012",
+        "abv": "4.4-5.4",
+        "ibu": "5-15",
+        "srm": "2-7"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 26,
+        "matched_heading": "Leipzig-Style Gose",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-046",
+      "name": "Contemporary-Style Gose",
+      "toc_page": 19,
+      "og_min": 1.036,
+      "og_max": 1.056,
+      "fg_min": 1.008,
+      "fg_max": 1.012,
+      "abv_min": 4.4,
+      "abv_max": 5.4,
+      "ibu_min": 5.0,
+      "ibu_max": 30.0,
+      "srm_min": 3.0,
+      "srm_max": 9.0,
+      "raw": {
+        "og": "1.036-1.056",
+        "fg": "1.008-1.012",
+        "abv": "4.4-5.4",
+        "ibu": "5-30",
+        "srm": "3-9"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 27,
+        "matched_heading": "Contemporary-Style Gose",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-047",
+      "name": "South German-Style Hefeweizen",
+      "toc_page": 19,
+      "og_min": 1.047,
+      "og_max": 1.056,
+      "fg_min": 1.008,
+      "fg_max": 1.016,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": 10.0,
+      "ibu_max": 15.0,
+      "srm_min": 3.0,
+      "srm_max": 9.0,
+      "raw": {
+        "og": "1.047-1.056",
+        "fg": "1.008-1.016",
+        "abv": null,
+        "ibu": "10-15",
+        "srm": "3-9"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "missing",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 27,
+        "matched_heading": "South German-Style Hefeweizen",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-048",
+      "name": "South German-Style Kristal Weizen",
+      "toc_page": 20,
+      "og_min": 1.047,
+      "og_max": 1.056,
+      "fg_min": 1.008,
+      "fg_max": 1.016,
+      "abv_min": 4.9,
+      "abv_max": 5.6,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.047-1.056",
+        "fg": "1.008-1.016",
+        "abv": "4.9-5.6",
+        "ibu": null,
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "missing",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 28,
+        "matched_heading": "South German-Style Kristal Weizen",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-049",
+      "name": "German-Style Leichtes Weizen",
+      "toc_page": 20,
+      "og_min": 1.028,
+      "og_max": 1.044,
+      "fg_min": 1.004,
+      "fg_max": 1.008,
+      "abv_min": 2.5,
+      "abv_max": 3.5,
+      "ibu_min": 10.0,
+      "ibu_max": 15.0,
+      "srm_min": 3.5,
+      "srm_max": 15.0,
+      "raw": {
+        "og": "1.028-1.044",
+        "fg": "1.004-1.008",
+        "abv": "2.5-3.5",
+        "ibu": "10-15",
+        "srm": "3.5-15"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 28,
+        "matched_heading": "German-Style Leichtes Weizen",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-050",
+      "name": "South German-Style Bernsteinfarbenes Weizen",
+      "toc_page": 20,
+      "og_min": 1.048,
+      "og_max": 1.056,
+      "fg_min": 1.008,
+      "fg_max": 1.016,
+      "abv_min": 4.8,
+      "abv_max": 5.4,
+      "ibu_min": 10.0,
+      "ibu_max": 15.0,
+      "srm_min": 9.0,
+      "srm_max": 13.0,
+      "raw": {
+        "og": "1.048-1.056",
+        "fg": "1.008-1.016",
+        "abv": "4.8-5.4",
+        "ibu": "10-15",
+        "srm": "9-13"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 28,
+        "matched_heading": "South German-Style Bernsteinfarbenes Weizen",
+        "match_score": 95.0
+      }
+    },
+    {
+      "id": "BA-2025-051",
+      "name": "German-Style Rye Ale",
+      "toc_page": 21,
+      "og_min": 1.047,
+      "og_max": 1.056,
+      "fg_min": 1.008,
+      "fg_max": 1.016,
+      "abv_min": 4.9,
+      "abv_max": 5.6,
+      "ibu_min": 10.0,
+      "ibu_max": 15.0,
+      "srm_min": 4.0,
+      "srm_max": 25.0,
+      "raw": {
+        "og": "1.047-1.056",
+        "fg": "1.008-1.016",
+        "abv": "4.9-5.6",
+        "ibu": "10-15",
+        "srm": "4-25"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 29,
+        "matched_heading": "German-Style Rye Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-052",
+      "name": "Bamberg-Style Weiss Rauchbier",
+      "toc_page": 22,
+      "og_min": 1.047,
+      "og_max": 1.056,
+      "fg_min": 1.008,
+      "fg_max": 1.016,
+      "abv_min": 4.9,
+      "abv_max": 5.6,
+      "ibu_min": 10.0,
+      "ibu_max": 15.0,
+      "srm_min": 4.0,
+      "srm_max": 18.0,
+      "raw": {
+        "og": "1.047-1.056",
+        "fg": "1.008-1.016",
+        "abv": "4.9-5.6",
+        "ibu": "10-15",
+        "srm": "4-18"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 30,
+        "matched_heading": "Bamberg-Style Weiss Rauchbier",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-053",
+      "name": "Belgian-Style Session Ale",
+      "toc_page": 22,
+      "og_min": 1.018,
+      "og_max": 1.04,
+      "fg_min": 1.002,
+      "fg_max": 1.01,
+      "abv_min": 2.1,
+      "abv_max": 5.0,
+      "ibu_min": 5.0,
+      "ibu_max": 35.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.018-1.040",
+        "fg": "1.002-1.010",
+        "abv": "2.1-5.0",
+        "ibu": "5-35",
+        "srm": "May vary widely"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "varies"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 30,
+        "matched_heading": "Belgian-Style Session Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-054",
+      "name": "Belgian-Style Speciale Belge",
+      "toc_page": 23,
+      "og_min": 1.04,
+      "og_max": 1.054,
+      "fg_min": 1.008,
+      "fg_max": 1.014,
+      "abv_min": 5.1,
+      "abv_max": 6.3,
+      "ibu_min": 20.0,
+      "ibu_max": 30.0,
+      "srm_min": 4.0,
+      "srm_max": 12.0,
+      "raw": {
+        "og": "1.040-1.054",
+        "fg": "1.008-1.014",
+        "abv": "5.1-6.3",
+        "ibu": "20-30",
+        "srm": "4-12"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 31,
+        "matched_heading": "Belgian-Style Speciale Belge",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-055",
+      "name": "Belgian-Style Blonde Ale",
+      "toc_page": 23,
+      "og_min": 1.054,
+      "og_max": 1.068,
+      "fg_min": 1.01,
+      "fg_max": 1.014,
+      "abv_min": 6.3,
+      "abv_max": 7.9,
+      "ibu_min": 15.0,
+      "ibu_max": 40.0,
+      "srm_min": 2.0,
+      "srm_max": 7.0,
+      "raw": {
+        "og": "1.054-1.068",
+        "fg": "1.010-1.014",
+        "abv": "6.3-7.9",
+        "ibu": "15-40",
+        "srm": "2-7"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 31,
+        "matched_heading": "Belgian-Style Blonde Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-056",
+      "name": "Belgian-Style Strong Blonde Ale",
+      "toc_page": 23,
+      "og_min": 1.064,
+      "og_max": 1.096,
+      "fg_min": 1.008,
+      "fg_max": 1.024,
+      "abv_min": 7.1,
+      "abv_max": 11.2,
+      "ibu_min": 20.0,
+      "ibu_max": 50.0,
+      "srm_min": 2.0,
+      "srm_max": 7.0,
+      "raw": {
+        "og": "1.064-1.096",
+        "fg": "1.008-1.024",
+        "abv": "7.1-11.2",
+        "ibu": "20-50",
+        "srm": "2-7"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 31,
+        "matched_heading": "Belgian-Style Strong Blonde Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-057",
+      "name": "Belgian-Style Strong Dark Ale",
+      "toc_page": 24,
+      "og_min": 1.064,
+      "og_max": 1.096,
+      "fg_min": 1.012,
+      "fg_max": 1.024,
+      "abv_min": 7.1,
+      "abv_max": 11.2,
+      "ibu_min": 20.0,
+      "ibu_max": 50.0,
+      "srm_min": 8.0,
+      "srm_max": 35.0,
+      "raw": {
+        "og": "1.064-1.096",
+        "fg": "1.012-1.024",
+        "abv": "7.1-11.2",
+        "ibu": "20-50",
+        "srm": "8-35"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 32,
+        "matched_heading": "Belgian-Style Strong Dark Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-058",
+      "name": "Belgian-Style Quadrupel",
+      "toc_page": 25,
+      "og_min": 1.092,
+      "og_max": 1.12,
+      "fg_min": 1.014,
+      "fg_max": 1.02,
+      "abv_min": 10.0,
+      "abv_max": 14.2,
+      "ibu_min": 25.0,
+      "ibu_max": 50.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.092-1.120",
+        "fg": "1.014-1.020",
+        "abv": "10.0-14.2",
+        "ibu": "25-50",
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 33,
+        "matched_heading": "Belgian-Style Quadrupel",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-059",
+      "name": "Belgian-Style Witbier",
+      "toc_page": 25,
+      "og_min": 1.044,
+      "og_max": 1.05,
+      "fg_min": 1.006,
+      "fg_max": 1.008,
+      "abv_min": 4.8,
+      "abv_max": 5.6,
+      "ibu_min": 10.0,
+      "ibu_max": 17.0,
+      "srm_min": 2.0,
+      "srm_max": 4.0,
+      "raw": {
+        "og": "1.044-1.050",
+        "fg": "1.006-1.008",
+        "abv": "4.8-5.6",
+        "ibu": "10-17",
+        "srm": "2-4"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 33,
+        "matched_heading": "Belgian-Style Witbier",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-060",
+      "name": "Classic French & Belgian-Style Saison",
+      "toc_page": 25,
+      "og_min": 1.04,
+      "og_max": 1.06,
+      "fg_min": 1.004,
+      "fg_max": 1.008,
+      "abv_min": 5.0,
+      "abv_max": 6.8,
+      "ibu_min": 20.0,
+      "ibu_max": 38.0,
+      "srm_min": 3.0,
+      "srm_max": 7.0,
+      "raw": {
+        "og": "1.040-1.060",
+        "fg": "1.004-1.008",
+        "abv": "5.0-6.8",
+        "ibu": "20-38",
+        "srm": "3-7"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 33,
+        "matched_heading": "Classic French & Belgian-Style Saison",
+        "match_score": 95.0
+      }
+    },
+    {
+      "id": "BA-2025-061",
+      "name": "Specialty Saison",
+      "toc_page": 26,
+      "og_min": 1.04,
+      "og_max": 1.08,
+      "fg_min": 1.005,
+      "fg_max": 1.014,
+      "abv_min": 5.0,
+      "abv_max": 9.3,
+      "ibu_min": 20.0,
+      "ibu_max": 40.0,
+      "srm_min": 3.0,
+      "srm_max": 20.0,
+      "raw": {
+        "og": "1.040-1.080",
+        "fg": "1.005-1.014",
+        "abv": "5.0-9.3",
+        "ibu": "20-40",
+        "srm": "3-20"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 34,
+        "matched_heading": "Specialty Saison",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-062",
+      "name": "French-Style Bière de Garde",
+      "toc_page": 26,
+      "og_min": 1.06,
+      "og_max": 1.08,
+      "fg_min": 1.012,
+      "fg_max": 1.024,
+      "abv_min": 4.4,
+      "abv_max": 8.0,
+      "ibu_min": 20.0,
+      "ibu_max": 30.0,
+      "srm_min": 7.0,
+      "srm_max": 16.0,
+      "raw": {
+        "og": "1.060-1.080",
+        "fg": "1.012-1.024",
+        "abv": "4.4-8.0",
+        "ibu": "20-30",
+        "srm": "7-16"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 34,
+        "matched_heading": "French-Style Bière de Garde",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-063",
+      "name": "Belgian-Style Flanders Oud Bruin or Oud Red Ale",
+      "toc_page": 27,
+      "og_min": 1.044,
+      "og_max": 1.056,
+      "fg_min": 1.008,
+      "fg_max": 1.016,
+      "abv_min": 4.8,
+      "abv_max": 6.6,
+      "ibu_min": 5.0,
+      "ibu_max": 18.0,
+      "srm_min": 12.0,
+      "srm_max": 25.0,
+      "raw": {
+        "og": "1.044-1.056",
+        "fg": "1.008-1.016",
+        "abv": "4.8-6.6",
+        "ibu": "5-18",
+        "srm": "12-25"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 35,
+        "matched_heading": "Belgian-Style Flanders Oud Bruin or Oud Red Ale",
+        "match_score": 95.0
+      }
+    },
+    {
+      "id": "BA-2025-064",
+      "name": "Belgian-Style Lambic",
+      "toc_page": 27,
+      "og_min": 1.044,
+      "og_max": 1.065,
+      "fg_min": 1.0,
+      "fg_max": 1.01,
+      "abv_min": 5.0,
+      "abv_max": 7.6,
+      "ibu_min": 11.0,
+      "ibu_max": 23.0,
+      "srm_min": 6.0,
+      "srm_max": 13.0,
+      "raw": {
+        "og": "1.044-1.065",
+        "fg": "1.000-1.010",
+        "abv": "5.0-7.6",
+        "ibu": "11-23",
+        "srm": "6-13"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 35,
+        "matched_heading": "Belgian-Style Lambic",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-065",
+      "name": "Traditional Belgian-Style Gueuze",
+      "toc_page": 27,
+      "og_min": 1.044,
+      "og_max": 1.065,
+      "fg_min": 1.0,
+      "fg_max": 1.01,
+      "abv_min": 5.0,
+      "abv_max": 8.0,
+      "ibu_min": 11.0,
+      "ibu_max": 23.0,
+      "srm_min": 6.0,
+      "srm_max": 13.0,
+      "raw": {
+        "og": "1.044-1.065",
+        "fg": "1.000-1.010",
+        "abv": "5.0-8.0",
+        "ibu": "11-23",
+        "srm": "6-13"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 35,
+        "matched_heading": "Traditional Belgian-Style Gueuze",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-066",
+      "name": "Contemporary Belgian-Style Spontaneous Fermented Ale",
+      "toc_page": 28,
+      "og_min": 1.044,
+      "og_max": 1.072,
+      "fg_min": 1.004,
+      "fg_max": 1.016,
+      "abv_min": 4.0,
+      "abv_max": 7.0,
+      "ibu_min": 11.0,
+      "ibu_max": 23.0,
+      "srm_min": 6.0,
+      "srm_max": 40.0,
+      "raw": {
+        "og": "1.044-1.072",
+        "fg": "1.004-1.016",
+        "abv": "4.0-7.0",
+        "ibu": "11-23",
+        "srm": "6-40"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 36,
+        "matched_heading": "Contemporary Belgian-Style Spontaneous Fermented Ale",
+        "match_score": 95.0
+      }
+    },
+    {
+      "id": "BA-2025-067",
+      "name": "Belgian-Style Fruit Lambic",
+      "toc_page": 29,
+      "og_min": 1.04,
+      "og_max": 1.072,
+      "fg_min": 1.008,
+      "fg_max": 1.016,
+      "abv_min": 5.0,
+      "abv_max": 8.9,
+      "ibu_min": 10.0,
+      "ibu_max": 15.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.040-1.072",
+        "fg": "1.008-1.016",
+        "abv": "5.0-8.9",
+        "ibu": "10-15",
+        "srm": "Color takes on hue of fruit (Color takes on hue of fruit EBC)"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "unknown"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 37,
+        "matched_heading": "Belgian-Style Fruit Lambic",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-068",
+      "name": "Other Belgian-Style Ale",
+      "toc_page": 29,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "Varies with style",
+        "fg": "Varies with style",
+        "abv": ">4.0% (>5.0%)",
+        "ibu": "Varies with style",
+        "srm": null
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "unknown",
+        "ibu": "varies",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 37,
+        "matched_heading": "Other Belgian-Style Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-069",
+      "name": "Grodziskie",
+      "toc_page": 30,
+      "og_min": 1.031,
+      "og_max": 1.034,
+      "fg_min": 1.009,
+      "fg_max": 1.012,
+      "abv_min": 2.5,
+      "abv_max": 3.3,
+      "ibu_min": 20.0,
+      "ibu_max": 30.0,
+      "srm_min": 3.0,
+      "srm_max": 6.0,
+      "raw": {
+        "og": "1.031-1.034",
+        "fg": "1.009-1.012",
+        "abv": "2.5-3.3",
+        "ibu": "20-30",
+        "srm": "3-6"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 38,
+        "matched_heading": "Grodziskie",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-070",
+      "name": "Adambier",
+      "toc_page": 30,
+      "og_min": 1.07,
+      "og_max": 1.09,
+      "fg_min": 1.01,
+      "fg_max": 1.02,
+      "abv_min": 9.0,
+      "abv_max": 11.0,
+      "ibu_min": 30.0,
+      "ibu_max": 50.0,
+      "srm_min": 15.0,
+      "srm_max": 35.0,
+      "raw": {
+        "og": "1.070-1.090",
+        "fg": "1.010-1.020",
+        "abv": "9.0-11.0",
+        "ibu": "30-50",
+        "srm": "15-35"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 38,
+        "matched_heading": "Adambier",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-071",
+      "name": "International-Style Pale Ale",
+      "toc_page": 31,
+      "og_min": 1.04,
+      "og_max": 1.06,
+      "fg_min": 1.006,
+      "fg_max": 1.014,
+      "abv_min": 4.4,
+      "abv_max": 6.6,
+      "ibu_min": 20.0,
+      "ibu_max": 42.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.040-1.060",
+        "fg": "1.006-1.014",
+        "abv": "4.4-6.6",
+        "ibu": "20-42",
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 39,
+        "matched_heading": "International-Style Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-072",
+      "name": "Classic Australian-Style Pale Ale",
+      "toc_page": 31,
+      "og_min": 1.04,
+      "og_max": 1.052,
+      "fg_min": 1.004,
+      "fg_max": 1.01,
+      "abv_min": 4.0,
+      "abv_max": 6.0,
+      "ibu_min": 15.0,
+      "ibu_max": 35.0,
+      "srm_min": 3.0,
+      "srm_max": 10.0,
+      "raw": {
+        "og": "1.040-1.052",
+        "fg": "1.004-1.010",
+        "abv": "4.0-6.0",
+        "ibu": "15-35",
+        "srm": "3-10"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 39,
+        "matched_heading": "Classic Australian-Style Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-073",
+      "name": "Australian-Style Pale Ale",
+      "toc_page": 31,
+      "og_min": 1.04,
+      "og_max": 1.052,
+      "fg_min": 1.006,
+      "fg_max": 1.01,
+      "abv_min": 4.0,
+      "abv_max": 6.0,
+      "ibu_min": 15.0,
+      "ibu_max": 40.0,
+      "srm_min": 3.0,
+      "srm_max": 9.0,
+      "raw": {
+        "og": "1.040-1.052",
+        "fg": "1.006-1.010",
+        "abv": "4.0-6.0",
+        "ibu": "15-40",
+        "srm": "3-9"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 39,
+        "matched_heading": "Australian-Style Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-074",
+      "name": "New Zealand-Style Pale Ale",
+      "toc_page": 32,
+      "og_min": 1.04,
+      "og_max": 1.052,
+      "fg_min": 1.006,
+      "fg_max": 1.01,
+      "abv_min": 4.0,
+      "abv_max": 6.0,
+      "ibu_min": 15.0,
+      "ibu_max": 40.0,
+      "srm_min": 3.0,
+      "srm_max": 9.0,
+      "raw": {
+        "og": "1.040-1.052",
+        "fg": "1.006-1.010",
+        "abv": "4.0-6.0",
+        "ibu": "15-40",
+        "srm": "3-9"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 40,
+        "matched_heading": "New Zealand-Style Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-075",
+      "name": "New Zealand-Style India Pale Ale",
+      "toc_page": 32,
+      "og_min": 1.06,
+      "og_max": 1.07,
+      "fg_min": 1.01,
+      "fg_max": 1.016,
+      "abv_min": 6.3,
+      "abv_max": 7.5,
+      "ibu_min": 50.0,
+      "ibu_max": 70.0,
+      "srm_min": 3.0,
+      "srm_max": 8.0,
+      "raw": {
+        "og": "1.060-1.070",
+        "fg": "1.010-1.016",
+        "abv": "6.3-7.5",
+        "ibu": "50-70",
+        "srm": "3-8"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 40,
+        "matched_heading": "New Zealand-Style India Pale Ale",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-076",
+      "name": "Swedish-Style Gotlandsdricke",
+      "toc_page": 32,
+      "og_min": 1.04,
+      "og_max": 1.05,
+      "fg_min": 1.01,
+      "fg_max": 1.014,
+      "abv_min": 5.5,
+      "abv_max": 6.5,
+      "ibu_min": 15.0,
+      "ibu_max": 25.0,
+      "srm_min": 4.0,
+      "srm_max": 12.0,
+      "raw": {
+        "og": "1.040-1.050",
+        "fg": "1.010-1.014",
+        "abv": "5.5-6.5",
+        "ibu": "15-25",
+        "srm": "4-12"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 40,
+        "matched_heading": "Swedish-Style Gotlandsdricke",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-077",
+      "name": "Breslau-Style Schoeps",
+      "toc_page": 33,
+      "og_min": 1.067,
+      "og_max": 1.072,
+      "fg_min": 1.016,
+      "fg_max": 1.024,
+      "abv_min": 6.0,
+      "abv_max": 7.0,
+      "ibu_min": 20.0,
+      "ibu_max": 30.0,
+      "srm_min": 2.0,
+      "srm_max": 40.0,
+      "raw": {
+        "og": "1.067-1.072",
+        "fg": "1.016-1.024",
+        "abv": "6.0-7.0",
+        "ibu": "20-30",
+        "srm": "2-40+"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 41,
+        "matched_heading": "Breslau-Style Schoeps",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-078",
+      "name": "German-Style Leichtbier",
+      "toc_page": 33,
+      "og_min": 1.026,
+      "og_max": 1.034,
+      "fg_min": 1.006,
+      "fg_max": 1.01,
+      "abv_min": 2.5,
+      "abv_max": 3.7,
+      "ibu_min": 16.0,
+      "ibu_max": 24.0,
+      "srm_min": 2.0,
+      "srm_max": 4.0,
+      "raw": {
+        "og": "1.026-1.034",
+        "fg": "1.006-1.010",
+        "abv": "2.5-3.7",
+        "ibu": "16-24",
+        "srm": "2-4"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 41,
+        "matched_heading": "German-Style Leichtbier",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-079",
+      "name": "German-Style Pilsener",
+      "toc_page": 33,
+      "og_min": 1.044,
+      "og_max": 1.052,
+      "fg_min": 1.006,
+      "fg_max": 1.012,
+      "abv_min": 4.6,
+      "abv_max": 5.3,
+      "ibu_min": 25.0,
+      "ibu_max": 50.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.044-1.052",
+        "fg": "1.006-1.012",
+        "abv": "4.6-5.3",
+        "ibu": "25-50",
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 41,
+        "matched_heading": "German-Style Pilsener",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-080",
+      "name": "Czech-Style Amber Lager",
+      "toc_page": 34,
+      "og_min": 1.044,
+      "og_max": 1.06,
+      "fg_min": 1.013,
+      "fg_max": 1.017,
+      "abv_min": 4.4,
+      "abv_max": 5.8,
+      "ibu_min": 20.0,
+      "ibu_max": 35.0,
+      "srm_min": 10.0,
+      "srm_max": 16.0,
+      "raw": {
+        "og": "1.044-1.060",
+        "fg": "1.013-1.017",
+        "abv": "4.4-5.8",
+        "ibu": "20-35",
+        "srm": "10-16"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 42,
+        "matched_heading": "Czech-Style Amber Lager",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-081",
+      "name": "Czech-Style Dark Lager",
+      "toc_page": 34,
+      "og_min": 1.044,
+      "og_max": 1.06,
+      "fg_min": 1.013,
+      "fg_max": 1.017,
+      "abv_min": 4.4,
+      "abv_max": 5.8,
+      "ibu_min": 18.0,
+      "ibu_max": 35.0,
+      "srm_min": 15.0,
+      "srm_max": 40.0,
+      "raw": {
+        "og": "1.044-1.060",
+        "fg": "1.013-1.017",
+        "abv": "4.4-5.8",
+        "ibu": "18-35",
+        "srm": "15-40"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 42,
+        "matched_heading": "Czech-Style Dark Lager",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-082",
+      "name": "Italian-Style Pilsener",
+      "toc_page": 35,
+      "og_min": 1.044,
+      "og_max": 1.052,
+      "fg_min": 1.006,
+      "fg_max": 1.013,
+      "abv_min": 4.6,
+      "abv_max": 5.3,
+      "ibu_min": 25.0,
+      "ibu_max": 50.0,
+      "srm_min": 3.0,
+      "srm_max": 4.0,
+      "raw": {
+        "og": "1.044-1.052",
+        "fg": "1.006-1.013",
+        "abv": "4.6-5.3",
+        "ibu": "25-50",
+        "srm": "3-4"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 43,
+        "matched_heading": "Italian-Style Pilsener",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-083",
+      "name": "Munich-Style Helles",
+      "toc_page": 35,
+      "og_min": 1.044,
+      "og_max": 1.048,
+      "fg_min": 1.008,
+      "fg_max": 1.012,
+      "abv_min": 4.8,
+      "abv_max": 5.6,
+      "ibu_min": 15.0,
+      "ibu_max": 25.0,
+      "srm_min": 2.5,
+      "srm_max": 5.0,
+      "raw": {
+        "og": "1.044-1.048",
+        "fg": "1.008-1.012",
+        "abv": "4.8-5.6",
+        "ibu": "15-25",
+        "srm": "2.5-5"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 43,
+        "matched_heading": "Munich-Style Helles",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-084",
+      "name": "Dortmunder/European-Style Export",
+      "toc_page": 35,
+      "og_min": 1.05,
+      "og_max": 1.057,
+      "fg_min": 1.01,
+      "fg_max": 1.014,
+      "abv_min": 5.1,
+      "abv_max": 6.1,
+      "ibu_min": 23.0,
+      "ibu_max": 30.0,
+      "srm_min": 3.0,
+      "srm_max": 6.0,
+      "raw": {
+        "og": "1.050-1.057",
+        "fg": "1.010-1.014",
+        "abv": "5.1-6.1",
+        "ibu": "23-30",
+        "srm": "3-6"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 43,
+        "matched_heading": "Dortmunder/European-Style Export",
+        "match_score": 95.0
+      }
+    },
+    {
+      "id": "BA-2025-085",
+      "name": "Vienna-Style Lager",
+      "toc_page": 36,
+      "og_min": 1.046,
+      "og_max": 1.056,
+      "fg_min": 1.008,
+      "fg_max": 1.018,
+      "abv_min": 4.8,
+      "abv_max": 5.4,
+      "ibu_min": 20.0,
+      "ibu_max": 26.0,
+      "srm_min": 6.0,
+      "srm_max": 18.0,
+      "raw": {
+        "og": "1.046-1.056",
+        "fg": "1.008-1.018",
+        "abv": "4.8-5.4",
+        "ibu": "20-26",
+        "srm": "6-18"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 44,
+        "matched_heading": "Vienna-Style Lager",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-086",
+      "name": "Franconian-Style Rotbier",
+      "toc_page": 36,
+      "og_min": 1.046,
+      "og_max": 1.056,
+      "fg_min": 1.012,
+      "fg_max": 1.018,
+      "abv_min": 4.8,
+      "abv_max": 5.4,
+      "ibu_min": 22.0,
+      "ibu_max": 28.0,
+      "srm_min": 13.0,
+      "srm_max": 23.0,
+      "raw": {
+        "og": "1.046-1.056",
+        "fg": "1.012-1.018",
+        "abv": "4.8-5.4",
+        "ibu": "22-28",
+        "srm": "13-23"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 44,
+        "matched_heading": "Franconian-Style Rotbier",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-087",
+      "name": "German-Style Maerzen",
+      "toc_page": 36,
+      "og_min": 1.052,
+      "og_max": 1.057,
+      "fg_min": 1.012,
+      "fg_max": 1.02,
+      "abv_min": 5.1,
+      "abv_max": 6.0,
+      "ibu_min": 18.0,
+      "ibu_max": 25.0,
+      "srm_min": 4.0,
+      "srm_max": 15.0,
+      "raw": {
+        "og": "1.052-1.057",
+        "fg": "1.012-1.020",
+        "abv": "5.1-6.0",
+        "ibu": "18-25",
+        "srm": "4-15"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 44,
+        "matched_heading": "German-Style Maerzen",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-088",
+      "name": "German-Style Oktoberfest/Festbier",
+      "toc_page": 36,
+      "og_min": 1.048,
+      "og_max": 1.056,
+      "fg_min": 1.01,
+      "fg_max": 1.014,
+      "abv_min": 5.1,
+      "abv_max": 6.1,
+      "ibu_min": 23.0,
+      "ibu_max": 29.0,
+      "srm_min": 3.0,
+      "srm_max": 5.0,
+      "raw": {
+        "og": "1.048-1.056",
+        "fg": "1.010-1.014",
+        "abv": "5.1-6.1",
+        "ibu": "23-29",
+        "srm": "3-5"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 44,
+        "matched_heading": "German-Style Oktoberfest/Festbier",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-089",
+      "name": "European-Style Dark Lager",
+      "toc_page": 37,
+      "og_min": 1.048,
+      "og_max": 1.056,
+      "fg_min": 1.014,
+      "fg_max": 1.018,
+      "abv_min": 4.8,
+      "abv_max": 5.3,
+      "ibu_min": 20.0,
+      "ibu_max": 35.0,
+      "srm_min": 15.0,
+      "srm_max": 40.0,
+      "raw": {
+        "og": "1.048-1.056",
+        "fg": "1.014-1.018",
+        "abv": "4.8-5.3",
+        "ibu": "20-35",
+        "srm": "15-40"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 45,
+        "matched_heading": "European-Style Dark Lager",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-090",
+      "name": "German-Style Schwarzbier",
+      "toc_page": 37,
+      "og_min": 1.044,
+      "og_max": 1.052,
+      "fg_min": 1.01,
+      "fg_max": 1.015,
+      "abv_min": 3.8,
+      "abv_max": 4.9,
+      "ibu_min": 22.0,
+      "ibu_max": 30.0,
+      "srm_min": 25.0,
+      "srm_max": 40.0,
+      "raw": {
+        "og": "1.044-1.052",
+        "fg": "1.010-1.015",
+        "abv": "3.8-4.9",
+        "ibu": "22-30",
+        "srm": "25-40"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 45,
+        "matched_heading": "German-Style Schwarzbier",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-091",
+      "name": "Bamberg-Style Helles Rauchbier",
+      "toc_page": 37,
+      "og_min": 1.044,
+      "og_max": 1.05,
+      "fg_min": 1.008,
+      "fg_max": 1.012,
+      "abv_min": 4.8,
+      "abv_max": 5.6,
+      "ibu_min": 18.0,
+      "ibu_max": 25.0,
+      "srm_min": 4.0,
+      "srm_max": 5.5,
+      "raw": {
+        "og": "1.044-1.050",
+        "fg": "1.008-1.012",
+        "abv": "4.8-5.6",
+        "ibu": "18-25",
+        "srm": "4-5.5"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 45,
+        "matched_heading": "Bamberg-Style Helles Rauchbier",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-092",
+      "name": "Bamberg-Style Bock Rauchbier",
+      "toc_page": 38,
+      "og_min": 1.066,
+      "og_max": 1.074,
+      "fg_min": 1.018,
+      "fg_max": 1.024,
+      "abv_min": 6.3,
+      "abv_max": 7.6,
+      "ibu_min": 20.0,
+      "ibu_max": 30.0,
+      "srm_min": 20.0,
+      "srm_max": 30.0,
+      "raw": {
+        "og": "1.066-1.074",
+        "fg": "1.018-1.024",
+        "abv": "6.3-7.6",
+        "ibu": "20-30",
+        "srm": "20-30"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 46,
+        "matched_heading": "Bamberg-Style Bock Rauchbier",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-093",
+      "name": "German-Style Heller Bock/Maibock",
+      "toc_page": 38,
+      "og_min": 1.066,
+      "og_max": 1.074,
+      "fg_min": 1.012,
+      "fg_max": 1.02,
+      "abv_min": 6.3,
+      "abv_max": 8.1,
+      "ibu_min": 20.0,
+      "ibu_max": 38.0,
+      "srm_min": 4.0,
+      "srm_max": 9.0,
+      "raw": {
+        "og": "1.066-1.074",
+        "fg": "1.012-1.020",
+        "abv": "6.3-8.1",
+        "ibu": "20-38",
+        "srm": "4-9"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 46,
+        "matched_heading": "German-Style Heller Bock/Maibock",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-094",
+      "name": "Traditional German-Style Bock",
+      "toc_page": 39,
+      "og_min": 1.066,
+      "og_max": 1.074,
+      "fg_min": 1.018,
+      "fg_max": 1.024,
+      "abv_min": 6.3,
+      "abv_max": 7.6,
+      "ibu_min": 20.0,
+      "ibu_max": 30.0,
+      "srm_min": 20.0,
+      "srm_max": 30.0,
+      "raw": {
+        "og": "1.066-1.074",
+        "fg": "1.018-1.024",
+        "abv": "6.3-7.6",
+        "ibu": "20-30",
+        "srm": "20-30"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 47,
+        "matched_heading": "Traditional German-Style Bock",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-095",
+      "name": "German-Style Doppelbock",
+      "toc_page": 39,
+      "og_min": 1.074,
+      "og_max": 1.08,
+      "fg_min": 1.014,
+      "fg_max": 1.02,
+      "abv_min": 6.6,
+      "abv_max": 7.9,
+      "ibu_min": 17.0,
+      "ibu_max": 27.0,
+      "srm_min": 12.0,
+      "srm_max": 30.0,
+      "raw": {
+        "og": "1.074-1.080",
+        "fg": "1.014-1.020",
+        "abv": "6.6-7.9",
+        "ibu": "17-27",
+        "srm": "12-30"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 47,
+        "matched_heading": "German-Style Doppelbock",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-096",
+      "name": "German-Style Eisbock",
+      "toc_page": 39,
+      "og_min": 1.074,
+      "og_max": 1.116,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": 8.6,
+      "abv_max": 14.3,
+      "ibu_min": 26.0,
+      "ibu_max": 33.0,
+      "srm_min": 15.0,
+      "srm_max": 50.0,
+      "raw": {
+        "og": "1.074-1.116",
+        "fg": "N/A",
+        "abv": "8.6-14.3",
+        "ibu": "26-33",
+        "srm": "15-50"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "unknown",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 47,
+        "matched_heading": "German-Style Eisbock",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-097",
+      "name": "American-Style Lager",
+      "toc_page": 39,
+      "og_min": 1.04,
+      "og_max": 1.048,
+      "fg_min": 1.006,
+      "fg_max": 1.012,
+      "abv_min": 4.1,
+      "abv_max": 5.1,
+      "ibu_min": 5.0,
+      "ibu_max": 15.0,
+      "srm_min": 2.0,
+      "srm_max": 4.0,
+      "raw": {
+        "og": "1.040-1.048",
+        "fg": "1.006-1.012",
+        "abv": "4.1-5.1",
+        "ibu": "5-15",
+        "srm": "2-4"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 47,
+        "matched_heading": "American-Style Lager",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-098",
+      "name": "American-Style Light Lager",
+      "toc_page": 40,
+      "og_min": 1.024,
+      "og_max": 1.04,
+      "fg_min": 0.992,
+      "fg_max": 1.008,
+      "abv_min": 3.5,
+      "abv_max": 4.4,
+      "ibu_min": 4.0,
+      "ibu_max": 10.0,
+      "srm_min": 1.5,
+      "srm_max": 4.0,
+      "raw": {
+        "og": "1.024-1.040",
+        "fg": "0.992-1.008",
+        "abv": "3.5-4.4",
+        "ibu": "4-10",
+        "srm": "1.5-4"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 48,
+        "matched_heading": "American-Style Light Lager",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-099",
+      "name": "Contemporary American-Style Light Lager",
+      "toc_page": 40,
+      "og_min": 1.024,
+      "og_max": 1.04,
+      "fg_min": 0.992,
+      "fg_max": 1.008,
+      "abv_min": 3.5,
+      "abv_max": 4.4,
+      "ibu_min": 5.0,
+      "ibu_max": 20.0,
+      "srm_min": 1.5,
+      "srm_max": 12.0,
+      "raw": {
+        "og": "1.024-1.040",
+        "fg": "0.992-1.008",
+        "abv": "3.5-4.4",
+        "ibu": "5-20",
+        "srm": "1.5-12"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 48,
+        "matched_heading": "Contemporary American-Style Light Lager",
+        "match_score": 95.0
+      }
+    },
+    {
+      "id": "BA-2025-100",
+      "name": "American-Style Pilsener",
+      "toc_page": 41,
+      "og_min": 1.045,
+      "og_max": 1.06,
+      "fg_min": 1.012,
+      "fg_max": 1.018,
+      "abv_min": 4.9,
+      "abv_max": 6.0,
+      "ibu_min": 25.0,
+      "ibu_max": 40.0,
+      "srm_min": 3.0,
+      "srm_max": 6.0,
+      "raw": {
+        "og": "1.045-1.060",
+        "fg": "1.012-1.018",
+        "abv": "4.9-6.0",
+        "ibu": "25-40",
+        "srm": "3-6"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 49,
+        "matched_heading": "American-Style Pilsener",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-101",
+      "name": "Contemporary American-Style Pilsener",
+      "toc_page": 41,
+      "og_min": 1.045,
+      "og_max": 1.053,
+      "fg_min": 1.01,
+      "fg_max": 1.018,
+      "abv_min": 4.9,
+      "abv_max": 6.0,
+      "ibu_min": 25.0,
+      "ibu_max": 50.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.045-1.053",
+        "fg": "1.010-1.018",
+        "abv": "4.9-6.0",
+        "ibu": "25-50",
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 49,
+        "matched_heading": "Contemporary American-Style Pilsener",
+        "match_score": 95.0
+      }
+    },
+    {
+      "id": "BA-2025-102",
+      "name": "American-Style Maerzen/Oktoberfest",
+      "toc_page": 42,
+      "og_min": 1.05,
+      "og_max": 1.06,
+      "fg_min": 1.012,
+      "fg_max": 1.02,
+      "abv_min": 5.1,
+      "abv_max": 6.0,
+      "ibu_min": 20.0,
+      "ibu_max": 30.0,
+      "srm_min": 4.0,
+      "srm_max": 15.0,
+      "raw": {
+        "og": "1.050-1.060",
+        "fg": "1.012-1.020",
+        "abv": "5.1-6.0",
+        "ibu": "20-30",
+        "srm": "4-15"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 50,
+        "matched_heading": "American-Style Maerzen/Oktoberfest",
+        "match_score": 95.0
+      }
+    },
+    {
+      "id": "BA-2025-103",
+      "name": "American-Style Dark Lager",
+      "toc_page": 42,
+      "og_min": 1.04,
+      "og_max": 1.05,
+      "fg_min": 1.008,
+      "fg_max": 1.012,
+      "abv_min": 4.1,
+      "abv_max": 5.6,
+      "ibu_min": 14.0,
+      "ibu_max": 24.0,
+      "srm_min": 14.0,
+      "srm_max": 40.0,
+      "raw": {
+        "og": "1.040-1.050",
+        "fg": "1.008-1.012",
+        "abv": "4.1-5.6",
+        "ibu": "14-24",
+        "srm": "14-40"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 50,
+        "matched_heading": "American-Style Dark Lager",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-104",
+      "name": "Mexican-Style Light Lager",
+      "toc_page": 42,
+      "og_min": 1.026,
+      "og_max": 1.044,
+      "fg_min": 1.003,
+      "fg_max": 1.01,
+      "abv_min": 3.2,
+      "abv_max": 4.2,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.026-1.044",
+        "fg": "1.003-1.010",
+        "abv": "3.2-4.2",
+        "ibu": null,
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "missing",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 50,
+        "matched_heading": "Mexican-Style Light Lager",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-105",
+      "name": "Mexican-Style Amber Lager",
+      "toc_page": 43,
+      "og_min": 1.045,
+      "og_max": 1.052,
+      "fg_min": 1.01,
+      "fg_max": 1.012,
+      "abv_min": 4.0,
+      "abv_max": 5.5,
+      "ibu_min": 12.0,
+      "ibu_max": 25.0,
+      "srm_min": 7.0,
+      "srm_max": 15.0,
+      "raw": {
+        "og": "1.045-1.052",
+        "fg": "1.010-1.012",
+        "abv": "4.0-5.5",
+        "ibu": "12-25",
+        "srm": "7-15"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 51,
+        "matched_heading": "Mexican-Style Amber Lager",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-106",
+      "name": "Mexican-Style Dark Lager",
+      "toc_page": 43,
+      "og_min": 1.048,
+      "og_max": 1.053,
+      "fg_min": 1.009,
+      "fg_max": 1.012,
+      "abv_min": 4.5,
+      "abv_max": 5.8,
+      "ibu_min": 12.0,
+      "ibu_max": 28.0,
+      "srm_min": 16.0,
+      "srm_max": 30.0,
+      "raw": {
+        "og": "1.048-1.053",
+        "fg": "1.009-1.012",
+        "abv": "4.5-5.8",
+        "ibu": "12-28",
+        "srm": "16-30"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 51,
+        "matched_heading": "Mexican-Style Dark Lager",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-107",
+      "name": "Australasian, Latin American or Tropical-Style Light Lager",
+      "toc_page": 44,
+      "og_min": 1.038,
+      "og_max": 1.046,
+      "fg_min": 1.006,
+      "fg_max": 1.01,
+      "abv_min": 4.1,
+      "abv_max": 5.1,
+      "ibu_min": 9.0,
+      "ibu_max": 18.0,
+      "srm_min": 2.0,
+      "srm_max": 5.0,
+      "raw": {
+        "og": "1.038-1.046",
+        "fg": "1.006-1.010",
+        "abv": "4.1-5.1",
+        "ibu": "9-18",
+        "srm": "2-5"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 52,
+        "matched_heading": "Australasian, Latin American or Tropical-Style Light Lager",
+        "match_score": 95.0
+      }
+    },
+    {
+      "id": "BA-2025-108",
+      "name": "International-Style Pilsener",
+      "toc_page": 44,
+      "og_min": 1.04,
+      "og_max": 1.052,
+      "fg_min": 1.008,
+      "fg_max": 1.014,
+      "abv_min": 4.6,
+      "abv_max": 5.3,
+      "ibu_min": 17.0,
+      "ibu_max": 40.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.040-1.052",
+        "fg": "1.008-1.014",
+        "abv": "4.6-5.3",
+        "ibu": "17-40",
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 52,
+        "matched_heading": "International-Style Pilsener",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-109",
+      "name": "Baltic-Style Porter",
+      "toc_page": 45,
+      "og_min": 1.072,
+      "og_max": 1.092,
+      "fg_min": 1.016,
+      "fg_max": 1.022,
+      "abv_min": 7.6,
+      "abv_max": 9.3,
+      "ibu_min": 35.0,
+      "ibu_max": 40.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.072-1.092",
+        "fg": "1.016-1.022",
+        "abv": "7.6-9.3",
+        "ibu": "35-40",
+        "srm": "20+ (40+ EBC)"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "unknown"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 53,
+        "matched_heading": "Baltic-Style Porter",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-110",
+      "name": "Kentucky Common Beer",
+      "toc_page": 46,
+      "og_min": 1.04,
+      "og_max": 1.055,
+      "fg_min": 1.01,
+      "fg_max": 1.018,
+      "abv_min": 4.0,
+      "abv_max": 5.5,
+      "ibu_min": 15.0,
+      "ibu_max": 30.0,
+      "srm_min": 11.0,
+      "srm_max": 20.0,
+      "raw": {
+        "og": "1.040-1.055",
+        "fg": "1.010-1.018",
+        "abv": "4.0-5.5",
+        "ibu": "15-30",
+        "srm": "11-20"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 54,
+        "matched_heading": "Kentucky Common Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-111",
+      "name": "American-Style Wheat Beer",
+      "toc_page": 47,
+      "og_min": 1.036,
+      "og_max": 1.056,
+      "fg_min": 1.004,
+      "fg_max": 1.016,
+      "abv_min": 3.5,
+      "abv_max": 5.6,
+      "ibu_min": 10.0,
+      "ibu_max": 35.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.036-1.056",
+        "fg": "1.004-1.016",
+        "abv": "3.5-5.6",
+        "ibu": "10-35",
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 55,
+        "matched_heading": "American-Style Wheat Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-112",
+      "name": "Kellerbier or Zwickelbier",
+      "toc_page": 47,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "Varies with style",
+        "fg": "Varies with style",
+        "abv": "Varies with style",
+        "ibu": "Varies with style",
+        "srm": "Varies with style"
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "varies"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 55,
+        "matched_heading": "Kellerbier or Zwickelbier",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-113",
+      "name": "American-Style Fruit Beer",
+      "toc_page": 48,
+      "og_min": 1.03,
+      "og_max": 1.11,
+      "fg_min": 1.006,
+      "fg_max": 1.03,
+      "abv_min": 2.5,
+      "abv_max": 12.0,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.030-1.110",
+        "fg": "1.006-1.030",
+        "abv": "2.5-12.0",
+        "ibu": null,
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "missing",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 56,
+        "matched_heading": "American-Style Fruit Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-114",
+      "name": "Belgian-Style Fruit Beer",
+      "toc_page": 49,
+      "og_min": 1.03,
+      "og_max": 1.11,
+      "fg_min": 1.006,
+      "fg_max": 1.03,
+      "abv_min": 2.5,
+      "abv_max": 12.0,
+      "ibu_min": 5.0,
+      "ibu_max": 70.0,
+      "srm_min": 5.0,
+      "srm_max": 50.0,
+      "raw": {
+        "og": "1.030-1.110",
+        "fg": "1.006-1.030",
+        "abv": "2.5-12.0",
+        "ibu": "5-70",
+        "srm": "5-50"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 57,
+        "matched_heading": "Belgian-Style Fruit Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-115",
+      "name": "Pumpkin Spice Beer",
+      "toc_page": 50,
+      "og_min": 1.03,
+      "og_max": 1.11,
+      "fg_min": 1.006,
+      "fg_max": 1.03,
+      "abv_min": 2.5,
+      "abv_max": 12.0,
+      "ibu_min": 5.0,
+      "ibu_max": 35.0,
+      "srm_min": 5.0,
+      "srm_max": 50.0,
+      "raw": {
+        "og": "1.030-1.110",
+        "fg": "1.006-1.030",
+        "abv": "2.5-12.0",
+        "ibu": "5-35",
+        "srm": "5-50"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 58,
+        "matched_heading": "Pumpkin Spice Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-116",
+      "name": "Chocolate or Cocoa Beer",
+      "toc_page": 51,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "Varies with style",
+        "fg": "Varies with style",
+        "abv": "Varies with style",
+        "ibu": "Varies with style",
+        "srm": null
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 59,
+        "matched_heading": "Chocolate or Cocoa Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-117",
+      "name": "Dessert Stout or Pastry Stout",
+      "toc_page": 51,
+      "og_min": 1.08,
+      "og_max": 1.12,
+      "fg_min": 1.02,
+      "fg_max": 1.06,
+      "abv_min": 7.0,
+      "abv_max": 13.0,
+      "ibu_min": 20.0,
+      "ibu_max": 65.0,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.080-1.120",
+        "fg": "1.020-1.060",
+        "abv": "7.0-13.0",
+        "ibu": "20-65",
+        "srm": "35+ (70+"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "unknown"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 59,
+        "matched_heading": "Dessert Stout or Pastry Stout",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-118",
+      "name": "Coffee Beer",
+      "toc_page": 52,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "Varies with style",
+        "fg": "Varies with style",
+        "abv": "Varies with style",
+        "ibu": "Varies with style",
+        "srm": "Varies with style"
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "varies"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 60,
+        "matched_heading": "Coffee Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-119",
+      "name": "Herb and Spice Beer",
+      "toc_page": 53,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "Varies with style",
+        "fg": "Varies with style",
+        "abv": "Varies with style",
+        "ibu": "Varies with style",
+        "srm": "Varies with style"
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "varies"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 61,
+        "matched_heading": "Herb and Spice Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-120",
+      "name": "Specialty Beer",
+      "toc_page": 53,
+      "og_min": 1.03,
+      "og_max": 1.14,
+      "fg_min": 1.006,
+      "fg_max": 1.03,
+      "abv_min": 2.0,
+      "abv_max": 20.0,
+      "ibu_min": 1.0,
+      "ibu_max": 100.0,
+      "srm_min": 1.0,
+      "srm_max": 100.0,
+      "raw": {
+        "og": "1.030-1.140+",
+        "fg": "1.006-1.030+",
+        "abv": "2.0-20+",
+        "ibu": "1-100",
+        "srm": "1-100"
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "numeric",
+        "srm": "numeric"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 61,
+        "matched_heading": "Specialty Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-121",
+      "name": "Specialty Honey Beer",
+      "toc_page": 54,
+      "og_min": 1.03,
+      "og_max": 1.11,
+      "fg_min": 1.006,
+      "fg_max": 1.03,
+      "abv_min": 2.5,
+      "abv_max": 12.0,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "1.030-1.110",
+        "fg": "1.006-1.030",
+        "abv": "2.5-12.0",
+        "ibu": null,
+        "srm": null
+      },
+      "modes": {
+        "og": "numeric",
+        "fg": "numeric",
+        "abv": "numeric",
+        "ibu": "missing",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 62,
+        "matched_heading": "Specialty Honey Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-122",
+      "name": "Rye Beer",
+      "toc_page": 54,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "Varies with style",
+        "fg": "Varies with style",
+        "abv": "Varies with style",
+        "ibu": "Varies with style",
+        "srm": "Varies with style"
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "varies"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 62,
+        "matched_heading": "Rye Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-123",
+      "name": "Brett Beer",
+      "toc_page": 55,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "Varies with style",
+        "fg": "Varies with style",
+        "abv": "Varies with style",
+        "ibu": "Varies with style",
+        "srm": "Varies with style"
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "varies"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 63,
+        "matched_heading": "Brett Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-124",
+      "name": "Mixed-Culture Brett Beer",
+      "toc_page": 56,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "Varies with style",
+        "fg": "Varies with style",
+        "abv": "Varies with style",
+        "ibu": "Varies with style",
+        "srm": "Varies with style"
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "varies"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 64,
+        "matched_heading": "Mixed-Culture Brett Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-125",
+      "name": "Fresh Hop Beer",
+      "toc_page": 56,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "Varies with style",
+        "fg": "Varies with style",
+        "abv": "Varies with style",
+        "ibu": "Varies with style",
+        "srm": null
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "missing"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 64,
+        "matched_heading": "Fresh Hop Beer",
+        "match_score": 100.0
+      }
+    },
+    {
+      "id": "BA-2025-126",
+      "name": "Wood- and Barrel-Aged Beer",
+      "toc_page": 57,
+      "og_min": null,
+      "og_max": null,
+      "fg_min": null,
+      "fg_max": null,
+      "abv_min": null,
+      "abv_max": null,
+      "ibu_min": null,
+      "ibu_max": null,
+      "srm_min": null,
+      "srm_max": null,
+      "raw": {
+        "og": "Varies with style",
+        "fg": "Varies with style",
+        "abv": "Varies with style",
+        "ibu": "Varies with style",
+        "srm": "Varies with style"
+      },
+      "modes": {
+        "og": "varies",
+        "fg": "varies",
+        "abv": "varies",
+        "ibu": "varies",
+        "srm": "varies"
+      },
+      "extraction": {
+        "matched_pdf_page_index": 65,
+        "matched_heading": "Wood- and Barrel-Aged Beer",
+        "match_score": 100.0
+      }
+    }
+  ]
+}

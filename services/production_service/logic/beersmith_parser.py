@@ -4,6 +4,7 @@ BeerSmith Parser - Parse .bsmx XML files to Recipe model.
 Supports BeerSmith 3 format (.bsmx).
 """
 import xml.etree.ElementTree as ET
+import re
 from typing import Dict, List, Optional
 from models.recipe import Recipe
 
@@ -121,6 +122,7 @@ class BeerSmithParser:
             
             fermentables.append({
                 'name': name,
+                'sku': BeerSmithParser._normalize_sku(name),
                 'amount_kg': amount_kg,
                 'color_srm': color_srm,
                 'type': grain_type
@@ -149,6 +151,7 @@ class BeerSmithParser:
             
             hops_list.append({
                 'name': name,
+                'sku': BeerSmithParser._normalize_sku(name),
                 'amount_g': amount_g,
                 'time_min': time_min,
                 'use': use,
@@ -171,12 +174,17 @@ class BeerSmithParser:
             lab = BeerSmithParser._get_text(yeast, 'F_Y_LAB', default='')
             product_id = BeerSmithParser._get_text(yeast, 'F_Y_PRODUCT_ID', default='')
             yeast_type = BeerSmithParser._get_text(yeast, 'F_Y_TYPE', default='Ale')
+            amount_packets = BeerSmithParser._get_float(yeast, 'F_Y_AMOUNT', default=1.0)
+            if amount_packets is None or amount_packets <= 0:
+                amount_packets = 1.0
             
             yeast_list.append({
                 'name': name,
+                'sku': BeerSmithParser._normalize_sku(name),
                 'lab': lab,
                 'product_id': product_id,
-                'type': yeast_type
+                'type': yeast_type,
+                'amount_packets': amount_packets,
             })
         
         return yeast_list
@@ -203,3 +211,9 @@ class BeerSmithParser:
             if required:
                 raise ValueError(f"Field '{tag}' must be a number")
             return default
+
+    @staticmethod
+    def _normalize_sku(value: str) -> str:
+        """Normalize a name to canonical SKU shape used by inventory."""
+        normalized = re.sub(r"[^A-Z0-9]+", "-", value.strip().upper())
+        return normalized.strip("-")

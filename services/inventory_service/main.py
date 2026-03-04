@@ -8,6 +8,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base
 import logging
+import os
+import models  # noqa: F401  # Ensure all ORM models are registered before create_all
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -22,10 +24,19 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
+def _get_allowed_origins() -> list[str]:
+    raw = os.getenv("CORS_ALLOW_ORIGINS")
+    if raw:
+        return [origin.strip() for origin in raw.split(",") if origin.strip()]
+    return [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
+
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # TODO: Configurar origins en producción
+    allow_origins=_get_allowed_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -66,13 +77,22 @@ async def root():
             "gas_tanks": "/api/v1/inventory/gas-tanks",
             "kegs": "/api/v1/inventory/kegs",
             "finished_products": "/api/v1/inventory/finished-products",
-            "cold_room": "/api/v1/inventory/cold-room"
+            "cold_room": "/api/v1/inventory/cold-room",
+            "ingredients": "/api/v1/inventory/ingredients",
         }
     }
 
 
 # Include API routers
-from api import stock_routes, movement_routes, supplier_routes, gas_routes, keg_routes, finished_product_routes
+from api import (
+    stock_routes,
+    movement_routes,
+    supplier_routes,
+    gas_routes,
+    keg_routes,
+    finished_product_routes,
+    ingredient_routes,
+)
 
 app.include_router(
     stock_routes.router,
@@ -108,6 +128,12 @@ app.include_router(
     finished_product_routes.router,
     prefix="/api/v1/inventory",
     tags=["finished-products", "cold-room"]
+)
+
+app.include_router(
+    ingredient_routes.router,
+    prefix="/api/v1/inventory",
+    tags=["ingredients"],
 )
 
 

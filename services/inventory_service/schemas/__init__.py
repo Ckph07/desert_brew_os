@@ -9,6 +9,11 @@ from schemas.stock import (
     UnitMeasure,
     IngredientCategory
 )
+from schemas.ingredient import (
+    IngredientCatalogCreate,
+    IngredientCatalogUpdate,
+    IngredientCatalogResponse,
+)
 
 __all__ = [
     "StockBatchCreate",
@@ -16,5 +21,8 @@ __all__ = [
     "StockAllocationRequest",
     "StockAllocationResponse",
     "UnitMeasure",
-    "IngredientCategory"
+    "IngredientCategory",
+    "IngredientCatalogCreate",
+    "IngredientCatalogUpdate",
+    "IngredientCatalogResponse",
 ]

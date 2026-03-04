@@ -3,7 +3,7 @@ ProductionBatch Model - Tracks brewery production batches.
 
 6-state lifecycle: PLANNED → BREWING → FERMENTING → CONDITIONING → PACKAGING → COMPLETED
 """
-from sqlalchemy import Column, Integer, String, Numeric, DateTime, ForeignKey, Text
+from sqlalchemy import Column, Integer, String, Numeric, DateTime, ForeignKey, Text, JSON
 from sqlalchemy.dialects.postgresql import UUID
 from database import Base
 from datetime import datetime
@@ -50,6 +50,8 @@ class ProductionBatch(Base):
     batch_number = Column(String(50), unique=True, nullable=False, index=True)  # "IPA-2026-001"
     recipe_id = Column(Integer, ForeignKey('recipes.id'), nullable=False)
     recipe_name = Column(String(200), nullable=False)  # Denormalized for quick access
+    # Immutable recipe snapshot captured at planning time to freeze cost allocations.
+    recipe_snapshot = Column(JSON)
     
     # Status tracking
     status = Column(String(20), nullable=False, default=BatchStatus.PLANNED.value, index=True)

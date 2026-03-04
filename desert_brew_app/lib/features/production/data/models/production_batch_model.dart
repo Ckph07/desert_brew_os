@@ -1,0 +1,66 @@
+import '../../domain/entities/production_batch.dart';
+
+class ProductionBatchModel extends ProductionBatch {
+  const ProductionBatchModel({
+    required super.id,
+    required super.batchNumber,
+    required super.recipeId,
+    required super.recipeName,
+    required super.status,
+    required super.plannedVolumeLiters,
+    required super.plannedAt,
+    super.actualVolumeLiters,
+    super.totalCost,
+    super.costPerLiter,
+    super.maltCost,
+    super.hopsCost,
+    super.yeastCost,
+    super.waterCost,
+    super.laborCost,
+    super.overheadCost,
+    super.actualOg,
+    super.actualFg,
+    super.actualAbv,
+    super.yieldPercentage,
+    super.daysInProduction,
+    super.brewingStartedAt,
+    super.fermentingStartedAt,
+    super.conditioningStartedAt,
+    super.packagingStartedAt,
+    super.completedAt,
+    super.notes,
+  });
+
+  factory ProductionBatchModel.fromJson(Map<String, dynamic> j) {
+    DateTime? _dt(String? k) => k != null ? DateTime.tryParse(k) : null;
+    return ProductionBatchModel(
+      id: j['id'] as int,
+      batchNumber: j['batch_number'] as String,
+      recipeId: j['recipe_id'] as int,
+      recipeName: j['recipe_name'] as String,
+      status: BatchStatus.fromString(j['status'] as String),
+      plannedVolumeLiters: (j['planned_volume_liters'] as num).toDouble(),
+      plannedAt: DateTime.parse(j['planned_at'] as String),
+      actualVolumeLiters: (j['actual_volume_liters'] as num?)?.toDouble(),
+      totalCost: (j['total_cost'] as num?)?.toDouble(),
+      costPerLiter: (j['cost_per_liter'] as num?)?.toDouble(),
+      maltCost: (j['malt_cost'] as num?)?.toDouble(),
+      hopsCost: (j['hops_cost'] as num?)?.toDouble(),
+      yeastCost: (j['yeast_cost'] as num?)?.toDouble(),
+      waterCost: (j['water_cost'] as num?)?.toDouble(),
+      laborCost: (j['labor_cost'] as num?)?.toDouble(),
+      overheadCost: (j['overhead_cost'] as num?)?.toDouble(),
+      actualOg: (j['actual_og'] as num?)?.toDouble(),
+      actualFg: (j['actual_fg'] as num?)?.toDouble(),
+      actualAbv: (j['actual_abv'] as num?)?.toDouble(),
+      yieldPercentage: (j['yield_percentage'] as num?)?.toDouble(),
+      daysInProduction: (j['days_in_production'] as num?)?.toInt(),
+      brewingStartedAt: _dt(j['brewing_started_at'] as String?),
+      fermentingStartedAt: _dt(j['fermenting_started_at'] as String?),
+      conditioningStartedAt: _dt(j['conditioning_started_at'] as String?),
+      packagingStartedAt: _dt(j['packaging_started_at'] as String?),
+      completedAt: _dt(j['completed_at'] as String?),
+      notes: j['notes'] as String?,
+    );
+  }
+}

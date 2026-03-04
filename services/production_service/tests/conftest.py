@@ -62,14 +62,26 @@ class MockInventoryServiceClient:
             "remaining_quantity": 100.0 - quantity,
         }
 
-    async def create_finished_product(self, production_batch_id, sku, volume_liters, unit_cost, container_type=None, location=None):
+    async def create_finished_product(
+        self,
+        production_batch_id,
+        sku,
+        product_name,
+        actual_volume_liters,
+        unit_cost,
+        cold_room_id="COLD_ROOM_A",
+        notes=None,
+    ):
         """Mock finished product creation."""
         return {
             "id": 999,
             "production_batch_id": production_batch_id,
             "sku": sku,
-            "volume_liters": volume_liters,
+            "product_name": product_name,
+            "quantity": actual_volume_liters,
             "unit_cost": unit_cost,
+            "cold_room_id": cold_room_id,
+            "notes": notes,
         }
 
     async def health_check(self):
@@ -79,15 +91,32 @@ class MockInventoryServiceClient:
 class MockFinanceServiceClient:
     """Mock Finance Service client for tests."""
 
-    async def create_internal_transfer(self, origin_type, volume_liters, unit_cost,
-                                       production_batch_id, profit_center_from="factory",
-                                       profit_center_to="taproom"):
+    async def create_internal_transfer(
+        self,
+        origin_type,
+        quantity,
+        unit_measure,
+        unit_cost,
+        product_sku,
+        product_name,
+        profit_center_from="factory",
+        profit_center_to="taproom",
+        notes=None,
+        created_by_user_id=None,
+    ):
         return {
             "id": "mock-transfer-001",
             "origin_type": origin_type,
-            "volume_liters": volume_liters,
+            "quantity": quantity,
+            "unit_measure": unit_measure,
             "unit_cost": unit_cost,
-            "transfer_price": unit_cost * 1.15,
+            "product_sku": product_sku,
+            "product_name": product_name,
+            "from_profit_center": profit_center_from,
+            "to_profit_center": profit_center_to,
+            "total_transfer_price": quantity * unit_cost * 1.15,
+            "notes": notes,
+            "created_by_user_id": created_by_user_id,
         }
 
     async def health_check(self):

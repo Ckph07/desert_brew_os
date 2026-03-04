@@ -3,6 +3,7 @@ RabbitMQ event publisher for Production Service.
 """
 import pika
 import json
+import os
 from typing import Dict, Optional
 from datetime import datetime
 
@@ -10,8 +11,8 @@ from datetime import datetime
 class EventPublisher:
     """RabbitMQ event publisher for production events."""
     
-    def __init__(self, rabbitmq_url: str = "amqp://guest:guest@localhost:5672/"):
-        self.rabbitmq_url = rabbitmq_url
+    def __init__(self, rabbitmq_url: str = None):
+        self.rabbitmq_url = rabbitmq_url or os.getenv("RABBITMQ_URL", "amqp://guest:guest@localhost:5672/")
         self.connection: Optional[pika.BlockingConnection] = None
         self.channel: Optional[pika.channel.Channel] = None
     

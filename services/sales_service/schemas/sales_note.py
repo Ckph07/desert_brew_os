@@ -77,6 +77,11 @@ class SalesNoteUpdate(BaseModel):
     notes: Optional[str] = Field(None, max_length=500)
 
 
+class SalesNotePaymentUpdate(BaseModel):
+    """Schema for updating payment status on a CONFIRMED sales note."""
+    payment_status: str = Field(..., description="PAID | PENDING | PARTIAL | OVERDUE")
+
+
 class SalesNoteItemResponse(BaseModel):
     """Line item response."""
     id: int
@@ -119,6 +124,7 @@ class SalesNoteResponse(BaseModel):
     notes: Optional[str] = None
     created_by: Optional[str] = None
     confirmed_at: Optional[datetime] = None
+    paid_at: Optional[datetime] = None
     created_at: datetime
     updated_at: datetime
     items: list[SalesNoteItemResponse] = []

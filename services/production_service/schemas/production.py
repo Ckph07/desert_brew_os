@@ -12,6 +12,7 @@ from decimal import Decimal
 class FermentableInput(BaseModel):
     """Fermentable ingredient input."""
     name: str = Field(..., min_length=1, max_length=100)
+    sku: Optional[str] = Field(None, min_length=1, max_length=100)
     amount_kg: float = Field(..., gt=0)
     color_srm: Optional[float] = None
     type: Optional[str] = Field(None, description="Grain, Sugar, Extract, Dry Extract, Adjunct")
@@ -20,6 +21,7 @@ class FermentableInput(BaseModel):
 class HopInput(BaseModel):
     """Hop ingredient input."""
     name: str = Field(..., min_length=1, max_length=100)
+    sku: Optional[str] = Field(None, min_length=1, max_length=100)
     amount_g: float = Field(..., gt=0)
     time_min: Optional[float] = Field(None, ge=0)
     use: Optional[str] = Field("Boil", description="Boil, Dry Hop, First Wort, Whirlpool")
@@ -29,9 +31,15 @@ class HopInput(BaseModel):
 class YeastInput(BaseModel):
     """Yeast input."""
     name: str = Field(..., min_length=1, max_length=100)
+    sku: Optional[str] = Field(None, min_length=1, max_length=100)
     lab: Optional[str] = Field(None, max_length=100)
     product_id: Optional[str] = Field(None, max_length=50)
     type: Optional[str] = Field(None, description="Ale, Lager, Wheat, Wine, Champagne")
+    amount_packets: Optional[float] = Field(
+        1.0,
+        gt=0,
+        description="Required yeast packets for one base recipe batch",
+    )
 
 
 class MashStepInput(BaseModel):
@@ -129,6 +137,48 @@ class UpdateBatchVolumeRequest(BaseModel):
     actual_volume_liters: float = Field(..., gt=0, description="Actual volume produced")
     actual_og: Optional[float] = Field(None, description="Measured Original Gravity")
     actual_fg: Optional[float] = Field(None, description="Measured Final Gravity")
+
+
+class CancelBatchRequest(BaseModel):
+    """Cancel an in-progress batch."""
+    reason: Optional[str] = Field(
+        None,
+        min_length=1,
+        max_length=500,
+        description="Cancellation reason",
+    )
+
+
+class RecipeInventoryValidationRequest(BaseModel):
+    """Optional parameters to validate recipe stock against inventory."""
+    planned_volume_liters: Optional[float] = Field(
+        None,
+        gt=0,
+        description="Scale ingredients to this planned volume",
+    )
+
+
+class RecipeInventoryValidationItem(BaseModel):
+    """Validation result for a single ingredient."""
+    ingredient_type: str
+    name: str
+    sku: Optional[str]
+    lookup_key: str
+    required_quantity: float
+    unit: str
+    available_quantity: float
+    status: str  # OK | MISSING | INSUFFICIENT
+    matched_batches: int
+
+
+class RecipeInventoryValidationResponse(BaseModel):
+    """Inventory validation summary for a recipe."""
+    recipe_id: int
+    recipe_name: str
+    scale_factor: float
+    planned_volume_liters: float
+    items: List[RecipeInventoryValidationItem]
+    all_available: bool
 
 
 class BatchResponse(BaseModel):

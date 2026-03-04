@@ -157,6 +157,33 @@ class TestSalesNoteAPI:
         )
         assert response.status_code == 400
 
+    def test_update_draft_note(self, client):
+        """Test updating editable fields on a draft note."""
+        create_resp = client.post("/api/v1/sales/notes", json={
+            "client_name": "Cliente Inicial",
+            "payment_method": "TRANSFERENCIA",
+            "include_taxes": False,
+            "notes": "Inicial",
+            "items": [{"product_name": "IPA", "quantity": 1, "unit_price": 100}],
+        })
+        note_id = create_resp.json()["id"]
+
+        response = client.patch(
+            f"/api/v1/sales/notes/{note_id}",
+            json={
+                "client_name": "Cliente Editado",
+                "payment_method": "EFECTIVO",
+                "include_taxes": True,
+                "notes": "Actualizado",
+            },
+        )
+        assert response.status_code == 200
+        data = response.json()
+        assert data["client_name"] == "Cliente Editado"
+        assert data["payment_method"] == "EFECTIVO"
+        assert data["include_taxes"] is True
+        assert data["notes"] == "Actualizado"
+
     def test_cancel_note(self, client):
         """Test cancelling a note."""
         create_resp = client.post("/api/v1/sales/notes", json={
@@ -168,6 +195,34 @@ class TestSalesNoteAPI:
         response = client.patch(f"/api/v1/sales/notes/{note_id}/cancel")
         assert response.status_code == 200
         assert response.json()["status"] == "CANCELLED"
+
+    def test_delete_draft_note(self, client):
+        """Test deleting a draft note."""
+        create_resp = client.post("/api/v1/sales/notes", json={
+            "client_name": "Borrar",
+            "include_taxes": False,
+            "items": [{"product_name": "IPA", "quantity": 1, "unit_price": 100}],
+        })
+        note_id = create_resp.json()["id"]
+
+        delete_resp = client.delete(f"/api/v1/sales/notes/{note_id}")
+        assert delete_resp.status_code == 204
+
+        get_resp = client.get(f"/api/v1/sales/notes/{note_id}")
+        assert get_resp.status_code == 404
+
+    def test_cannot_delete_confirmed_note(self, client):
+        """Test that confirmed notes cannot be deleted."""
+        create_resp = client.post("/api/v1/sales/notes", json={
+            "client_name": "No borrar",
+            "include_taxes": False,
+            "items": [{"product_name": "Lager", "quantity": 1, "unit_price": 80}],
+        })
+        note_id = create_resp.json()["id"]
+        client.patch(f"/api/v1/sales/notes/{note_id}/confirm")
+
+        delete_resp = client.delete(f"/api/v1/sales/notes/{note_id}")
+        assert delete_resp.status_code == 400
 
     def test_note_number_auto_increment(self, client):
         """Test note numbers auto-increment."""

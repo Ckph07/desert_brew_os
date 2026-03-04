@@ -65,6 +65,7 @@ class SalesNote(Base):
 
     # Timestamps
     confirmed_at = Column(DateTime, nullable=True)
+    paid_at = Column(DateTime, nullable=True)
     cancelled_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)

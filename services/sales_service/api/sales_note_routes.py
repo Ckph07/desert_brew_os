@@ -1,7 +1,7 @@
 """
 FastAPI routes for Sales Notes CRUD with PDF/PNG export.
 """
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Response
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 from sqlalchemy import func, case, and_
@@ -17,6 +17,7 @@ from models.product_catalog import ProductCatalog
 from schemas.sales_note import (
     SalesNoteCreate,
     SalesNoteUpdate,
+    SalesNotePaymentUpdate,
     SalesNoteResponse,
     SalesNoteItemResponse,
 )
@@ -173,6 +174,21 @@ def update_sales_note(note_id: int, payload: SalesNoteUpdate, db: Session = Depe
     return _build_note_response(note, items)
 
 
+@router.delete("/{note_id}", status_code=204)
+def delete_sales_note(note_id: int, db: Session = Depends(get_db)):
+    """Delete a DRAFT sales note and its items."""
+    note = db.query(SalesNote).filter(SalesNote.id == note_id).first()
+    if not note:
+        raise HTTPException(status_code=404, detail=f"Sales note {note_id} not found")
+    if note.status != "DRAFT":
+        raise HTTPException(status_code=400, detail="Only DRAFT notes can be deleted")
+
+    db.query(SalesNoteItem).filter(SalesNoteItem.sales_note_id == note_id).delete()
+    db.delete(note)
+    db.commit()
+    return Response(status_code=204)
+
+
 @router.patch("/{note_id}/confirm", response_model=SalesNoteResponse)
 def confirm_sales_note(note_id: int, db: Session = Depends(get_db)):
     """
@@ -209,7 +225,11 @@ def confirm_sales_note(note_id: int, db: Session = Depends(get_db)):
 
             client = InventoryServiceClient()
             inventory_results = asyncio.run(
-                client.deduct_items_for_note(items, note.note_number)
+                client.deduct_items_for_note(
+                    items,
+                    note.note_number,
+                    user_id=note.created_by,
+                )
             )
         except Exception as e:
             inventory_results = [{"status": f"Integration error: {str(e)}"}]
@@ -231,6 +251,39 @@ def cancel_sales_note(note_id: int, db: Session = Depends(get_db)):
 
     note.status = "CANCELLED"
     note.cancelled_at = datetime.utcnow()
+    db.commit()
+    db.refresh(note)
+
+    items = db.query(SalesNoteItem).filter(SalesNoteItem.sales_note_id == note_id).all()
+    return _build_note_response(note, items)
+
+
+@router.patch("/{note_id}/payment", response_model=SalesNoteResponse)
+def update_sales_note_payment(
+    note_id: int,
+    payload: SalesNotePaymentUpdate,
+    db: Session = Depends(get_db),
+):
+    """Update payment status for a CONFIRMED sales note."""
+    note = db.query(SalesNote).filter(SalesNote.id == note_id).first()
+    if not note:
+        raise HTTPException(status_code=404, detail=f"Sales note {note_id} not found")
+
+    if note.status == "CANCELLED":
+        raise HTTPException(status_code=400, detail="Cannot update payment on CANCELLED note")
+    if note.status != "CONFIRMED":
+        raise HTTPException(status_code=400, detail="Only CONFIRMED notes can update payment status")
+
+    new_status = payload.payment_status.upper()
+    allowed = {"PAID", "PENDING", "PARTIAL", "OVERDUE"}
+    if new_status not in allowed:
+        raise HTTPException(
+            status_code=422,
+            detail=f"Invalid payment_status '{payload.payment_status}'. Allowed: {sorted(allowed)}",
+        )
+
+    note.payment_status = new_status
+    note.paid_at = datetime.utcnow() if new_status == "PAID" else None
     db.commit()
     db.refresh(note)
 

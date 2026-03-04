@@ -1,8 +1,7 @@
 """
 Finished Product Inventory Model - Cold Room Tracking.
 """
-from sqlalchemy import Column, Integer, String, Numeric, DateTime, Boolean, ForeignKey, Index
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Column, Integer, String, Numeric, DateTime, Boolean, ForeignKey, Index, Uuid
 from database import Base
 from datetime import datetime
 from decimal import Decimal
@@ -44,7 +43,7 @@ class FinishedProductInventory(Base):
     production_batch_id = Column(Integer, nullable=True)           # Para cerveza propia
     supplier_id = Column(Integer, nullable=True)                   # Para comercial/guest
     guest_brewery_id = Column(Integer, nullable=True)              # Para guest craft
-    keg_asset_id = Column(UUID(as_uuid=True), nullable=True)       # Link to KegAsset if BEER_KEG
+    keg_asset_id = Column(Uuid(as_uuid=True), nullable=True)       # Link to KegAsset if BEER_KEG
     
     # Quantity tracking
     quantity = Column(Numeric(10, 2), nullable=False)

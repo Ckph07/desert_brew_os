@@ -1,231 +1,57 @@
-# 🗺️ Frontend Roadmap — Desert Brew OS
+# Frontend Roadmap - Desert Brew OS
 
-## Estado Actual del Scaffold
+## Estado actual (2026-03-04)
 
-**29 archivos Dart** · `flutter pub get ✓` · `flutter analyze ✓` · 0 errores
+Objetivo de este corte: estabilizar contratos reales de backend y cerrar P0+P1 de frontend en flujos criticos.
 
-### Plataformas Target
+Referencia de cambios implementados:
+- `docs/implementaciones_2026-03-04.md`
 
-| Plataforma | Soporte | Notas |
-|------------|---------|-------|
-| 🌐 **Chrome** | ✅ Ready | `flutter run -d chrome` |
-| 🖥️ **macOS** | ✅ Ready | `flutter run -d macos` |
-| 📱 **iOS** | ⚠️ Requiere Xcode fix | Xcode check crashed en `flutter doctor` |
-| 🤖 **Android** | ✅ Ready | Android Studio 2024.3 detectado |
+## Estado real por modulo
 
-> Para iOS necesitamos reparar Xcode (`flutter doctor` reportó timeout).
-> Posiblemente solo falta: `sudo xcodebuild -license accept`
+| Modulo | Estado | Entregado en este corte | Gaps actuales |
+|---|---|---|---|
+| Inventory | P0+P1 operativo | Stock dashboard y Receive Stock usando `/api/v1/inventory/stock`; mapping real de `StockBatch`; summary primario en `/api/v1/inventory/summary` con fallback a `/api/v1/inventory/stock/summary`; vista `Lotes/Insumos`; catalogo de insumos CRUD (`/inventory/ingredients`) conectado a selector en Receive Stock; payload de suppliers alineado (`contact_person`, `payment_terms`). | Falta migracion Alembic para `ingredient_catalog`; UX avanzada de Kegs/Cold Room pendiente. |
+| Sales | P0+P1 operativo | Rutas `sales/*` alineadas; notas con `offset`; confirm/cancel por `PATCH`; nuevo pago `PATCH /api/v1/sales/notes/{id}/payment`; create note con `product_id + sku`; detalle de nota con export PDF/PNG; analytics liters-by-style activo. | Client detail sigue en placeholder; sharing/download de export en dispositivo (flujo nativo) queda para siguiente corte. |
+| Production | P0+P1 operativo | Costos corregidos a `/ingredients`, `/costs/fixed`, `/costs/summary`; parser UI usa `monthly_amount`; `completeBatch(...)` implementado en repo/bloc/ui; recetas con CRUD + import BeerSmith (`.bsmx`) en frontend; editor manual/edicion de receta ahora soporta multiples fermentables, lupulos y levaduras con `sku`; reglas por estilo activas en formularios de receta y batch (validacion OG/FG/ABV/IBU + escala de volumen por estilo); reglas avanzadas por estilo activas (SRM + perfil de agua por ion), con sugerencia automatica de targets desde el formulario de receta; matching de estilo alineado a nombres BA para alias comunes; catálogo BA 2025 completo extraído a `data/ba_beer_styles_2025.json` desde el PDF oficial; transiciones de batch habilitadas para `conditioning`, `packaging` y `cancel`; validacion de insumos (`validate-stock`) desde frontend; `start-brewing` bloquea si la validacion de stock falla; snapshot inmutable de receta para costos de batch. | Fuente de reglas por estilo aun local en frontend; faltan perfiles dedicados para cubrir el 100% del catalogo BA en validación avanzada (hoy se mapea por alias a un subconjunto canónico) y exponer catalogo/versionado desde backend para evitar drift. |
+| Finance | P1 operativo | CRUD completo de incomes y expenses (create/update/delete); dashboard enlaza a pricing rules, internal transfers y profit-center summary (lectura). | Edicion/alta de pricing rules e internal transfers aun no expuesta en UI. |
+| Payroll | Fuera de corte | Estructura base y pantallas existentes. | Data layer completo + flujos operativos quedan para siguiente fase. |
+| Security | Fuera de corte | Estructura base y device list existente. | Enrollment operativo, heartbeat y acciones administrativas quedan para siguiente fase. |
 
----
+## Entregables cerrados (P0 + P1)
 
-## 📊 Estado por Microservicio
+1. Sales contracts + endpoint de pago de nota.
+2. Inventory contracts + stock mapping + summary derivado en frontend.
+3. Production costos con rutas reales.
+4. Complete batch end-to-end con integracion Production -> Inventory/Finance.
+5. Finance CRUD de ingresos/egresos + navegacion de cards pendientes.
+6. Sales note con lineas ligadas a catalogo (`product_id`) + detalle/export.
+7. Documentacion de integracion y roadmap actualizados.
+8. Catalogo de insumos (Inventory) con CRUD y seleccion desde Receive Stock.
+9. Production recetas CRUD + import BeerSmith en frontend y flujo completo de estados `planned -> ... -> completed`.
+10. Production recetas manuales/editables con multiples lineas de ingredientes y `sku`, mas bloqueo de inicio de lote cuando no hay stock suficiente.
+11. Validaciones por estilo en formularios de Produccion: receta (OG/FG/ABV/IBU/SRM/perfil de agua) con sugerencia automatica de targets, y batch (escala de volumen + cumplimiento de objetivos de estilo).
 
-| Servicio | Backend Endpoints | Scaffold Pages | Data Layer | BLoC | UI Funcional | Tests |
-|----------|:-:|:-:|:-:|:-:|:-:|:-:|
-| **Inventory** (8001) | 39 | 3 stubs ✅ | ❌ | ❌ | ❌ | ❌ |
-| **Sales** (8002) | 24 | 3 stubs ✅ | ❌ | ❌ | ❌ | ❌ |
-| **Security** (8003) | 8 | 1 stub ✅ | ❌ | ❌ | ❌ | ❌ |
-| **Production** (8004) | 26 | 3 stubs ✅ | ❌ | ❌ | ❌ | ❌ |
-| **Finance** (8005) | 19 | 4 stubs ✅ | ❌ | ❌ | ❌ | ❌ |
-| **Payroll** (8006) | 11 | 2 stubs ✅ | ❌ | ❌ | ❌ | ❌ |
-| **Total** | **127** | **16 stubs** | — | — | — | — |
+## Calidad y validacion ejecutada
 
-**Leyenda:** ✅ Completado · 🔨 En progreso · ❌ Pendiente
+- Frontend:
+  - `flutter analyze` sin errores de compilacion (solo lints informativos existentes).
+  - Tests agregados y pasando:
+    - `test/features/inventory/data/repositories/inventory_repository_impl_test.dart`
+    - `test/features/production/presentation/bloc/batch/batch_bloc_test.dart`
+    - `test/features/production/domain/entities/style_guidelines_test.dart`
+- Backend:
+  - `services/sales_service`: `41 passed`
+  - `services/production_service`: `53 passed`
+  - `services/inventory_service`: modulos nuevos compilando via `py_compile`.
+  - Nota: tests de integracion con SQLite estan impactados por incompatibilidad preexistente de tipos `JSONB`.
 
-Cada módulo necesita 5 capas para estar completo:
+## Backlog siguiente corte (P2)
 
-```
-1. Data Layer     → Models (freezed) + Remote DataSource (Dio) + Local DS (Isar)
-2. Domain Layer   → Entities + Repository Interface + UseCases
-3. Repository     → Implementación (remote + cache + outbox)
-4. BLoC           → Events, States, Bloc + lógica de negocio
-5. UI             → Páginas funcionales con widgets, forms, charts
-```
-
----
-
-## 🗓️ Sprint Plan (Frontend)
-
-### Sprint F1: Inventario Core
-
-> **Meta:** Stock dashboard funcional conectado al backend
-
-| Task | Endpoints | Archivos |
-|------|:-:|---------|
-| `StockBatchModel` (freezed + JSON) | — | `models/stock_batch_model.dart` |
-| `InventoryRemoteDataSource` | 8 | `datasources/inventory_remote_ds.dart` |
-| `StockRepository` | — | `repositories/stock_repository_impl.dart` |
-| `StockBloc` (list, receive, allocate) | — | `bloc/stock_bloc.dart` |
-| **Stock Dashboard** funcional | `GET /stock`, `/stock/summary` | `stock_dashboard_page.dart` |
-| **Receive Stock** form | `POST /stock` | `receive_stock_page.dart` |
-| **Supplier List** | 6 | `supplier_list_page.dart` |
-| Tests unitarios (model parsing) | — | `test/unit/models/` |
-
-**Endpoints cubiertos:** 14/39 del Inventory Service
-
----
-
-### Sprint F2: Kegs + Producto Terminado
-
-> **Meta:** Gestión de barriles FSM + cold room monitor
-
-| Task | Endpoints | Archivos |
-|------|:-:|---------|
-| `KegAssetModel`, `FinishedProductModel` | — | `models/keg_*.dart`, `models/finished_*.dart` |
-| `KegBloc` (list, transition, scan) | 10 | `bloc/keg_bloc.dart` |
-| `FinishedProductBloc` | 13 | `bloc/finished_product_bloc.dart` |
-| **Keg Management** con FSM visual | `GET/POST kegs/*` | `keg_management_page.dart` |
-| **Keg Scanner** (QR/barcode) | `POST /kegs/bulk-scan` | `keg_scan_page.dart` |
-| **Finished Products** + cold room | `GET /finished-products/*` | `finished_products_page.dart` |
-| **Cold Room Monitor** | `GET /cold-room/status` | `cold_room_monitor_page.dart` |
-
-**Endpoints cubiertos:** 39/39 del Inventory Service ✅
-
-**Dependencia:** `mobile_scanner` package para QR
-
----
-
-### Sprint F3: Sales Core
-
-> **Meta:** Clientes, catálogo de productos, y notas de venta funcionales
-
-| Task | Endpoints | Archivos |
-|------|:-:|---------|
-| `ClientModel`, `ProductCatalogModel`, `SalesNoteModel` | — | `models/*.dart` |
-| `ClientBloc`, `ProductBloc`, `SalesNoteBloc` | 24 | `bloc/*.dart` |
-| **Client List + Detail** (credit, kegs) | 6 | `client_list_page.dart`, `client_detail_page.dart` |
-| **Product Catalog** + dual pricing | 8 | `product_catalog_page.dart` |
-| **Create Sales Note** (item builder) | 8 | `create_sales_note_page.dart` |
-| **Sales Note Detail** + PDF/PNG share | `GET /notes/{id}/pdf` | `sales_note_detail_page.dart` |
-| **Margin Report** visual | `GET /products/margin-report` | `margin_report_page.dart` |
-
-**Endpoints cubiertos:** 24/24 del Sales Service ✅
-
-**Dependencia:** `share_plus` para PDF/PNG export
-
----
-
-### Sprint F4: Producción
-
-> **Meta:** Recetas, batches con state machine, y cost breakdown
-
-| Task | Endpoints | Archivos |
-|------|:-:|---------|
-| `RecipeModel`, `BatchModel`, `CostModels` | — | `models/*.dart` |
-| `RecipeBloc`, `BatchBloc`, `CostBloc` | 26 | `bloc/*.dart` |
-| **Recipe List + Detail** (ingredients) | 6 | `recipe_list_page.dart`, `recipe_detail_page.dart` |
-| **Create Recipe** (manual form) | `POST /recipes` | `create_recipe_page.dart` |
-| **Batch Tracker** con state machine visual | 6 | `batch_tracker_page.dart` |
-| **Cost Breakdown** per batch | 2 | `cost_breakdown_page.dart` |
-| **Cost Management** (ingredients + fixed) | 12 | `cost_management_page.dart` |
-
-**Endpoints cubiertos:** 26/26 del Production Service ✅
-
----
-
-### Sprint F5: Finanzas
-
-> **Meta:** Income/Expense tracking, balance, cashflow charts, transfer pricing
-
-| Task | Endpoints | Archivos |
-|------|:-:|---------|
-| `IncomeModel`, `ExpenseModel`, `BalanceModel` | — | `models/*.dart` |
-| `IncomeBloc`, `ExpenseBloc`, `BalanceBloc` | 19 | `bloc/*.dart` |
-| **Finance Dashboard** (resumen KPIs) | 2 | `finance_dashboard_page.dart` |
-| **Income CRUD + Summary** | 6 | `income_list_page.dart` |
-| **Expense CRUD + Summary** | 6 | `expense_list_page.dart` |
-| **Balance + Cashflow** (fl_chart) | 2 | `balance_cashflow_page.dart` |
-| **Transfer Pricing Rules** | 2 | `transfer_pricing_page.dart` |
-| **Internal Transfers** | 2 | `internal_transfers_page.dart` |
-
-**Endpoints cubiertos:** 19/19 del Finance Service ✅
-
-**Dependencia:** `fl_chart` para cashflow visualization
-
----
-
-### Sprint F6: Payroll + Security
-
-> **Meta:** Nómina, propinas, y enrollment de dispositivos
-
-| Task | Endpoints | Archivos |
-|------|:-:|---------|
-| `EmployeeModel`, `PayrollModel`, `TipPoolModel` | — | `models/*.dart` |
-| **Employee CRUD** | 4 | `employee_list_page.dart` |
-| **Payroll Entry** (cálculo con overtime) | 4 | `payroll_entry_page.dart` |
-| **Tip Pool** distribution | 3 | `tip_pool_page.dart` |
-| **Device Enrollment** (Ed25519) | 6 | `device_enrollment_page.dart` |
-| **Device List** + heartbeat | 2 | `device_list_page.dart` |
-
-**Endpoints cubiertos:** 11/11 Payroll + 8/8 Security ✅
-
-**Dependencia:** `cryptography` para Ed25519
-
----
-
-### Sprint F7: Dashboard + Offline + Polish
-
-> **Meta:** Home dashboard con KPIs reales, offline mode, sync status
-
-| Task | Archivos |
-|------|---------|
-| **Home Dashboard** con datos reales de todos los servicios | `home_dashboard_page.dart` |
-| **Isar integration** — cache offline para read operations | `*_local_ds.dart` |
-| **Outbox integration** — queue para writes offline | `outbox_service.dart` |
-| **Sync Status** page (pending ops, last sync) | `sync_status_page.dart` |
-| **Settings** page (backend host, feature flags) | `settings_page.dart` |
-| **Multi-platform testing** — Chrome, macOS, iOS, Android | |
-
----
-
-### Sprint F8: B2B Client Portal + Auth
-
-> **Meta:** Role-based access para clientes B2B
-
-| Task | Archivos |
-|------|---------|
-| **Login / Auth** (JWT or device-based) | `login_page.dart` |
-| **Role-based routing** (admin vs brewmaster vs b2bClient) | `app_router.dart` |
-| **B2B Client View** — only their orders, deliveries, kegs | `b2b_dashboard_page.dart` |
-| **Delivery PoD** — firma digital offline | `delivery_pod_page.dart` |
-
----
-
-## 📐 Diagrama de Dependencias
-
-```mermaid
-graph TD
-    F1["F1: Inventory Core"] --> F2["F2: Kegs + Finished"]
-    F1 --> F4["F4: Production"]
-    F4 --> F5["F5: Finance"]
-    F1 --> F3["F3: Sales"]
-    F3 --> F5
-    F5 --> F6["F6: Payroll + Security"]
-    F6 --> F7["F7: Dashboard + Offline"]
-    F7 --> F8["F8: B2B Portal + Auth"]
-
-    style F1 fill:#D4A017,color:#1A0E08
-    style F2 fill:#D4A017,color:#1A0E08
-    style F3 fill:#CC5A36,color:#fff
-    style F4 fill:#CC5A36,color:#fff
-    style F5 fill:#4CAF50,color:#fff
-    style F6 fill:#42A5F5,color:#fff
-    style F7 fill:#AB47BC,color:#fff
-    style F8 fill:#757575,color:#fff
-```
-
----
-
-## ⏱️ Estimación de Esfuerzo
-
-| Sprint | Archivos Nuevos | Endpoints | Complejidad | Estimado |
-|--------|:-:|:-:|:-:|:-:|
-| F1: Inventory Core | ~8 | 14 | Media | 2-3 días |
-| F2: Kegs + Finished | ~10 | 25 | Alta (FSM + scanner) | 3-4 días |
-| F3: Sales | ~10 | 24 | Alta (forms + PDF) | 3-4 días |
-| F4: Production | ~10 | 26 | Alta (state machine) | 3-4 días |
-| F5: Finance | ~10 | 19 | Media (charts) | 2-3 días |
-| F6: Payroll + Security | ~8 | 19 | Media (crypto) | 2-3 días |
-| F7: Dashboard + Offline | ~6 | 0 (aggregation) | Alta (Isar + sync) | 3-4 días |
-| F8: B2B Portal + Auth | ~6 | 0 (RBAC) | Alta (auth + roles) | 3-4 días |
-| **Total** | **~68** | **127** | | **~22-29 días** |
+1. Payroll y Security con data layer + casos operativos completos.
+2. Client Detail de Sales (sin placeholder) con historial y estado de credito.
+3. Eliminacion del fallback legacy de inventory summary cuando backend lo depreque oficialmente.
+4. Migracion Alembic para `ingredient_catalog` y estrategia de tests sin bloqueo por `JSONB`.
+5. Auth/RBAC y controles de permisos por modulo.
+6. Offline/outbox y sync status transversal.
+7. Externalizar reglas de estilo (rangos y targets de agua) a backend/configuracion central versionada.

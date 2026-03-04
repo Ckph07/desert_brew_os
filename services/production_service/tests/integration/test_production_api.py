@@ -117,6 +117,23 @@ class TestRecipeAPI:
         assert data['id'] == sample_recipe.id
         assert data['name'] == sample_recipe.name
 
+    def test_delete_recipe(self, client):
+        """Test deleting an unused recipe."""
+        create_response = client.post("/api/v1/production/recipes", json={
+            "name": "Recipe To Delete",
+            "batch_size_liters": 20.0,
+            "fermentables": [{"name": "Pale Malt", "amount_kg": 5.0}],
+            "yeast": [{"name": "US-05"}],
+        })
+        assert create_response.status_code == 201
+        recipe_id = create_response.json()["id"]
+
+        delete_response = client.delete(f"/api/v1/production/recipes/{recipe_id}")
+        assert delete_response.status_code == 204
+
+        get_response = client.get(f"/api/v1/production/recipes/{recipe_id}")
+        assert get_response.status_code == 404
+
 
 class TestProductionBatchAPI:
     """Test production batch endpoints."""
@@ -184,6 +201,179 @@ class TestProductionBatchAPI:
         assert batch['status'] == "fermenting"
         assert batch['total_cost'] is not None
         assert batch['malt_cost'] is not None
+
+    def test_transition_to_conditioning_and_packaging(self, client, sample_recipe):
+        """Test FERMENTING → CONDITIONING → PACKAGING transitions."""
+        create_resp = client.post("/api/v1/production/batches", json={
+            "recipe_id": sample_recipe.id,
+            "batch_number": "IPA-2026-003B",
+            "planned_volume_liters": 20.0
+        })
+        batch_id = create_resp.json()['id']
+
+        brew_resp = client.patch(f"/api/v1/production/batches/{batch_id}/start-brewing")
+        assert brew_resp.status_code == 200
+
+        ferm_resp = client.patch(f"/api/v1/production/batches/{batch_id}/start-fermenting")
+        assert ferm_resp.status_code == 200
+
+        conditioning_resp = client.patch(
+            f"/api/v1/production/batches/{batch_id}/start-conditioning"
+        )
+        assert conditioning_resp.status_code == 200
+        assert conditioning_resp.json()["new_status"] == "conditioning"
+
+        packaging_resp = client.patch(
+            f"/api/v1/production/batches/{batch_id}/start-packaging"
+        )
+        assert packaging_resp.status_code == 200
+        assert packaging_resp.json()["new_status"] == "packaging"
+
+    def test_batch_uses_recipe_snapshot_for_costing(self, client, sample_recipe, db_session):
+        """Batch costing should use recipe snapshot captured at planning time."""
+        from models.batch_ingredient_allocation import BatchIngredientAllocation
+
+        create_resp = client.post("/api/v1/production/batches", json={
+            "recipe_id": sample_recipe.id,
+            "batch_number": "IPA-2026-003C",
+            "planned_volume_liters": 20.0
+        })
+        assert create_resp.status_code == 201
+        batch_id = create_resp.json()["id"]
+
+        # Update the source recipe after batch planning.
+        patch_resp = client.patch(
+            f"/api/v1/production/recipes/{sample_recipe.id}",
+            json={
+                "fermentables": [
+                    {"name": "Maris Otter", "amount_kg": 9.0, "type": "Grain"}
+                ]
+            },
+        )
+        assert patch_resp.status_code == 200
+
+        brew_resp = client.patch(f"/api/v1/production/batches/{batch_id}/start-brewing")
+        assert brew_resp.status_code == 200
+
+        malt_allocations = db_session.query(BatchIngredientAllocation).filter(
+            BatchIngredientAllocation.production_batch_id == batch_id,
+            BatchIngredientAllocation.ingredient_category == "MALT",
+        ).all()
+
+        total_malt_kg = sum(float(a.quantity_consumed) for a in malt_allocations)
+        assert total_malt_kg == pytest.approx(5.0, rel=1e-6)
+
+    def test_cancel_batch(self, client, sample_recipe):
+        """Test cancelling a batch with reason."""
+        create_resp = client.post("/api/v1/production/batches", json={
+            "recipe_id": sample_recipe.id,
+            "batch_number": "IPA-2026-003D",
+            "planned_volume_liters": 20.0
+        })
+        batch_id = create_resp.json()["id"]
+
+        cancel_resp = client.patch(
+            f"/api/v1/production/batches/{batch_id}/cancel",
+            json={"reason": "Contaminacion detectada"},
+        )
+        assert cancel_resp.status_code == 200
+        assert cancel_resp.json()["new_status"] == "cancelled"
+        assert "Contaminacion detectada" in cancel_resp.json()["message"]
+
+    def test_validate_recipe_stock(self, client, sample_recipe):
+        """Validate stock availability for recipe ingredients."""
+        response = client.post(
+            f"/api/v1/production/recipes/{sample_recipe.id}/validate-stock",
+            json={"planned_volume_liters": 20.0},
+        )
+        assert response.status_code == 200
+        payload = response.json()
+        assert payload["recipe_id"] == sample_recipe.id
+        assert payload["all_available"] is True
+        assert len(payload["items"]) >= 3  # malt + hop + yeast
+        assert all(item["status"] == "OK" for item in payload["items"])
+
+    def test_validate_recipe_stock_insufficient(self, client, sample_recipe):
+        """Validation should flag insufficient inventory for scaled batches."""
+        response = client.post(
+            f"/api/v1/production/recipes/{sample_recipe.id}/validate-stock",
+            json={"planned_volume_liters": 5000.0},
+        )
+        assert response.status_code == 200
+        payload = response.json()
+        assert payload["all_available"] is False
+        assert any(item["status"] == "INSUFFICIENT" for item in payload["items"])
+
+    def test_validate_recipe_stock_uses_yeast_amount_packets(self, client):
+        """Validation should respect yeast amount_packets and volume scaling."""
+        recipe_resp = client.post("/api/v1/production/recipes", json={
+            "name": "Double Yeast IPA",
+            "batch_size_liters": 20.0,
+            "fermentables": [{"name": "Pale Malt", "amount_kg": 5.0}],
+            "hops": [{"name": "Cascade", "amount_g": 40.0}],
+            "yeast": [{"name": "US-05", "amount_packets": 2.0}],
+        })
+        assert recipe_resp.status_code == 201
+        recipe_id = recipe_resp.json()["id"]
+
+        response = client.post(
+            f"/api/v1/production/recipes/{recipe_id}/validate-stock",
+            json={"planned_volume_liters": 40.0},
+        )
+        assert response.status_code == 200
+        payload = response.json()
+        yeast_item = next(item for item in payload["items"] if item["ingredient_type"] == "YEAST")
+        assert yeast_item["required_quantity"] == pytest.approx(4.0, rel=1e-6)
+
+    def test_start_brewing_preflight_avoids_partial_consumption(self, client, sample_recipe):
+        """If one ingredient is missing, no stock should be consumed before failing."""
+        from main import app
+        from clients.inventory_client import get_inventory_client
+
+        consume_calls = []
+
+        class InsufficientHopInventoryClient:
+            async def get_available_stock_batches(self, ingredient_name, min_quantity=0.01):
+                if ingredient_name == "Cascade":
+                    return []
+                return [
+                    {
+                        "id": 1,
+                        "batch_number": f"MOCK-{ingredient_name[:4].upper()}-001",
+                        "sku": ingredient_name,
+                        "available_quantity": 100.0,
+                        "unit_cost": 25.00,
+                        "unit_measure": "KG",
+                        "supplier_name": "Test Supplier",
+                    }
+                ]
+
+            async def consume_stock(self, stock_batch_id, quantity, unit, production_batch_id, reason=None):
+                consume_calls.append((stock_batch_id, quantity, unit))
+                return {"status": "consumed"}
+
+            async def create_finished_product(self, *args, **kwargs):
+                return {}
+
+            async def health_check(self):
+                return True
+
+        app.dependency_overrides[get_inventory_client] = lambda: InsufficientHopInventoryClient()
+        try:
+            create_resp = client.post("/api/v1/production/batches", json={
+                "recipe_id": sample_recipe.id,
+                "batch_number": "IPA-2026-003E",
+                "planned_volume_liters": 20.0
+            })
+            assert create_resp.status_code == 201
+            batch_id = create_resp.json()["id"]
+
+            brew_resp = client.patch(f"/api/v1/production/batches/{batch_id}/start-brewing")
+            assert brew_resp.status_code == 400
+            assert "Insufficient stock" in brew_resp.text
+            assert consume_calls == []
+        finally:
+            app.dependency_overrides.pop(get_inventory_client, None)
     
     def test_complete_batch(self, client, sample_recipe, db_session):
         """Test completing batch with actual volume."""

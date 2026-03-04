@@ -3,10 +3,13 @@ Main FastAPI application for Finance Service.
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 from api.finance_routes import router as finance_router
 from api.income_routes import router as income_router
 from api.expense_routes import router as expense_router
+from database import Base, engine
+import models  # noqa: F401
 
 app = FastAPI(
     title="Desert Brew Finance Service",
@@ -14,10 +17,19 @@ app = FastAPI(
     version="0.2.0"
 )
 
+def _get_allowed_origins() -> list[str]:
+    raw = os.getenv("CORS_ALLOW_ORIGINS")
+    if raw:
+        return [origin.strip() for origin in raw.split(",") if origin.strip()]
+    return [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
+
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_get_allowed_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -27,6 +39,12 @@ app.add_middleware(
 app.include_router(finance_router)
 app.include_router(income_router)
 app.include_router(expense_router)
+
+
+@app.on_event("startup")
+def startup_event():
+    """Ensure schema exists before serving requests."""
+    Base.metadata.create_all(bind=engine)
 
 
 @app.get("/")

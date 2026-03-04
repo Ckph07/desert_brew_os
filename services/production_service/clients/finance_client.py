@@ -2,6 +2,7 @@
 HTTP client for Finance Service.
 """
 import httpx
+import os
 from typing import Dict
 from decimal import Decimal
 
@@ -9,44 +10,42 @@ from decimal import Decimal
 class FinanceServiceClient:
     """HTTP client for Finance Service API."""
     
-    def __init__(self, base_url: str = "http://localhost:8005"):
-        self.base_url = base_url
+    def __init__(self, base_url: str | None = None):
+        self.base_url = base_url or os.getenv("FINANCE_SERVICE_URL", "http://localhost:8005")
         self.timeout = 10.0
     
     async def create_internal_transfer(
         self,
         origin_type: str,
-        volume_liters: float,
+        quantity: float,
+        unit_measure: str,
         unit_cost: float,
-        production_batch_id: int,
+        product_sku: str,
+        product_name: str,
         profit_center_from: str = "factory",
-        profit_center_to: str = "taproom"
+        profit_center_to: str = "taproom",
+        notes: str | None = None,
+        created_by_user_id: int | None = None,
     ) -> Dict:
         """
-        Create InternalTransfer (Factory → Taproom).
-        
-        Args:
-            origin_type: "HOUSE", "GUEST", "COMMERCIAL", or "MERCHANDISE"
-            volume_liters: Volume transferred
-            unit_cost: Factory cost per liter (before transfer pricing)
-            production_batch_id: Source production batch
-            profit_center_from: Source profit center (default: "factory")
-            profit_center_to: Destination profit center (default: "taproom")
-        
-        Returns:
-            Created InternalTransfer with calculated transfer price
+        Create InternalTransfer (Factory → Taproom) aligned with Finance API schema.
         """
+        payload = {
+            "origin_type": origin_type,
+            "quantity": quantity,
+            "unit_measure": unit_measure,
+            "unit_cost": unit_cost,
+            "product_sku": product_sku,
+            "product_name": product_name,
+            "from_profit_center": profit_center_from,
+            "to_profit_center": profit_center_to,
+            "notes": notes,
+            "created_by_user_id": created_by_user_id,
+        }
         async with httpx.AsyncClient(timeout=self.timeout) as client:
             response = await client.post(
                 f"{self.base_url}/api/v1/finance/internal-transfers",
-                json={
-                    "origin_type": origin_type,
-                    "volume_liters": volume_liters,
-                    "unit_cost": unit_cost,
-                    "source_reference": f"production_batch_{production_batch_id}",
-                    "profit_center_from": profit_center_from,
-                    "profit_center_to": profit_center_to
-                }
+                json=payload,
             )
             response.raise_for_status()
             return response.json()

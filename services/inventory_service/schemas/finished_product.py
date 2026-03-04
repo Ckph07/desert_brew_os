@@ -62,6 +62,14 @@ class FinishedProductCreate(BaseModel):
         return v
 
 
+class FinishedProductDeductRequest(BaseModel):
+    """Schema for deducting quantity (sales/outbound)."""
+    quantity: Decimal = Field(..., gt=0, description="Quantity to deduct")
+    movement_reason: Optional[str] = Field(None, max_length=200)
+    reference_number: Optional[str] = Field(None, max_length=50)
+    user_id: Optional[int] = None
+
+
 class FinishedProductUpdate(BaseModel):
     """Schema for updating finished product (location, status)."""
     cold_room_id: Optional[ColdRoomLocation] = None

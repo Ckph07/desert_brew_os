@@ -10,7 +10,7 @@
 
 ```bash
 chmod +x dev_launcher.sh
-./dev_launcher.sh
+./dev_launcher.sh --all
 ```
 
 ### Solo backend (6 microservicios FastAPI)
@@ -27,17 +27,23 @@ chmod +x dev_launcher.sh
 
 > **Ctrl+C** detiene todos los procesos limpiamente.
 
+### Documentacion Operativa Vigente
+
+- [Runbook de integracion](docs/runbook_integracion.md)
+- [Roadmap frontend actualizado](FRONTEND_ROADMAP.md)
+- [Implementaciones del corte 2026-03-04](docs/implementaciones_2026-03-04.md)
+
 ### URLs
 
 | Servicio | Puerto | Swagger | Estado Frontend |
 |----------|:------:|:-------:|:---------------:|
-| Inventory | **8001** | [/docs](http://localhost:8001/docs) | ✅ F1 + F2 |
+| Inventory | **8001** | [/docs](http://localhost:8001/docs) | ✅ P0 + P1 |
 | Sales | **8002** | [/docs](http://localhost:8002/docs) | ✅ F3 + F3+ |
 | Security | **8003** | [/docs](http://localhost:8003/docs) | ⏳ F6 |
 | Production | **8004** | [/docs](http://localhost:8004/docs) | ✅ F4 |
-| Finance | **8005** | [/docs](http://localhost:8005/docs) | ⏳ F5 |
+| Finance | **8005** | [/docs](http://localhost:8005/docs) | ✅ F5 |
 | Payroll | **8006** | [/docs](http://localhost:8006/docs) | ⏳ F6 |
-| Flutter Web | **5000** | — | ✅ |
+| Flutter Web | **3000** | — | ✅ |
 
 Logs en vivo: `/tmp/desert_brew_<servicio>.log`
 

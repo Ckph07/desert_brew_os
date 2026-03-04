@@ -4,8 +4,7 @@ Internal Transfer Model - Shadow Ledger for P&L segregation.
 Purpose: Record internal movements between profit centers WITHOUT fiscal invoices.
 Enables Factory P&L vs Taproom P&L separation.
 """
-from sqlalchemy import Column, Integer, String, Numeric, DateTime, ForeignKey
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Column, Integer, String, Numeric, DateTime, ForeignKey, Uuid
 from database import Base
 from datetime import datetime
 import uuid
@@ -43,7 +42,7 @@ class InternalTransfer(Base):
     """
     __tablename__ = "internal_transfers"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     
     # Transfer parties
     from_profit_center = Column(String(20), nullable=False, index=True)  # ProfitCenter enum

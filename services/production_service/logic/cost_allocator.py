@@ -82,7 +82,7 @@ class CostAllocator:
             InsufficientStockError: If not enough inventory
             ServiceUnavailableError: If Inventory Service is down
         """
-        allocations = []
+        allocations: List[BatchIngredientAllocation] = []
         
         # Cost breakdown
         malt_cost = 0.0
@@ -90,47 +90,145 @@ class CostAllocator:
         yeast_cost = 0.0
         water_cost = 0.0
         
+        recipe_batch_size = float(recipe.batch_size_liters or 0)
+        planned_batch_size = float(batch.planned_volume_liters or 0)
+        if recipe_batch_size <= 0:
+            recipe_batch_size = planned_batch_size if planned_batch_size > 0 else 1.0
+        scale_factor = (
+            planned_batch_size / recipe_batch_size
+            if planned_batch_size > 0 and recipe_batch_size > 0
+            else 1.0
+        )
+
+        preflight_plans: List[Dict] = []
+
         try:
-            # Allocate fermentables (malts) - Real FIFO
+            # Preflight all ingredients first to avoid partial consumption from stock shortages.
             if recipe.fermentables:
                 for ferm in recipe.fermentables:
-                    result = await CostAllocator._allocate_fermentable(
+                    ingredient_lookup = ferm.get('sku') or ferm.get('name')
+                    ingredient_label = ferm.get('name') or ingredient_lookup
+                    if not ingredient_lookup:
+                        continue
+                    required_kg = float(ferm.get('amount_kg', 0.0)) * scale_factor
+                    if required_kg <= 0:
+                        continue
+                    preflight = await CostAllocator._allocate_fermentable(
                         batch=batch,
-                        ingredient_name=ferm['name'],
-                        required_kg=ferm['amount_kg'],
-                        inventory_client=inventory_client
+                        ingredient_name=ingredient_lookup,
+                        display_name=ingredient_label,
+                        required_kg=required_kg,
+                        inventory_client=inventory_client,
+                        dry_run=True,
                     )
-                    malt_cost += result['total_cost']
-                    allocations.extend(result['allocations'])
-            
-            # Allocate hops - Real FIFO
+                    preflight_plans.append(
+                        {
+                            "kind": "MALT",
+                            "lookup": ingredient_lookup,
+                            "label": ingredient_label,
+                            "required": required_kg,
+                            "stock_batches": preflight["stock_batches"],
+                        }
+                    )
+
             if recipe.hops:
                 for hop in recipe.hops:
-                    result = await CostAllocator._allocate_hop(
+                    ingredient_lookup = hop.get('sku') or hop.get('name')
+                    ingredient_label = hop.get('name') or ingredient_lookup
+                    if not ingredient_lookup:
+                        continue
+                    required_g = float(hop.get('amount_g', 0.0)) * scale_factor
+                    if required_g <= 0:
+                        continue
+                    preflight = await CostAllocator._allocate_hop(
                         batch=batch,
-                        ingredient_name=hop['name'],
-                        required_g=hop['amount_g'],
-                        inventory_client=inventory_client
+                        ingredient_name=ingredient_lookup,
+                        display_name=ingredient_label,
+                        required_g=required_g,
+                        inventory_client=inventory_client,
+                        dry_run=True,
                     )
-                    hops_cost += result['total_cost']
-                    allocations.extend(result['allocations'])
-            
-            # Allocate yeast - Real FIFO
+                    preflight_plans.append(
+                        {
+                            "kind": "HOP",
+                            "lookup": ingredient_lookup,
+                            "label": ingredient_label,
+                            "required": required_g,
+                            "stock_batches": preflight["stock_batches"],
+                        }
+                    )
+
             if recipe.yeast:
                 for yeast_item in recipe.yeast:
+                    ingredient_lookup = yeast_item.get('sku') or yeast_item.get('name')
+                    ingredient_label = yeast_item.get('name') or ingredient_lookup
+                    if not ingredient_lookup:
+                        continue
+                    required_packets = (
+                        float(yeast_item.get('amount_packets') or 1.0)
+                        * scale_factor
+                    )
+                    if required_packets <= 0:
+                        continue
+                    preflight = await CostAllocator._allocate_yeast(
+                        batch=batch,
+                        yeast_name=ingredient_lookup,
+                        display_name=ingredient_label,
+                        required_packets=required_packets,
+                        inventory_client=inventory_client,
+                        dry_run=True,
+                    )
+                    preflight_plans.append(
+                        {
+                            "kind": "YEAST",
+                            "lookup": ingredient_lookup,
+                            "label": ingredient_label,
+                            "required": required_packets,
+                            "stock_batches": preflight["stock_batches"],
+                        }
+                    )
+
+            # Execute consumption after all ingredients passed preflight.
+            for plan in preflight_plans:
+                if plan["kind"] == "MALT":
+                    result = await CostAllocator._allocate_fermentable(
+                        batch=batch,
+                        ingredient_name=plan["lookup"],
+                        display_name=plan["label"],
+                        required_kg=plan["required"],
+                        inventory_client=inventory_client,
+                        stock_batches=plan["stock_batches"],
+                    )
+                    malt_cost += result["total_cost"]
+                    allocations.extend(result["allocations"])
+                elif plan["kind"] == "HOP":
+                    result = await CostAllocator._allocate_hop(
+                        batch=batch,
+                        ingredient_name=plan["lookup"],
+                        display_name=plan["label"],
+                        required_g=plan["required"],
+                        inventory_client=inventory_client,
+                        stock_batches=plan["stock_batches"],
+                    )
+                    hops_cost += result["total_cost"]
+                    allocations.extend(result["allocations"])
+                elif plan["kind"] == "YEAST":
                     result = await CostAllocator._allocate_yeast(
                         batch=batch,
-                        yeast_name=yeast_item['name'],
-                        inventory_client=inventory_client
+                        yeast_name=plan["lookup"],
+                        display_name=plan["label"],
+                        required_packets=plan["required"],
+                        inventory_client=inventory_client,
+                        stock_batches=plan["stock_batches"],
                     )
-                    yeast_cost += result['total_cost']
-                    allocations.extend(result['allocations'])
-        
+                    yeast_cost += result["total_cost"]
+                    allocations.extend(result["allocations"])
+
         except httpx.HTTPError as e:
             raise ServiceUnavailableError("Inventory Service", f"FIFO allocation: {str(e)}")
         
         # Water cost (placeholder - Sprint 5 will use WaterProductionRun)
-        water_liters = float(recipe.batch_size_liters) * 1.5  # Assume 1.5x batch size
+        water_liters = (planned_batch_size if planned_batch_size > 0 else recipe_batch_size) * 1.5
         water_cost = water_liters * 0.50  # $0.50/liter placeholder
         
         # Real fixed cost overhead from FixedMonthlyCost + ProductionTarget
@@ -180,8 +278,11 @@ class CostAllocator:
     async def _allocate_fermentable(
         batch: ProductionBatch,
         ingredient_name: str,
+        display_name: str,
         required_kg: float,
-        inventory_client: InventoryServiceClient
+        inventory_client: InventoryServiceClient,
+        stock_batches: List[Dict] = None,
+        dry_run: bool = False,
     ) -> Dict:
         """
         Allocate fermentable from StockBatch using real FIFO.
@@ -189,19 +290,23 @@ class CostAllocator:
         Queries Inventory Service, consumes from oldest batches first.
         """
         # Get available stock batches (FIFO order: oldest first)
-        stock_batches = await inventory_client.get_available_stock_batches(
-            ingredient_name=ingredient_name,
-            min_quantity=0.01
-        )
+        if stock_batches is None:
+            stock_batches = await inventory_client.get_available_stock_batches(
+                ingredient_name=ingredient_name,
+                min_quantity=0.01
+            )
         
         if not stock_batches:
-            raise InsufficientStockError(ingredient_name, required_kg, 0.0, "KG")
+            raise InsufficientStockError(display_name, required_kg, 0.0, "KG")
         
         # Calculate total available
         total_available = sum(sb.get('available_quantity', 0.0) for sb in stock_batches)
         
         if total_available < required_kg:
-            raise InsufficientStockError(ingredient_name, required_kg, total_available, "KG")
+            raise InsufficientStockError(display_name, required_kg, total_available, "KG")
+
+        if dry_run:
+            return {"stock_batches": stock_batches}
         
         # Allocate from oldest first (FIFO)
         allocations = []
@@ -229,7 +334,7 @@ class CostAllocator:
             allocation = BatchIngredientAllocation(
                 production_batch_id=batch.id,
                 stock_batch_id=stock_batch['id'],
-                ingredient_name=ingredient_name,
+                ingredient_name=display_name,
                 ingredient_category='MALT',
                 quantity_consumed=Decimal(str(qty_to_consume)),
                 unit_measure='KG',
@@ -252,8 +357,11 @@ class CostAllocator:
     async def _allocate_hop(
         batch: ProductionBatch,
         ingredient_name: str,
+        display_name: str,
         required_g: float,
-        inventory_client: InventoryServiceClient
+        inventory_client: InventoryServiceClient,
+        stock_batches: List[Dict] = None,
+        dry_run: bool = False,
     ) -> Dict:
         """
         Allocate hops from StockBatch using real FIFO.
@@ -263,20 +371,24 @@ class CostAllocator:
         required_kg = required_g / 1000.0  # Convert grams to kg
         
         # Get available stock batches
-        stock_batches = await inventory_client.get_available_stock_batches(
-            ingredient_name=ingredient_name,
-            min_quantity=0.001  # 1 gram minimum
-        )
+        if stock_batches is None:
+            stock_batches = await inventory_client.get_available_stock_batches(
+                ingredient_name=ingredient_name,
+                min_quantity=0.001  # 1 gram minimum
+            )
         
         if not stock_batches:
-            raise InsufficientStockError(ingredient_name, required_g, 0.0, "G")
+            raise InsufficientStockError(display_name, required_g, 0.0, "G")
         
         # Calculate total available (in grams)
         total_available_kg = sum(sb.get('available_quantity', 0.0) for sb in stock_batches)
         total_available_g = total_available_kg * 1000
         
         if total_available_g < required_g:
-            raise InsufficientStockError(ingredient_name, required_g, total_available_g, "G")
+            raise InsufficientStockError(display_name, required_g, total_available_g, "G")
+
+        if dry_run:
+            return {"stock_batches": stock_batches}
         
         # Allocate from oldest first
         allocations = []
@@ -304,7 +416,7 @@ class CostAllocator:
             allocation = BatchIngredientAllocation(
                 production_batch_id=batch.id,
                 stock_batch_id=stock_batch['id'],
-                ingredient_name=ingredient_name,
+                ingredient_name=display_name,
                 ingredient_category='HOP',
                 quantity_consumed=Decimal(str(qty_to_consume_kg * 1000)),  # Store as grams
                 unit_measure='G',
@@ -327,54 +439,74 @@ class CostAllocator:
     async def _allocate_yeast(
         batch: ProductionBatch,
         yeast_name: str,
-        inventory_client: InventoryServiceClient
+        display_name: str,
+        required_packets: float,
+        inventory_client: InventoryServiceClient,
+        stock_batches: List[Dict] = None,
+        dry_run: bool = False,
     ) -> Dict:
         """
         Allocate yeast from StockBatch using real FIFO.
-        
-        Yeast is typically 1 packet/sachet per batch.
         """
-        required_packets = 1.0  # Simplified: 1 packet per yeast strain
-        
-        # Get available stock batches
-        stock_batches = await inventory_client.get_available_stock_batches(
-            ingredient_name=yeast_name,
-            min_quantity=0.1
-        )
-        
-        if not stock_batches or stock_batches[0]['available_quantity'] < required_packets:
-            available = stock_batches[0]['available_quantity'] if stock_batches else 0.0
-            raise InsufficientStockError(yeast_name, required_packets, available, "PACKET")
-        
-        # Use first (oldest) batch
-        stock_batch = stock_batches[0]
-        unit_cost = float(stock_batch['unit_cost'])
-        cost = required_packets * unit_cost
-        
-        # Consume from Inventory Service
-        await inventory_client.consume_stock(
-            stock_batch_id=stock_batch['id'],
-            quantity=required_packets,
-            unit="PACKET",
-            production_batch_id=batch.id,
-            reason=f"Production Batch #{batch.batch_number}"
-        )
-        
-        # Create allocation record
-        allocation = BatchIngredientAllocation(
-            production_batch_id=batch.id,
-            stock_batch_id=stock_batch['id'],
-            ingredient_name=yeast_name,
-            ingredient_category='YEAST',
-            quantity_consumed=Decimal(str(required_packets)),
-            unit_measure='PACKET',
-            unit_cost=Decimal(str(unit_cost)),
-            total_cost=Decimal(str(cost)),
-            stock_batch_number=stock_batch.get('batch_number', f"SB-{stock_batch['id']}"),
-            supplier_name=stock_batch.get('supplier_name', 'Unknown')
-        )
-        
+
+        if stock_batches is None:
+            stock_batches = await inventory_client.get_available_stock_batches(
+                ingredient_name=yeast_name,
+                min_quantity=0.1
+            )
+
+        if not stock_batches:
+            raise InsufficientStockError(display_name, required_packets, 0.0, "PACKET")
+
+        total_available = sum(sb.get('available_quantity', 0.0) for sb in stock_batches)
+        if total_available < required_packets:
+            raise InsufficientStockError(
+                display_name,
+                required_packets,
+                total_available,
+                "PACKET",
+            )
+
+        if dry_run:
+            return {"stock_batches": stock_batches}
+
+        allocations = []
+        remaining = required_packets
+        total_cost = 0.0
+
+        for stock_batch in stock_batches:
+            if remaining <= 0:
+                break
+
+            qty_to_consume = min(remaining, stock_batch['available_quantity'])
+            unit_cost = float(stock_batch['unit_cost'])
+            cost = qty_to_consume * unit_cost
+
+            await inventory_client.consume_stock(
+                stock_batch_id=stock_batch['id'],
+                quantity=qty_to_consume,
+                unit="PACKET",
+                production_batch_id=batch.id,
+                reason=f"Production Batch #{batch.batch_number}"
+            )
+
+            allocation = BatchIngredientAllocation(
+                production_batch_id=batch.id,
+                stock_batch_id=stock_batch['id'],
+                ingredient_name=display_name,
+                ingredient_category='YEAST',
+                quantity_consumed=Decimal(str(qty_to_consume)),
+                unit_measure='PACKET',
+                unit_cost=Decimal(str(unit_cost)),
+                total_cost=Decimal(str(cost)),
+                stock_batch_number=stock_batch.get('batch_number', f"SB-{stock_batch['id']}"),
+                supplier_name=stock_batch.get('supplier_name', 'Unknown')
+            )
+            allocations.append(allocation)
+            remaining -= qty_to_consume
+            total_cost += cost
+
         return {
-            'total_cost': cost,
-            'allocations': [allocation]
+            'total_cost': total_cost,
+            'allocations': allocations
         }

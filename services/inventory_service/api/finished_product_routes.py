@@ -13,6 +13,7 @@ from models.finished_product import FinishedProductInventory
 from models.cold_room_reading import ColdRoomReading
 from models.product_movement import ProductMovement
 from models.finished_product_enums import (
+    OriginType,
     ProductType,
     ProductCategory,
     AvailabilityStatus,
@@ -24,6 +25,7 @@ from schemas.finished_product import (
     FinishedProductUpdate,
     FinishedProductResponse,
     FinishedProductWithMovements,
+    FinishedProductDeductRequest,
     ProductMovementCreate,
     ProductMovementResponse,
     ProductMoveRequest,
@@ -38,6 +40,17 @@ from schemas.finished_product import (
 )
 
 router = APIRouter()
+
+
+def _resolve_origin_type(product_type: ProductType) -> str:
+    """Map product type to transfer-pricing origin type."""
+    if product_type == ProductType.OWN_PRODUCTION:
+        return OriginType.HOUSE.value
+    if product_type == ProductType.GUEST_CRAFT:
+        return OriginType.GUEST.value
+    if product_type == ProductType.COMMERCIAL:
+        return OriginType.COMMERCIAL.value
+    return OriginType.MERCHANDISE.value
 
 
 # ==================== FINISHED PRODUCT CRUD ====================
@@ -64,6 +77,7 @@ def create_finished_product(
         sku=product_data.sku,
         product_name=product_data.product_name,
         product_type=product_data.product_type.value,
+        origin_type=_resolve_origin_type(product_data.product_type),
         category=product_data.category.value,
         production_batch_id=product_data.production_batch_id,
         supplier_id=product_data.supplier_id,
@@ -353,6 +367,54 @@ def update_finished_product(
     if product_update.notes is not None:
         product.notes = product_update.notes
     
+    product.updated_at = datetime.utcnow()
+    
+    db.commit()
+    db.refresh(product)
+    
+    return product
+
+
+@router.post("/finished-products/{product_id}/deduct", response_model=FinishedProductResponse)
+def deduct_finished_product(
+    product_id: int,
+    deduct_req: FinishedProductDeductRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Deduct quantity (egress) with movement audit.
+    Used by Sales Service.
+    """
+    product = db.query(FinishedProductInventory).filter(
+        FinishedProductInventory.id == product_id
+    ).first()
+    
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+    
+    if deduct_req.quantity > product.quantity:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Insufficient quantity: requested {deduct_req.quantity}, available {product.quantity}"
+        )
+    
+    # Create movement record
+    movement = ProductMovement(
+        finished_product_id=product_id,
+        movement_type=MovementType.SALE.value,
+        quantity=deduct_req.quantity,
+        from_location=product.cold_room_id,
+        to_location=None,
+        sales_order_id=None,
+        user_id=deduct_req.user_id,
+        notes=deduct_req.movement_reason,
+        reference_number=deduct_req.reference_number
+    )
+    db.add(movement)
+    
+    # Update quantities and audit
+    product.quantity -= deduct_req.quantity
+    product.total_cost = (product.unit_cost or Decimal("0")) * product.quantity
     product.updated_at = datetime.utcnow()
     
     db.commit()

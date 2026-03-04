@@ -11,10 +11,17 @@ from sqlalchemy.pool import QueuePool
 # Load .env file (if present) before reading env vars
 load_dotenv(dotenv_path=Path(__file__).parent / ".env")
 
-# Get database URL from environment
+# Normalized DB settings (override per-env via env vars)
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "5432")
+DB_USER = os.getenv("DB_USER", "desertbrew")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "desertbrew123")
+DB_NAME = os.getenv("DB_NAME", "inventory_db")
+
+# Allow explicit DATABASE_URL to override everything
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://desertbrew:desertbrew123@localhost:5432/inventory_db"
+    f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 )
 
 # Create engine with connection pooling

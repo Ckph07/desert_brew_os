@@ -1,8 +1,19 @@
--- Inicialización de bases de datos para Inventory y Finance
-CREATE DATABASE IF NOT EXISTS finance_db;
+-- Inicialización de bases de datos para microservicios (idempotente)
+\set ON_ERROR_STOP on
 
--- Crear usuario específico si es necesario
--- (El usuario 'desertbrew' ya existe vía env vars)
+SELECT 'CREATE DATABASE inventory_db'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'inventory_db')\gexec
 
--- Confirmar creación
+SELECT 'CREATE DATABASE desertbrew_finance'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'desertbrew_finance')\gexec
+
+SELECT 'CREATE DATABASE desertbrew_sales'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'desertbrew_sales')\gexec
+
+SELECT 'CREATE DATABASE desertbrew_security'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'desertbrew_security')\gexec
+
+SELECT 'CREATE DATABASE desertbrew_payroll'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'desertbrew_payroll')\gexec
+
 \echo 'Databases initialized successfully'

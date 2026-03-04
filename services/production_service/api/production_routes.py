@@ -3,10 +3,12 @@ Production Service API routes.
 """
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Query
 from sqlalchemy.orm import Session
-from typing import List
+from typing import Any, Dict, List, Optional
 import tempfile
 import os
 import httpx
+from datetime import datetime
+import re
 
 from database import get_db
 from models.recipe import Recipe
@@ -20,8 +22,12 @@ from schemas.production import (
     BatchResponse,
     BatchDetailResponse,
     UpdateBatchVolumeRequest,
+    CancelBatchRequest,
     CostBreakdownResponse,
-    BatchTransitionResponse
+    BatchTransitionResponse,
+    RecipeInventoryValidationRequest,
+    RecipeInventoryValidationResponse,
+    RecipeInventoryValidationItem,
 )
 from logic.beersmith_parser import BeerSmithParser
 from logic.batch_state_machine import BatchStateMachine
@@ -32,6 +38,128 @@ from events.publisher import EventPublisher, get_event_publisher
 from exceptions import InsufficientStockError, ServiceUnavailableError
 
 router = APIRouter(prefix="/api/v1/production", tags=["Production"])
+
+
+class _RecipeAllocationView:
+    """Lightweight recipe view used by CostAllocator."""
+
+    def __init__(
+        self,
+        batch_size_liters: float,
+        fermentables: List[Dict[str, Any]],
+        hops: List[Dict[str, Any]],
+        yeast: List[Dict[str, Any]],
+    ):
+        self.batch_size_liters = batch_size_liters
+        self.fermentables = fermentables
+        self.hops = hops
+        self.yeast = yeast
+
+
+def _copy_dict_list(items: Optional[List[Dict[str, Any]]]) -> List[Dict[str, Any]]:
+    """Create a defensive copy for JSON list fields."""
+    if not isinstance(items, list):
+        return []
+    return [dict(item) for item in items if isinstance(item, dict)]
+
+
+def _normalize_sku(value: str) -> str:
+    """Normalize ingredient names to SKU-friendly tokens."""
+    normalized = re.sub(r"[^A-Z0-9]+", "-", value.strip().upper())
+    return normalized.strip("-")
+
+
+def _ensure_recipe_sku_fields(items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Ensure every ingredient row has a `sku` key."""
+    normalized: List[Dict[str, Any]] = []
+    for item in items:
+        row = dict(item)
+        sku = row.get("sku")
+        if isinstance(sku, str):
+            sku = _normalize_sku(sku)
+        if not sku:
+            name = row.get("name")
+            if isinstance(name, str) and name.strip():
+                sku = _normalize_sku(name)
+        row["sku"] = sku
+        normalized.append(row)
+    return normalized
+
+
+def _apply_recipe_normalization(recipe: Recipe) -> None:
+    """Normalize ingredient payload before saving recipe."""
+    recipe.fermentables = _ensure_recipe_sku_fields(_copy_dict_list(recipe.fermentables))
+    recipe.hops = _ensure_recipe_sku_fields(_copy_dict_list(recipe.hops))
+    recipe.yeast = _ensure_recipe_sku_fields(_copy_dict_list(recipe.yeast))
+
+
+def _build_recipe_snapshot(recipe: Recipe) -> Dict[str, Any]:
+    """Capture immutable recipe payload at batch planning time."""
+    return {
+        "source_recipe_id": recipe.id,
+        "name": recipe.name,
+        "style": recipe.style,
+        "brewer": recipe.brewer,
+        "batch_size_liters": float(recipe.batch_size_liters),
+        "fermentables": _copy_dict_list(recipe.fermentables),
+        "hops": _copy_dict_list(recipe.hops),
+        "yeast": _copy_dict_list(recipe.yeast),
+        "water_profile": dict(recipe.water_profile) if isinstance(recipe.water_profile, dict) else None,
+        "mash_steps": _copy_dict_list(recipe.mash_steps),
+        "expected_og": float(recipe.expected_og) if recipe.expected_og is not None else None,
+        "expected_fg": float(recipe.expected_fg) if recipe.expected_fg is not None else None,
+        "expected_abv": float(recipe.expected_abv) if recipe.expected_abv is not None else None,
+        "ibu": float(recipe.ibu) if recipe.ibu is not None else None,
+        "color_srm": float(recipe.color_srm) if recipe.color_srm is not None else None,
+        "brewhouse_efficiency": (
+            float(recipe.brewhouse_efficiency) if recipe.brewhouse_efficiency is not None else None
+        ),
+        "notes": recipe.notes,
+        "captured_at": datetime.utcnow().isoformat(),
+    }
+
+
+def _resolve_recipe_for_allocation(
+    batch: ProductionBatch,
+    fallback_recipe: Optional[Recipe],
+) -> Optional[_RecipeAllocationView]:
+    """Resolve recipe payload for costing, preferring immutable batch snapshot."""
+    snapshot = batch.recipe_snapshot if isinstance(batch.recipe_snapshot, dict) else {}
+
+    if snapshot:
+        batch_size_liters = snapshot.get("batch_size_liters")
+        if batch_size_liters is None:
+            if fallback_recipe is not None:
+                batch_size_liters = float(fallback_recipe.batch_size_liters)
+            else:
+                batch_size_liters = float(batch.planned_volume_liters)
+
+        fermentables = _copy_dict_list(snapshot.get("fermentables")) or _copy_dict_list(
+            getattr(fallback_recipe, "fermentables", [])
+        )
+        hops = _copy_dict_list(snapshot.get("hops")) or _copy_dict_list(
+            getattr(fallback_recipe, "hops", [])
+        )
+        yeast = _copy_dict_list(snapshot.get("yeast")) or _copy_dict_list(
+            getattr(fallback_recipe, "yeast", [])
+        )
+
+        return _RecipeAllocationView(
+            batch_size_liters=float(batch_size_liters),
+            fermentables=fermentables,
+            hops=hops,
+            yeast=yeast,
+        )
+
+    if fallback_recipe is None:
+        return None
+
+    return _RecipeAllocationView(
+        batch_size_liters=float(fallback_recipe.batch_size_liters),
+        fermentables=_copy_dict_list(fallback_recipe.fermentables),
+        hops=_copy_dict_list(fallback_recipe.hops),
+        yeast=_copy_dict_list(fallback_recipe.yeast),
+    )
 
 
 # =====================
@@ -66,6 +194,7 @@ def create_recipe_manual(
         brewhouse_efficiency=payload.brewhouse_efficiency,
         notes=payload.notes,
     )
+    _apply_recipe_normalization(recipe)
 
     db.add(recipe)
     db.commit()
@@ -96,6 +225,7 @@ async def import_beersmith_recipe(
         # Parse recipe
         recipe = BeerSmithParser.parse_file(tmp_path)
         recipe.imported_by_user_id = user_id
+        _apply_recipe_normalization(recipe)
         
         # Save to database
         db.add(recipe)
@@ -177,6 +307,7 @@ def update_recipe(
 
     for key, value in update_data.items():
         setattr(recipe, key, value)
+    _apply_recipe_normalization(recipe)
 
     db.commit()
     db.refresh(recipe)
@@ -184,7 +315,7 @@ def update_recipe(
 
 
 # ===========================
-# Production Batch Endpoints (6)
+# Production Batch Endpoints (8)
 # ===========================
 
 @router.post("/batches", response_model=BatchDetailResponse, status_code=201)
@@ -210,6 +341,7 @@ def create_batch(
         batch_number=batch_req.batch_number,
         recipe_id=batch_req.recipe_id,
         recipe_name=recipe.name,
+        recipe_snapshot=_build_recipe_snapshot(recipe),
         planned_volume_liters=batch_req.planned_volume_liters,
         status=BatchStatus.PLANNED.value,
         notes=batch_req.notes,
@@ -277,11 +409,17 @@ async def start_brewing(
     
     # Allocate costs via real FIFO from Inventory Service
     recipe = db.query(Recipe).filter(Recipe.id == batch.recipe_id).first()
+    recipe_for_allocation = _resolve_recipe_for_allocation(batch, recipe)
+    if recipe_for_allocation is None:
+        raise HTTPException(
+            404,
+            f"Recipe {batch.recipe_id} not found and batch has no recipe snapshot",
+        )
     
     try:
         cost_breakdown = await CostAllocator.allocate_batch_costs(
             batch=batch,
-            recipe=recipe,
+            recipe=recipe_for_allocation,
             db=db,
             inventory_client=inventory_client
         )
@@ -354,6 +492,199 @@ def start_fermenting(batch_id: int, db: Session = Depends(get_db)):
     )
 
 
+@router.patch("/batches/{batch_id}/start-conditioning", response_model=BatchTransitionResponse)
+def start_conditioning(batch_id: int, db: Session = Depends(get_db)):
+    """Transition: FERMENTING → CONDITIONING."""
+    batch = db.query(ProductionBatch).filter(ProductionBatch.id == batch_id).first()
+    if not batch:
+        raise HTTPException(404, f"Batch {batch_id} not found")
+
+    previous_status = batch.status
+
+    try:
+        BatchStateMachine.transition(batch, BatchStatus.CONDITIONING)
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+
+    db.commit()
+
+    return BatchTransitionResponse(
+        batch_id=batch.id,
+        batch_number=batch.batch_number,
+        previous_status=previous_status,
+        new_status=batch.status,
+        timestamp=batch.conditioning_started_at,
+        message="Batch moved to conditioning"
+    )
+
+
+@router.patch("/batches/{batch_id}/start-packaging", response_model=BatchTransitionResponse)
+def start_packaging(batch_id: int, db: Session = Depends(get_db)):
+    """Transition: FERMENTING/CONDITIONING → PACKAGING."""
+    batch = db.query(ProductionBatch).filter(ProductionBatch.id == batch_id).first()
+    if not batch:
+        raise HTTPException(404, f"Batch {batch_id} not found")
+
+    previous_status = batch.status
+
+    try:
+        BatchStateMachine.transition(batch, BatchStatus.PACKAGING)
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+
+    db.commit()
+
+    return BatchTransitionResponse(
+        batch_id=batch.id,
+        batch_number=batch.batch_number,
+        previous_status=previous_status,
+        new_status=batch.status,
+        timestamp=batch.packaging_started_at,
+        message="Batch moved to packaging"
+    )
+
+
+@router.patch("/batches/{batch_id}/cancel", response_model=BatchTransitionResponse)
+def cancel_batch(
+    batch_id: int,
+    payload: CancelBatchRequest,
+    db: Session = Depends(get_db),
+):
+    """Transition batch to CANCELLED with optional reason."""
+    batch = db.query(ProductionBatch).filter(ProductionBatch.id == batch_id).first()
+    if not batch:
+        raise HTTPException(404, f"Batch {batch_id} not found")
+
+    previous_status = batch.status
+    reason = payload.reason or "Cancelled from frontend"
+
+    try:
+        BatchStateMachine.transition(batch, BatchStatus.CANCELLED, notes=reason)
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+
+    db.commit()
+
+    return BatchTransitionResponse(
+        batch_id=batch.id,
+        batch_number=batch.batch_number,
+        previous_status=previous_status,
+        new_status=batch.status,
+        timestamp=batch.cancelled_at,
+        message=f"Batch cancelled: {reason}",
+    )
+
+
+@router.post(
+    "/recipes/{recipe_id}/validate-stock",
+    response_model=RecipeInventoryValidationResponse,
+)
+async def validate_recipe_stock(
+    recipe_id: int,
+    payload: RecipeInventoryValidationRequest,
+    inventory_client: InventoryServiceClient = Depends(get_inventory_client),
+    db: Session = Depends(get_db),
+):
+    """
+    Validate recipe ingredients against available inventory before brewing.
+
+    Uses SKU when present in recipe ingredients, fallback to ingredient name.
+    """
+    recipe = db.query(Recipe).filter(Recipe.id == recipe_id).first()
+    if not recipe:
+        raise HTTPException(404, f"Recipe {recipe_id} not found")
+
+    _apply_recipe_normalization(recipe)
+
+    base_volume = float(recipe.batch_size_liters)
+    planned_volume = float(payload.planned_volume_liters or base_volume)
+    scale_factor = planned_volume / base_volume if base_volume > 0 else 1.0
+
+    items: List[RecipeInventoryValidationItem] = []
+
+    async def _check_item(
+        ingredient_type: str,
+        name: str,
+        sku: Optional[str],
+        required_quantity: float,
+        unit: str,
+    ) -> None:
+        lookup_key = sku or name
+        if not lookup_key:
+            items.append(
+                RecipeInventoryValidationItem(
+                    ingredient_type=ingredient_type,
+                    name=name or "UNKNOWN",
+                    sku=sku,
+                    lookup_key="",
+                    required_quantity=required_quantity,
+                    unit=unit,
+                    available_quantity=0.0,
+                    status="MISSING",
+                    matched_batches=0,
+                )
+            )
+            return
+
+        try:
+            stock_batches = await inventory_client.get_available_stock_batches(
+                ingredient_name=lookup_key,
+                min_quantity=0.0,
+            )
+        except httpx.HTTPError as e:
+            raise HTTPException(503, f"Inventory Service error: {str(e)}")
+
+        available = sum(float(batch.get("available_quantity", 0.0)) for batch in stock_batches)
+        if not stock_batches:
+            status = "MISSING"
+        elif available < required_quantity:
+            status = "INSUFFICIENT"
+        else:
+            status = "OK"
+
+        items.append(
+            RecipeInventoryValidationItem(
+                ingredient_type=ingredient_type,
+                name=name,
+                sku=sku,
+                lookup_key=lookup_key,
+                required_quantity=round(required_quantity, 4),
+                unit=unit,
+                available_quantity=round(available, 4),
+                status=status,
+                matched_batches=len(stock_batches),
+            )
+        )
+
+    for fermentable in _copy_dict_list(recipe.fermentables):
+        name = fermentable.get("name") or "FERMENTABLE"
+        sku = fermentable.get("sku")
+        required = float(fermentable.get("amount_kg", 0.0)) * scale_factor
+        await _check_item("FERMENTABLE", name, sku, required, "KG")
+
+    for hop in _copy_dict_list(recipe.hops):
+        name = hop.get("name") or "HOP"
+        sku = hop.get("sku")
+        required_kg = (float(hop.get("amount_g", 0.0)) / 1000.0) * scale_factor
+        await _check_item("HOP", name, sku, required_kg, "KG")
+
+    for yeast in _copy_dict_list(recipe.yeast):
+        name = yeast.get("name") or "YEAST"
+        sku = yeast.get("sku")
+        required_packets = float(yeast.get("amount_packets") or 1.0) * scale_factor
+        await _check_item("YEAST", name, sku, required_packets, "PACKET")
+
+    all_available = all(item.status == "OK" for item in items)
+    return RecipeInventoryValidationResponse(
+        recipe_id=recipe.id,
+        recipe_name=recipe.name,
+        scale_factor=round(scale_factor, 4),
+        planned_volume_liters=planned_volume,
+        items=items,
+        all_available=all_available,
+    )
+
+
 @router.patch("/batches/{batch_id}/complete", response_model=BatchTransitionResponse)
 async def complete_batch(
     batch_id: int,
@@ -401,11 +732,12 @@ async def complete_batch(
     try:
         finished_product = await inventory_client.create_finished_product(
             production_batch_id=batch.id,
-            sku=batch.recipe_name,  # Use recipe name as SKU (TODO: map to proper SKU)
-            volume_liters=float(batch.actual_volume_liters),
+            sku=batch.batch_number,
+            product_name=batch.recipe_name,
+            actual_volume_liters=float(batch.actual_volume_liters),
             unit_cost=float(batch.cost_per_liter),
-            container_type="KEG",
-            location="COLD_ROOM"
+            cold_room_id="COLD_ROOM_A",
+            notes=f"Completed from batch {batch.batch_number}",
         )
     except httpx.HTTPError as e:
         db.rollback()
@@ -414,12 +746,16 @@ async def complete_batch(
     # 2. Create InternalTransfer in Finance Service (Factory → Taproom)
     try:
         internal_transfer = await finance_client.create_internal_transfer(
-            origin_type="HOUSE",  # Production batches are always HOUSE
-            volume_liters=float(batch.actual_volume_liters),
+            origin_type="house",  # Finance service expects lower-case
+            quantity=float(batch.actual_volume_liters),
+            unit_measure="LITERS",
             unit_cost=float(batch.cost_per_liter),
-            production_batch_id=batch.id,
+            product_sku=batch.recipe_name,
+            product_name=batch.recipe_name,
             profit_center_from="factory",
-            profit_center_to="taproom"
+            profit_center_to="taproom",
+            notes=f"Batch {batch.batch_number} transfer",
+            created_by_user_id=batch.created_by_user_id,
         )
     except httpx.HTTPError as e:
         db.rollback()

@@ -1,7 +1,4 @@
-version: '3.8'
-
 services:
-  # PostgreSQL - Para Inventory y Finance Services
   postgres:
     image: postgres:15-alpine
     container_name: desertbrew_postgres
@@ -17,12 +14,11 @@ services:
     networks:
       - desertbrew_network
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U desertbrew" ]
+      test: ["CMD-SHELL", "pg_isready -U desertbrew"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  # TimescaleDB - Para Production Service (telemetría IoT)
   timescaledb:
     image: timescale/timescaledb:latest-pg15
     container_name: desertbrew_timescaledb
@@ -37,12 +33,11 @@ services:
     networks:
       - desertbrew_network
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U desertbrew" ]
+      test: ["CMD-SHELL", "pg_isready -U desertbrew"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  # RabbitMQ - Message broker para eventos asíncronos
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: desertbrew_rabbitmq
@@ -51,40 +46,34 @@ services:
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-desertbrew123}
       RABBITMQ_DEFAULT_VHOST: /
     ports:
-      - "5672:5672" # AMQP protocol
-      - "15672:15672" # Management UI
+      - "5672:5672"
+      - "15672:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     networks:
       - desertbrew_network
     healthcheck:
-      test: [ "CMD", "rabbitmq-diagnostics", "ping" ]
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  # MongoDB - Para Sales Service (órdenes complejas)
-  mongodb:
-    image: mongo:7
-    container_name: desertbrew_mongodb
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: desertbrew
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-desertbrew123}
-      MONGO_INITDB_DATABASE: sales_db
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-      - ./infra/mongodb/init.js:/docker-entrypoint-initdb.d/init.js
+  rabbitmq_setup:
+    image: rabbitmq:3-management-alpine
+    container_name: desertbrew_rabbitmq_setup
+    restart: "no"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    entrypoint: >
+      sh -c "
+        sleep 5 &&
+        rabbitmqadmin -H rabbitmq -u desertbrew -p ${RABBITMQ_PASSWORD:-desertbrew123} declare exchange name=production type=topic durable=true &&
+        rabbitmqadmin -H rabbitmq -u desertbrew -p ${RABBITMQ_PASSWORD:-desertbrew123} declare queue name=production_events durable=true &&
+        rabbitmqadmin -H rabbitmq -u desertbrew -p ${RABBITMQ_PASSWORD:-desertbrew123} declare binding source=production destination=production_events routing_key=production.#"
     networks:
       - desertbrew_network
-    healthcheck:
-      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
-  # Redis - Cache y sesiones
   redis:
     image: redis:7-alpine
     container_name: desertbrew_redis
@@ -96,34 +85,184 @@ services:
     networks:
       - desertbrew_network
     healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
+      test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
-  # Inventory Service (comentado hasta que esté listo)
-  # inventory_service:
-  #   build:
-  #     context: ./services/inventory_service
-  #     dockerfile: Dockerfile
-  #   container_name: desertbrew_inventory
-  #   environment:
-  #     DATABASE_URL: postgresql://desertbrew:${DB_PASSWORD:-desertbrew123}@postgres:5432/inventory_db
-  #     RABBITMQ_URL: amqp://desertbrew:${RABBITMQ_PASSWORD:-desertbrew123}@rabbitmq:5672/
-  #     REDIS_URL: redis://:${REDIS_PASSWORD:-desertbrew123}@redis:6379/0
-  #     ENVIRONMENT: development
-  #     LOG_LEVEL: INFO
-  #   ports:
-  #     - "8001:8000"
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-  #     rabbitmq:
-  #       condition: service_healthy
-  #   networks:
-  #     - desertbrew_network
-  #   volumes:
-  #     - ./services/inventory_service:/app
-  #   command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  inventory_service:
+    build:
+      context: ./services/inventory_service
+      dockerfile: Dockerfile
+    container_name: desertbrew_inventory
+    env_file:
+      - ./services/inventory_service/.env
+    environment:
+      DB_HOST: postgres
+      RABBITMQ_URL: amqp://desertbrew:${RABBITMQ_PASSWORD:-desertbrew123}@rabbitmq:5672/
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"]
+    ports:
+      - "8001:8001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - desertbrew_network
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8001/health')\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  sales_service:
+    build:
+      context: ./services/sales_service
+      dockerfile: Dockerfile
+    container_name: desertbrew_sales
+    env_file:
+      - ./services/sales_service/.env
+    environment:
+      DB_HOST: postgres
+      INVENTORY_SERVICE_URL: http://inventory_service:8001
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8002"]
+    ports:
+      - "8002:8002"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      inventory_service:
+        condition: service_healthy
+    networks:
+      - desertbrew_network
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8002/health')\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  security_service:
+    build:
+      context: ./services/security_service
+      dockerfile: Dockerfile
+    container_name: desertbrew_security
+    env_file:
+      - ./services/security_service/.env
+    environment:
+      DB_HOST: postgres
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8003"]
+    ports:
+      - "8003:8003"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - desertbrew_network
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8003/health')\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  production_service:
+    build:
+      context: ./services/production_service
+      dockerfile: Dockerfile
+    container_name: desertbrew_production
+    env_file:
+      - ./services/production_service/.env
+    environment:
+      DB_HOST: timescaledb
+      INVENTORY_SERVICE_URL: http://inventory_service:8001
+      FINANCE_SERVICE_URL: http://finance_service:8005
+      RABBITMQ_URL: amqp://desertbrew:${RABBITMQ_PASSWORD:-desertbrew123}@rabbitmq:5672/
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8004"]
+    ports:
+      - "8004:8004"
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+      inventory_service:
+        condition: service_healthy
+      finance_service:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - desertbrew_network
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8004/health')\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  finance_service:
+    build:
+      context: ./services/finance_service
+      dockerfile: Dockerfile
+    container_name: desertbrew_finance
+    env_file:
+      - ./services/finance_service/.env
+    environment:
+      DB_HOST: postgres
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8005"]
+    ports:
+      - "8005:8005"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - desertbrew_network
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8005/health')\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  finance_event_consumer:
+    build:
+      context: ./services/finance_service
+      dockerfile: Dockerfile
+    container_name: desertbrew_finance_event_consumer
+    env_file:
+      - ./services/finance_service/.env
+    environment:
+      DB_HOST: postgres
+      RABBITMQ_URL: amqp://desertbrew:${RABBITMQ_PASSWORD:-desertbrew123}@rabbitmq:5672/
+      PRODUCTION_EVENTS_QUEUE: production_events
+      PRODUCTION_EXCHANGE: production
+    command: ["python", "-m", "consumers.production_event_consumer"]
+    depends_on:
+      finance_service:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - desertbrew_network
+
+  payroll_service:
+    build:
+      context: ./services/payroll_service
+      dockerfile: Dockerfile
+    container_name: desertbrew_payroll
+    env_file:
+      - ./services/payroll_service/.env
+    environment:
+      DB_HOST: postgres
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8006"]
+    ports:
+      - "8006:8006"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - desertbrew_network
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8006/health')\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:
@@ -131,8 +270,6 @@ volumes:
   timescale_data:
     driver: local
   rabbitmq_data:
-    driver: local
-  mongo_data:
     driver: local
   redis_data:
     driver: local

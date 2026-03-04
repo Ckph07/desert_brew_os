@@ -13,6 +13,7 @@ from models.keg_enums import KegState, KegSize, KegType, KegOwnership
 from models.finished_product import FinishedProductInventory
 from models.cold_room_reading import ColdRoomReading
 from models.product_movement import ProductMovement
+from models.ingredient_catalog import IngredientCatalogItem
 from models.finished_product_enums import (
     ProductType,
     ProductCategory,
@@ -38,6 +39,7 @@ __all__ = [
     "FinishedProductInventory",
     "ColdRoomReading",
     "ProductMovement",
+    "IngredientCatalogItem",
     "ProductType",
     "ProductCategory",
     "AvailabilityStatus",

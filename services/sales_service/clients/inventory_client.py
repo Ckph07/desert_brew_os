@@ -33,29 +33,21 @@ class InventoryServiceClient:
         quantity: float,
         note_number: str,
         reason: Optional[str] = None,
+        user_id: Optional[int] = None,
     ) -> Dict:
         """
-        Deduct quantity from a FinishedProductInventory record.
-
-        Args:
-            product_id: Inventory Service finished_product.id
-            quantity: Amount to deduct
-            note_number: Sales note number for audit trail
-            reason: Optional reason string
-
-        Returns:
-            Updated product record from Inventory Service
-
-        Raises:
-            httpx.HTTPStatusError: If insufficient stock or product not found
+        Deduct quantity using dedicated endpoint with movement audit.
         """
+        payload = {
+            "quantity": quantity,
+            "movement_reason": reason or f"Sales Note #{note_number}",
+            "reference_number": note_number,
+            "user_id": user_id,
+        }
         async with httpx.AsyncClient(timeout=self.timeout) as client:
-            response = await client.patch(
-                f"{self.base_url}/api/v1/inventory/finished-products/{product_id}",
-                json={
-                    "quantity_delta": -quantity,
-                    "movement_reason": reason or f"Sales Note #{note_number}",
-                },
+            response = await client.post(
+                f"{self.base_url}/api/v1/inventory/finished-products/{product_id}/deduct",
+                json=payload,
             )
             response.raise_for_status()
             return response.json()
@@ -80,6 +72,7 @@ class InventoryServiceClient:
         self,
         items: list,
         note_number: str,
+        user_id: Optional[int] = None,
     ) -> List[Dict]:
         """
         Deduct inventory for all items in a sales note.
@@ -105,6 +98,7 @@ class InventoryServiceClient:
                     quantity=float(item.quantity),
                     note_number=note_number,
                     reason=f"Venta: {item.product_name} × {item.quantity}",
+                    user_id=user_id,
                 )
                 results.append({
                     "item_id": item.id,

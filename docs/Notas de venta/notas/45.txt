@@ -1,0 +1,34 @@
+cerveceria
+*DESERT BREW CO*
+- Saltillo, Conhuila dete
+PEDIDO:
+FECHA:
+00000202
+10/05/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: DINOQUESADILLAS
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+24 u
+Descripción
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+12 u
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+Saldo pendiente de notas 181 y 187 $5,400.
+$
+P.U.
+40.00
+Precio
+$ 960.00
+$
+40.00
+$ 480.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+$ 1,440.00
+$ 1,440.00

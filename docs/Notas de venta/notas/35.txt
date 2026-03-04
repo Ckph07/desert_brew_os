@@ -1,0 +1,35 @@
+cervecería
+* DESERT BREW CO*
+Satilo, Coahuila c
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: BEER GARDEN
+Cantidad
+18 u
+24 u
+24 u
+Descripción
+Litro Coahuilaceratops (Imperial Indian Pale Ale)
+Botella 355 cm3 T-Rex (American Stout)
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+PEDIDO:
+FECHA:
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+$
+P.U.
+95.00
+40.00
+40.00
+Subtotal
+TOTAL
+00000192
+07/05/25
+Precio
+$ 1,710.00
+$ 960.00
+$ 960.00
+$ 3,630.00
+$ 3,630.00

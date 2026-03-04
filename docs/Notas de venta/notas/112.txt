@@ -1,0 +1,35 @@
+cervecería
+*DESERT BREW CO*
+- Saltillo, Coahuila ate
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: ESTACIÓN COYOACÁN
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+50
+Descripción
+Litro Experimental (Kolsh)
+30
+Litros de descuento
+PEDIDO:
+FECHA:
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+P.U.
+95.00
+95.00
+Subtotal
+I.E.P.S
+IV.A
+TOTAL
+00000271
+09/11/25
+Precio
+$ 4,750.00
+$
+-
+$
+-$ 2,850.00
+$ 1,900.00
+$ 1,900.00

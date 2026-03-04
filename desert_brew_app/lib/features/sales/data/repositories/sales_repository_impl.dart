@@ -111,6 +111,8 @@ class SalesRepositoryImpl implements SalesRepository {
     String channel = 'B2B',
     String paymentMethod = 'TRANSFERENCIA',
     bool includeTaxes = false,
+    bool? includeIeps,
+    bool? includeIva,
     String? notes,
     String? createdBy,
   }) => _remote.createSalesNote({
@@ -120,6 +122,8 @@ class SalesRepositoryImpl implements SalesRepository {
     'channel': channel,
     'payment_method': paymentMethod,
     'include_taxes': includeTaxes,
+    if (includeIeps != null) 'include_ieps': includeIeps,
+    if (includeIva != null) 'include_iva': includeIva,
     if (notes != null) 'notes': notes,
     if (createdBy != null) 'created_by': createdBy,
   });

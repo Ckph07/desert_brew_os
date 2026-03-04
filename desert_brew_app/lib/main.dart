@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
 import 'app_router.dart';
+import 'features/production/domain/entities/style_guidelines.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await BeerStyleGuidelines.initialize();
   runApp(const DesertBrewApp());
 }
 

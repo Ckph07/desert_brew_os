@@ -1,0 +1,33 @@
+cervecería
+*DESERT BREW CO*
+- Saltillo, Coahuila ate-
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: DESERT BREW TAP
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+18
+Descripción
+Litro Velafrons (Mexican Pale Lager)
+18
+Litro Stoutillo (Imperial Stout - Carajillo)
+PEDIDO:
+FECHA:
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+P.U.
+80.00
+85.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+00000240
+15/08/25
+Precio
+$ 1,440.00
+$ 1,530.00
+$ 2,970.00
+$ 2,970.00

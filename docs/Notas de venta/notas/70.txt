@@ -1,0 +1,33 @@
+cervecería
+*DESERT BREW CO*
+- Saltillo, Coahuila de
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Estación Coyoacán
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+18 u
+Descripción
+Litro Coahuilaceratops (Imperial Indian Pale Ale)
+18 u
+Litro T-Rex (American Stout)
+PEDIDO:
+FECHA:
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+P.U.
+95.00
+95.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+00000227
+25/07/25
+Precio
+$ 1,710.00
+$ 1,710.00
+$ 3,420.00
+$ 3,420.00

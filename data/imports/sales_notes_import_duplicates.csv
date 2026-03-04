@@ -1,0 +1,5 @@
+note_number,type,kept_source,kept_ref,discarded_source,discarded_ref,conflict_note_number,primary_source,primary_ref,conflict_source,conflict_ref,reason
+00000033,identical_collapsed,gestion_pdf,docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000033.pdf,gestion_pdf,docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000033.pdf,,,,,,
+00000158,conflict_kept,gestion_pdf,docs/Notas de venta/notas_gestion_Cervecera/Pedido_000000158.pdf,,,00000158-DUP1,gestion_pdf,docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000158.pdf,gestion_pdf,docs/Notas de venta/notas_gestion_Cervecera/Pedido_000000158.pdf,same_note_number_different_payload
+00000158,conflict_kept,ocr_txt,docs/Notas de venta/notas/0.txt,,,00000158-DUP2,gestion_pdf,docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000158.pdf,ocr_txt,docs/Notas de venta/notas/0.txt,same_note_number_different_payload
+00000163,conflict_kept,ocr_txt,docs/Notas de venta/notas/6.txt,,,00000163-DUP1,ocr_txt,docs/Notas de venta/notas/4.txt,ocr_txt,docs/Notas de venta/notas/6.txt,same_note_number_different_payload

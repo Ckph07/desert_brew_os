@@ -1,0 +1,32 @@
+cervecería
+*DESERT BREW CO®
+= Saltillo, Coahuila de
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: SEDENA
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+60
+Descripción
+Litro de cerveza artesan al
+PEDIDO:
+FECHA:
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+P.U.
+85.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+00000270
+09/11/25
+Precio
+$ 5,100.00
+$
+$
+$ 5,100.00
+$ 1,351.50
+$ 1,032.24
+$ 7,483.74

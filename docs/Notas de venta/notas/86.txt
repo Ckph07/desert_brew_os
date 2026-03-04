@@ -1,0 +1,37 @@
+cervecería
+*DESERT BREW CO*
+= Satillo, Coahuila c
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: DB TAP
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+18
+18
+Descripción
+Litro Coahuilaceratops (Imperial Indian Pale Ale)
+Litro T-Rex (American Stout)
+Litro Stoutillo (Imperial Stout - Carajillo)
+PEDIDO:
+FECHA:
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+$
+P.U.
+80.00
+80.00
+85.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+00000244
+24/08/25
+Precio
+$ 1,440.00
+$ 1,410.00
+$ 1,530.00
+$ 4,410.00
+$ 4,410.00

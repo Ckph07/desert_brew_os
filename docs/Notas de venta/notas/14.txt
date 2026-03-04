@@ -1,0 +1,54 @@
+cerveceria
+*DESERT BREW CO*
+- Saltillo, Coahuila de
+PEDIDO:
+FECHA:
+00000171-COT
+07/04/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Cervecería Obni
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+Cantidad
+20 L
+6 u
+6 u
+4 u
+4 u
+4 u
+Descripción
+Litro Desertycal (Mexican Pale Lager C/sotol)
+Botella 355 cm3 Carnotaurus (Amber Lager)
+Botella 355 cm3 T-Rex (American Stout)
+Botella 355 cm3 Raptor (Mezcal Indian Pale Ale)
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+$
+$
+$
+$
+$
+$
+P.U.
+70.00
+40.00
+40.00
+40.00
+40.00
+40.00
+Precio
+$ 1,400.00
+$ 240.00
+$ 240.00
+$ 160.00
+$ 160.00
+$ 160.00
+Subtotal
+$ 2,360.00
+I.E.P.S (26.5%) $
+625.40
+I.V.A (16%)
+$ 477.66
+TOTAL
+$ 3,463.06

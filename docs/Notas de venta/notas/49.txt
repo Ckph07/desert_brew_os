@@ -1,0 +1,41 @@
+cerveceria
+*DESERT BREW CO*
+Saltillo, Coahuila ete-
+PEDIDO:
+FECHA:
+00000206
+23/05/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: JURASSIC FOOD&ADVENTURE
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+24 u
+Descripción
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+24 u
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+24 u
+Botella 355 cm3 T-Rex (American Stout)
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+P.U.
+36.00
+36.00
+36.00
+Precio
+$ 864.00
+$ 864.00
+$ 864.00
+DESCUENTO DE 95 ENVASES
+Subtotal
+I.E.P.S
+I.V.A
+Descuento
+TOTAL
+$ 2,592.00
+$ 414.72
+-$ 285.00
+$ 2,721.72

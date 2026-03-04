@@ -1,0 +1,34 @@
+cervecería
+*DESERT BREW CO*
+= Satilo, Coahuila ce
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: DB TAP
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+18
+18
+Descripción
+Litro Tequilamber (Tequila + Amber Lager)
+Litro T-Rex (American Stout)
+36 L
+PEDIDO:
+FECHA:
+00000247
+03/09/25
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+P.U.
+85.00
+80.00
+Precio
+$ 1,530.00
+$ 1,440.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+$ 2,970.00
+$ 2,970.00

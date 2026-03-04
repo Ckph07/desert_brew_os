@@ -1,0 +1,34 @@
+cervecería
+*DESERT BREW CO®
+- Saltillo, Coahuila de
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: TIYAHUI
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+24
+Descripción
+Botella 355 cm3 TIYAHUI (American Stout)
+24
+Botellas 355 cm3 Mixto
+PEDIDO:
+FECHA:
+00000235
+03/08/25
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+P.U.
+35.00
+38.00
+Precio
+$ 840.00
+$ 912.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+$ 1,752.00
+$ 280.32
+$ 2,032.32

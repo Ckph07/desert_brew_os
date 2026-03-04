@@ -1,0 +1,28 @@
+cervecería
+*DESERT BREW CO*
+- Saltillo, Coahuila de
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Estación Coyoacan
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+18
+Descripción
+Litro Carnotaurus (Amber Lager)
+PEDIDO:
+FECHA:
+00000234
+03/08/25
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+P.U.
+95.00
+Precio
+$ 1,710.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+$ 1,710.00
+$ 1,710.00

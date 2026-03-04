@@ -44,6 +44,8 @@ class SalesNote extends Equatable {
     required this.issuerName,
     required this.issuerRfc,
     required this.includeTaxes,
+    required this.includeIeps,
+    required this.includeIva,
     required this.subtotal,
     required this.iepsTotal,
     required this.ivaTotal,
@@ -68,6 +70,8 @@ class SalesNote extends Equatable {
   final String issuerName;
   final String issuerRfc;
   final bool includeTaxes;
+  final bool includeIeps;
+  final bool includeIva;
   final double subtotal;
   final double iepsTotal;
   final double ivaTotal;

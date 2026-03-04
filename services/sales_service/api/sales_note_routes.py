@@ -4,10 +4,9 @@ FastAPI routes for Sales Notes CRUD with PDF/PNG export.
 from fastapi import APIRouter, Depends, HTTPException, Query, Response
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
-from sqlalchemy import func, case, and_
+from sqlalchemy import func, case
 from typing import Optional
 from datetime import datetime, date
-from decimal import Decimal
 import io
 
 from database import get_db
@@ -19,7 +18,6 @@ from schemas.sales_note import (
     SalesNoteUpdate,
     SalesNotePaymentUpdate,
     SalesNoteResponse,
-    SalesNoteItemResponse,
 )
 
 router = APIRouter(prefix="/api/v1/sales/notes", tags=["Sales Notes"])
@@ -43,12 +41,77 @@ def _build_note_response(note: SalesNote, items: list[SalesNoteItem]) -> dict:
     }
 
 
+def _resolve_tax_toggles(
+    *,
+    include_taxes: bool,
+    include_ieps: Optional[bool],
+    include_iva: Optional[bool],
+) -> tuple[bool, bool, bool]:
+    """Resolve legacy + new tax toggle payload fields."""
+    ieps_enabled = include_ieps if include_ieps is not None else include_taxes
+    iva_enabled = include_iva if include_iva is not None else include_taxes
+    taxes_enabled = bool(ieps_enabled or iva_enabled)
+    return taxes_enabled, bool(ieps_enabled), bool(iva_enabled)
+
+
+def _is_beer_item(item_data, product: Optional[ProductCatalog]) -> bool:
+    """Determine if IEPS can apply to this line item."""
+    if product and product.category:
+        return product.category.upper().startswith("BEER")
+
+    sku = (item_data.sku or "").upper()
+    if sku.startswith("BEER"):
+        return True
+
+    name = (item_data.product_name or "").upper()
+    beer_keywords = (
+        "CERVEZA",
+        "IPA",
+        "LAGER",
+        "STOUT",
+        "ALE",
+        "PORTER",
+        "PILS",
+        "HEFE",
+        "TRIGO",
+    )
+    return any(keyword in name for keyword in beer_keywords)
+
+
+def _resolve_item_tax_rates(
+    *,
+    item_data,
+    product: Optional[ProductCatalog],
+    include_ieps: bool,
+    include_iva: bool,
+) -> tuple[float, float]:
+    """Resolve final tax rates for an item according to business rules."""
+    is_beer = _is_beer_item(item_data, product)
+
+    raw_ieps = item_data.ieps_rate
+    if raw_ieps is None and product and product.ieps_rate is not None:
+        raw_ieps = float(product.ieps_rate)
+    ieps_rate = float(raw_ieps or 0)
+    if not include_ieps or not is_beer:
+        ieps_rate = 0.0
+
+    raw_iva = item_data.iva_rate
+    if raw_iva is None and product and product.iva_rate is not None:
+        raw_iva = float(product.iva_rate)
+    iva_rate = float(raw_iva if raw_iva is not None else 0.16)
+    if not include_iva:
+        iva_rate = 0.0
+
+    return ieps_rate, iva_rate
+
+
 @router.post("", response_model=SalesNoteResponse, status_code=201)
 def create_sales_note(payload: SalesNoteCreate, db: Session = Depends(get_db)):
     """
     Create a new sales note with items.
 
-    Totals are auto-calculated. Tax inclusion controlled by include_taxes flag.
+    Totals are auto-calculated.
+    Tax toggles can be controlled independently (`include_ieps`, `include_iva`).
     """
     # Resolve client name if client_id provided
     client_name = payload.client_name
@@ -57,13 +120,27 @@ def create_sales_note(payload: SalesNoteCreate, db: Session = Depends(get_db)):
         if client:
             client_name = client_name or client.business_name
 
+    include_taxes, include_ieps, include_iva = _resolve_tax_toggles(
+        include_taxes=payload.include_taxes,
+        include_ieps=payload.include_ieps,
+        include_iva=payload.include_iva,
+    )
+
+    product_ids = [item.product_id for item in payload.items if item.product_id]
+    products_by_id: dict[int, ProductCatalog] = {}
+    if product_ids:
+        products = db.query(ProductCatalog).filter(ProductCatalog.id.in_(product_ids)).all()
+        products_by_id = {int(product.id): product for product in products}
+
     note = SalesNote(
         note_number=_generate_note_number(db),
         client_id=payload.client_id,
         client_name=client_name,
         channel=payload.channel,
         payment_method=payload.payment_method,
-        include_taxes=payload.include_taxes,
+        include_taxes=include_taxes,
+        include_ieps=include_ieps,
+        include_iva=include_iva,
         notes=payload.notes,
         created_by=payload.created_by,
     )
@@ -73,6 +150,13 @@ def create_sales_note(payload: SalesNoteCreate, db: Session = Depends(get_db)):
     # Create items
     items = []
     for item_data in payload.items:
+        product = products_by_id.get(item_data.product_id) if item_data.product_id else None
+        ieps_rate, iva_rate = _resolve_item_tax_rates(
+            item_data=item_data,
+            product=product,
+            include_ieps=include_ieps,
+            include_iva=include_iva,
+        )
         item = SalesNoteItem(
             sales_note_id=note.id,
             product_id=item_data.product_id,
@@ -86,9 +170,10 @@ def create_sales_note(payload: SalesNoteCreate, db: Session = Depends(get_db)):
             line_total=0,
         )
         item.calculate_totals(
-            include_taxes=payload.include_taxes,
-            ieps_rate=item_data.ieps_rate,
-            iva_rate=item_data.iva_rate,
+            include_ieps=include_ieps,
+            include_iva=include_iva,
+            ieps_rate=ieps_rate,
+            iva_rate=iva_rate,
         )
         db.add(item)
         items.append(item)
@@ -157,8 +242,25 @@ def update_sales_note(note_id: int, payload: SalesNoteUpdate, db: Session = Depe
 
     update_data = payload.model_dump(exclude_unset=True)
 
-    # If include_taxes changed, recalculate totals
-    taxes_changed = "include_taxes" in update_data and update_data["include_taxes"] != note.include_taxes
+    current_ieps = bool(getattr(note, "include_ieps", note.include_taxes))
+    current_iva = bool(getattr(note, "include_iva", note.include_taxes))
+
+    if "include_taxes" in update_data:
+        if "include_ieps" not in update_data:
+            update_data["include_ieps"] = bool(update_data["include_taxes"])
+        if "include_iva" not in update_data:
+            update_data["include_iva"] = bool(update_data["include_taxes"])
+
+    if "include_ieps" in update_data or "include_iva" in update_data:
+        ieps_enabled = bool(update_data.get("include_ieps", current_ieps))
+        iva_enabled = bool(update_data.get("include_iva", current_iva))
+        update_data["include_taxes"] = bool(ieps_enabled or iva_enabled)
+
+    taxes_changed = (
+        ("include_taxes" in update_data and update_data["include_taxes"] != note.include_taxes)
+        or ("include_ieps" in update_data and update_data["include_ieps"] != current_ieps)
+        or ("include_iva" in update_data and update_data["include_iva"] != current_iva)
+    )
 
     for key, value in update_data.items():
         setattr(note, key, value)

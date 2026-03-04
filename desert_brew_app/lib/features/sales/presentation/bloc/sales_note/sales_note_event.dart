@@ -17,6 +17,8 @@ class SalesNoteCreateSubmitted extends SalesNoteEvent {
     this.channel = 'B2B',
     this.paymentMethod = 'TRANSFERENCIA',
     this.includeTaxes = false,
+    this.includeIeps,
+    this.includeIva,
     this.notes,
     this.createdBy,
   });
@@ -26,6 +28,8 @@ class SalesNoteCreateSubmitted extends SalesNoteEvent {
   final String channel;
   final String paymentMethod;
   final bool includeTaxes;
+  final bool? includeIeps;
+  final bool? includeIva;
   final String? notes;
   final String? createdBy;
 }

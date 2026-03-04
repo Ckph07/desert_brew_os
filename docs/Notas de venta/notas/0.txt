@@ -1,0 +1,32 @@
+cerveceria
+* DESERT BREW CO=
+Saltillo, Coahulla de
+PEDIDO:
+FECHA:
+00000158
+06/03/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+CLIENTE: Asador 9
+Boulevard Venustiano Carranza, Carr. Monterrey Saltillo 5015, 25210 Saltillo, Coah.
+Cantidad
+6 u
+Descripción
+Botella 355 cm3 Coahuilaceratops
+(Imperial Indian Pale Ale) P.Unit. $42.00
+Precio
+$252.00
+6 u
+6 u
+Botella 355 cm3 Velafrons (Mexican
+Pale Lager) P.Unit. $40.00
+Botella 355 cm3 Carnotaurus (Amber
+Lager) P.Unit. $40.00
+$240.00
+$240.00
+SUBTOTAL
+TOTAL
+$732.00
+$732.00

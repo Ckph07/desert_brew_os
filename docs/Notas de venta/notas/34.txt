@@ -1,0 +1,25 @@
+cervecería
+* DESERT BREW CO*
+Satilo, Coahuila c
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: DESERT BREW TAP
+Cantidad
+18 l
+Descripción
+Litro T-Rex (American Stout)
+PEDIDO:
+FECHA:
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+P.U.
+80.00
+Subtotal
+TOTAL
+00000191
+07/05/25
+Precio
+$ 1,440.00
+$ 1,440.00
+$ 1,440.00

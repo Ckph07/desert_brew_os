@@ -1,0 +1,30 @@
+cerveceria
+* DESERT BREW CO*
+PEDIDO:
+FECHA:
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: EL BORRADO SUC. CATEDRAL
+FORMA DE PAGO: TBD
+Cantidad
+15 u
+Descripción
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+15 u
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+P.U.
+40.00
+38.00
+Subtotal
+I.V.A
+TOTAL
+00000195
+09/05/25
+Precio
+$ 600.00
+$ 570.00
+$ 1,170.00
+$ 1,170.00

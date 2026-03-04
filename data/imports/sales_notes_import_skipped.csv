@@ -1,0 +1,10 @@
+severity,source,source_ref,note_number,reason,details
+skip,ocr_txt,docs/Notas de venta/notas/13.txt,,missing_note_number,Could not parse note number from document.
+skip,ocr_txt,docs/Notas de venta/notas/88.txt,,missing_note_number,Could not parse note number from document.
+skip,ocr_txt,docs/Notas de venta/notas/102.txt,00000261,missing_date,Could not parse date from document.
+skip,ocr_txt,docs/Notas de venta/notas/103.txt,00000262,missing_date,Could not parse date from document.
+skip,ocr_pdf_page,docs/Notas de venta/Notas de venta__OCR.pdf#page=4,,missing_note_number,Could not parse note number from document.
+skip,ocr_pdf_page,docs/Notas de venta/Notas de venta__OCR.pdf#page=19,00000175,missing_date,Could not parse date from document.
+skip,ocr_pdf_page,docs/Notas de venta/Notas de venta__OCR.pdf#page=92,,missing_note_number,Could not parse note number from document.
+skip,ocr_pdf_page,docs/Notas de venta/Notas de venta__OCR.pdf#page=106,00000261,missing_date,Could not parse date from document.
+skip,ocr_pdf_page,docs/Notas de venta/Notas de venta__OCR.pdf#page=107,00000262,missing_date,Could not parse date from document.

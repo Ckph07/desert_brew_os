@@ -1,0 +1,38 @@
+cerveceria
+*DESERT BREW CO*
+- Saltillo, Conhuila dete
+PEDIDO:
+FECHA:
+00000205
+16/05/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: CASA TIYAHUI
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+8 u
+Descripción
+Botella 355 cm3 T-Rex (American Stout)
+8 u
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+8 u
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+P.U.
+38.00
+38.00
+38.00
+Precio
+$ 304.00
+$ 304.00
+$ 304.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+$ 912.00
+$ 145.92
+$ 1,057.92

@@ -50,18 +50,26 @@ def _run_schema_compat_migrations() -> None:
     """
     Apply lightweight compatibility migrations for existing local databases.
 
-    Current fix: add sales_notes.paid_at when missing.
+    Current fixes:
+    - add sales_notes.paid_at when missing.
+    - add sales_notes.include_ieps / include_iva when missing.
     """
     inspector = inspect(engine)
     if "sales_notes" not in inspector.get_table_names():
         return
 
     columns = {col["name"] for col in inspector.get_columns("sales_notes")}
-    if "paid_at" in columns:
-        return
-
     with engine.begin() as conn:
-        conn.execute(text("ALTER TABLE sales_notes ADD COLUMN paid_at TIMESTAMP NULL"))
+        if "paid_at" not in columns:
+            conn.execute(text("ALTER TABLE sales_notes ADD COLUMN paid_at TIMESTAMP NULL"))
+
+        if "include_ieps" not in columns:
+            conn.execute(text("ALTER TABLE sales_notes ADD COLUMN include_ieps BOOLEAN NOT NULL DEFAULT FALSE"))
+            conn.execute(text("UPDATE sales_notes SET include_ieps = include_taxes WHERE include_taxes = TRUE"))
+
+        if "include_iva" not in columns:
+            conn.execute(text("ALTER TABLE sales_notes ADD COLUMN include_iva BOOLEAN NOT NULL DEFAULT FALSE"))
+            conn.execute(text("UPDATE sales_notes SET include_iva = include_taxes WHERE include_taxes = TRUE"))
 
 
 @app.on_event("startup")

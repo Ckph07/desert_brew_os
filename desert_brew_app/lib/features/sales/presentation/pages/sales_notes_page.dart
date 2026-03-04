@@ -47,6 +47,11 @@ class _SalesNotesView extends StatelessWidget {
         title: const Text('Notas de Venta'),
         actions: [
           IconButton(
+            tooltip: 'Litros por estilo',
+            icon: const Icon(Icons.bar_chart_rounded),
+            onPressed: () => context.push('/sales/analytics'),
+          ),
+          IconButton(
             tooltip: 'Ver catálogo',
             icon: const Icon(Icons.inventory_2_rounded),
             onPressed: () => context.push('/sales/products'),
@@ -439,7 +444,8 @@ class _SalesNoteTile extends StatelessWidget {
   Future<void> _showEditDraftDialog(BuildContext context) async {
     final clientNameCtrl = TextEditingController(text: note.clientName ?? '');
     final notesCtrl = TextEditingController(text: note.notes ?? '');
-    var includeTaxes = note.includeTaxes;
+    var includeIeps = note.includeIeps;
+    var includeIva = note.includeIva;
     var paymentMethod =
         _paymentMethods.contains(note.paymentMethod)
             ? note.paymentMethod
@@ -486,11 +492,20 @@ class _SalesNoteTile extends StatelessWidget {
                           const SizedBox(height: 10),
                           SwitchListTile(
                             contentPadding: EdgeInsets.zero,
-                            title: const Text('Incluir impuestos'),
+                            title: const Text('Incluir IVA'),
                             dense: true,
-                            value: includeTaxes,
+                            value: includeIva,
                             onChanged: (v) {
-                              setStateDialog(() => includeTaxes = v);
+                              setStateDialog(() => includeIva = v);
+                            },
+                          ),
+                          SwitchListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: const Text('Incluir IEPS (solo cerveza)'),
+                            dense: true,
+                            value: includeIeps,
+                            onChanged: (v) {
+                              setStateDialog(() => includeIeps = v);
                             },
                           ),
                           const SizedBox(height: 8),
@@ -528,7 +543,9 @@ class _SalesNoteTile extends StatelessWidget {
                     ? null
                     : clientNameCtrl.text.trim(),
             'payment_method': paymentMethod,
-            'include_taxes': includeTaxes,
+            'include_taxes': includeIeps || includeIva,
+            'include_ieps': includeIeps,
+            'include_iva': includeIva,
             'notes':
                 notesCtrl.text.trim().isEmpty ? null : notesCtrl.text.trim(),
           },

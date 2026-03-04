@@ -2,7 +2,7 @@
 Sales Note Models - Invoice/Note management.
 
 Purpose: Track sales notes (notas de venta) with line items.
-Tax calculation (IEPS/IVA) is togglable since not all sales are invoiced.
+Tax calculation can be toggled independently for IEPS and IVA.
 """
 from sqlalchemy import Column, Integer, String, Numeric, Boolean, DateTime, ForeignKey, Index
 from database import Base
@@ -16,7 +16,8 @@ class SalesNote(Base):
 
     Business Rules:
     - note_number is auto-generated: 8-digit zero-padded (00000001)
-    - include_taxes: When False, IEPS/IVA fields remain at 0 (not invoiced)
+    - include_ieps / include_iva: Independent tax toggles
+    - include_taxes: Legacy compatibility flag (true when either tax applies)
     - Only DRAFT notes can be modified
     - CONFIRMED notes are immutable
     - Totals are recalculated from items
@@ -39,10 +40,10 @@ class SalesNote(Base):
     issuer_address = Column(String(300), nullable=False, default="SERPENTIS 178")
     issuer_phone = Column(String(50), nullable=False, default="8443823737")
 
-    # === TAX TOGGLE ===
+    # === TAX TOGGLES ===
     include_taxes = Column(Boolean, nullable=False, default=False)
-    # When False: IEPS and IVA shown as empty/0 in PDF (not invoiced)
-    # When True: IEPS and IVA calculated and shown
+    include_ieps = Column(Boolean, nullable=False, default=False)
+    include_iva = Column(Boolean, nullable=False, default=False)
 
     # Totals (auto-calculated from items)
     subtotal = Column(Numeric(12, 2), nullable=False, default=0)
@@ -82,8 +83,6 @@ class SalesNote(Base):
     def recalculate_totals(self, items: list) -> None:
         """
         Recalculate note totals from items.
-
-        Only calculates taxes if include_taxes is True.
         """
         subtotal = Decimal('0.00')
         ieps = Decimal('0.00')
@@ -92,15 +91,15 @@ class SalesNote(Base):
 
         for item in items:
             subtotal += Decimal(str(item.subtotal))
-            if self.include_taxes:
-                ieps += Decimal(str(item.ieps_amount or 0))
-                iva += Decimal(str(item.iva_amount or 0))
+            ieps += Decimal(str(item.ieps_amount or 0))
+            iva += Decimal(str(item.iva_amount or 0))
             if item.unit_measure and item.unit_measure.upper() in ("LITROS", "L"):
                 liters += Decimal(str(item.quantity))
 
+        self.include_taxes = bool(self.include_ieps or self.include_iva)
         self.subtotal = subtotal
-        self.ieps_total = ieps if self.include_taxes else Decimal('0.00')
-        self.iva_total = iva if self.include_taxes else Decimal('0.00')
+        self.ieps_total = ieps if self.include_ieps else Decimal('0.00')
+        self.iva_total = iva if self.include_iva else Decimal('0.00')
         self.total = subtotal + self.ieps_total + self.iva_total
         self.total_liters = liters
         self.updated_at = datetime.utcnow()
@@ -137,7 +136,13 @@ class SalesNoteItem(Base):
     def __repr__(self):
         return f"<SalesNoteItem(qty={self.quantity} {self.unit_measure} '{self.product_name}' ${self.line_total})>"
 
-    def calculate_totals(self, include_taxes: bool = False, ieps_rate: float = 0, iva_rate: float = 0.16) -> None:
+    def calculate_totals(
+        self,
+        include_ieps: bool = False,
+        include_iva: bool = False,
+        ieps_rate: float = 0,
+        iva_rate: float = 0.16,
+    ) -> None:
         """Calculate line item totals."""
         qty = Decimal(str(self.quantity))
         price = Decimal(str(self.unit_price))
@@ -145,11 +150,14 @@ class SalesNoteItem(Base):
 
         self.subtotal = round(qty * price * (1 - discount), 2)
 
-        if include_taxes:
+        if include_ieps:
             self.ieps_amount = round(self.subtotal * Decimal(str(ieps_rate)), 2)
-            self.iva_amount = round(self.subtotal * Decimal(str(iva_rate)), 2)
         else:
             self.ieps_amount = Decimal('0.00')
+
+        if include_iva:
+            self.iva_amount = round(self.subtotal * Decimal(str(iva_rate)), 2)
+        else:
             self.iva_amount = Decimal('0.00')
 
         self.line_total = self.subtotal + self.ieps_amount + self.iva_amount

@@ -1,0 +1,54 @@
+cerveceria
+*DESERT BREW CO*
+= Saltillo, Conhuila de
+PEDIDO:
+FECHA:
+00000175
+07/04/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: SEDENA - DEPORTIVO HUIZACHAL
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+Cantidad
+19 L
+36 u
+36 u
+24 u
+24 u
+24 u
+Descripción
+Litro Velafrons (Mexican Pale Lager)
+Botella 355 cm3 Carnotaurus (Amber Lager)
+Botella 355 cm3 T-Rex (American Stout)
+Botella 355 cm3 Raptor (Mezcal Indian Pale Ale)
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+$
+$
+$
+$
+$
+$
+P.U.
+90.00
+35.00
+35.00
+35.00
+35.00
+35.00
+Precio
+$1,710.00
+$1,260.00
+$ 1,260.00
+$ 840.00
+$ 840.00
+$ 840.00
+Subtotal
+$6,750.00
+I.E.P.S (26.5%)
+$1,788.75
+I.V.A (16%)
+$1,366.20
+TOTAL
+$ 9,904.95

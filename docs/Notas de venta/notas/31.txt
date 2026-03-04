@@ -1,0 +1,38 @@
+cerveceria
+* DESERT BREW CO*
+PEDIDO:
+FECHA:
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: WALK&TALK
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+Cantidad
+28 u
+28 u
+28 u
+28 u
+Descripción
+Botella 355 cm3 Carnotaurus (Amber Lager)
+Botella 355 cm3 T-Rex (American Stout)
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+$
+$
+$
+P.U.
+40.00
+40.00
+40.00
+40.00
+Subtotal
+TOTAL
+00000188-COT
+29/04/25
+Precio
+$1,120.00
+$1,120.00
+$1,120.00
+$1,120.00
+$4,480.00
+$4,480.00

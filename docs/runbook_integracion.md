@@ -125,11 +125,12 @@ Notas de dominio (production):
 - Levadura soporta `amount_packets` (default `1.0`) para validacion y consumo.
 - `start-brewing` ejecuta preflight de stock completo antes de consumir (evita consumo parcial por faltante de un ingrediente posterior).
 - Frontend aplica reglas por estilo en formularios:
+  - el catálogo de estilos se carga en runtime desde `assets/data/ba_beer_styles_2025.json` al iniciar la app (`main.dart`), con fallback local canónico si el asset falla.
   - receta: valida `OG/FG/ABV/IBU/SRM` y `water_profile` (ca/mg/na/cl/so4/hco3) contra rangos del estilo reconocido.
   - receta: permite `Aplicar Targets Sugeridos` para autocompletar OG/FG/ABV/IBU/SRM/perfil de agua desde el target recomendado del estilo.
   - batch: valida escala de volumen por estilo y tambien bloquea cuando la receta vinculada incumple objetivos de estilo (incluyendo SRM/agua) o tiene metricas avanzadas faltantes.
   - matching de estilos prioriza alias especificos (ej. `Hazy IPA` sobre alias generico `IPA`) para evitar recomendaciones incorrectas.
-  - el matching incluye nombres BA (ej. `American India Pale Ale (IPA)`, `Juicy or Hazy India Pale Ale`, `Belgian-Style Tripel`, `German-Style Märzen`) mapeados a perfiles canónicos de frontend.
+  - el matching incluye nombres BA (ej. `American-Style India Pale Ale`, `Juicy or Hazy India Pale Ale`) y mantiene alias operativos (`Hazy IPA`, `West Coast IPA`, `APA`, etc.) sobre el catálogo cargado.
 
 ### Finance Service (8005)
 

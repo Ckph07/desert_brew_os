@@ -50,6 +50,8 @@ abstract class SalesRepository {
     String channel,
     String paymentMethod,
     bool includeTaxes,
+    bool? includeIeps,
+    bool? includeIva,
     String? notes,
     String? createdBy,
   });

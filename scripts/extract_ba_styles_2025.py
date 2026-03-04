@@ -20,6 +20,9 @@ ROOT = Path(__file__).resolve().parents[1]
 PDF_PATH = ROOT / "data" / "2025_BA_Beer_Style_Guidelines.pdf"
 LAYOUT_TXT_PATH = Path("/tmp/ba_2025_layout.txt")
 OUT_PATH = ROOT / "data" / "ba_beer_styles_2025.json"
+APP_ASSET_OUT_PATH = (
+    ROOT / "desert_brew_app" / "assets" / "data" / "ba_beer_styles_2025.json"
+)
 
 # Fixed split point for two-column pages after pdftotext -layout.
 COLUMN_CUT = 56
@@ -368,8 +371,12 @@ def main() -> None:
         "styles": extracted_styles,
     }
 
-    OUT_PATH.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
+    body = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+    OUT_PATH.write_text(body)
+    APP_ASSET_OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    APP_ASSET_OUT_PATH.write_text(body)
     print(f"Wrote {OUT_PATH}")
+    print(f"Wrote {APP_ASSET_OUT_PATH}")
     print(f"Styles: {len(extracted_styles)} | numeric OG: {numeric_og} | varies OG: {varies_og}")
 
 

@@ -1,0 +1,28 @@
+cervecería
+* DESERT BREW CO*
+= Saltillo, Coahuila de
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Garden
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+18
+Descripción
+Litro T-Rex (American Stout)
+PEDIDO:
+FECHA:
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+P.U.
+95.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+00000241
+15/08/25
+Precio
+$ 1,710.00
+$ 1,710.00
+$ 1,710.00

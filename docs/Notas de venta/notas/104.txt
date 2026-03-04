@@ -1,0 +1,52 @@
+cerveceria
+*DESERT BREW CO®
+= Saltillo, Coahuila ce
+PEDIDO:
+FECHA:
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: JURASSIC
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+24
+Descripción
+Botella 355 cm3 T-Rex (American Stout)
+$
+24
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+$
+24
+24
+Botella 355 cm3 Carnotaurus (Amber Lager)
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+$
+$
+156
+Descuento botella retornable
+-$
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+P.U.
+38.00
+38.00
+38.00
+38.00
+3.00
+34.08L
+Descuento
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+00000263
+26/09/25
+Precio
+$ 912.00
+$ 912.00
+$ 912.00
+$ 912.00
+$ 468.00
+-$ 468.00
+$ 3,180.00
+$ 508.80
+$ 3,688.80

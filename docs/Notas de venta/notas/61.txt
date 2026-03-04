@@ -1,0 +1,39 @@
+cervecería
+*DESERT BREW CO®
+= Satillo, Coahuila c
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Beer Garden
+FORMA DE PAGO: Efectivo
+Cantidad
+Descripción
+Litro Carnotaurus (Amber Lager)
+19 u
+17 u
+17 u
+Litro Experimental (Pale Ale)
+Litro Experimental (Brown Ale)
+PEDIDO:
+FECHA:
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+$
+P.U.
+95.00
+95.00
+95.00
+Subtotal
+I.E.P.S
+I.V.A
+Descuento
+TOTAL
+00000218
+11/06/25
+Precio
+$ 1,805.00
+$ 1,615.00
+$ 1,615.00
+$ 5,035.00
+$ 5,035.00

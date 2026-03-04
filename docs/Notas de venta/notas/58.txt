@@ -1,0 +1,37 @@
+cerveceria
+*DESERT BREW CO®
+PEDIDO:
+FECHA:
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: La Cipolla
+FORMA DE PAGO: EFECTIVO
+Cantidad
+8 น
+8 u
+Descripción
+Botella 355 cm3 T-Rex (American Stout)
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+8 u
+Botella 355 cm3 Carnotaurus (Amber Lager)
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+P.U.
+40.00
+40.00
+40.00
+Subtotal
+I.E.P.S
+I.V.A
+Descuento
+TOTAL
+00000215
+11/06/25
+Precio
+$ 320.00
+$ 320.00
+$ 320.00
+$ 960.00
+$ 960.00

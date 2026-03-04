@@ -15,8 +15,8 @@ class SalesNoteItemCreate(BaseModel):
     quantity: float = Field(..., gt=0)
     unit_price: float = Field(..., ge=0)
     discount_pct: float = Field(0, ge=0, le=100)
-    ieps_rate: float = Field(0, ge=0)
-    iva_rate: float = Field(0.16, ge=0)
+    ieps_rate: Optional[float] = Field(None, ge=0)
+    iva_rate: Optional[float] = Field(None, ge=0)
 
 
 class SalesNoteCreate(BaseModel):
@@ -25,7 +25,12 @@ class SalesNoteCreate(BaseModel):
     client_name: Optional[str] = Field(None, max_length=200)
     channel: str = Field("B2B", max_length=20)
     payment_method: str = Field("TRANSFERENCIA", max_length=30)
-    include_taxes: bool = Field(False, description="When False, IEPS/IVA shown as empty (not invoiced)")
+    include_taxes: bool = Field(
+        False,
+        description="Legacy combined tax flag. If include_ieps/include_iva are provided, they take precedence.",
+    )
+    include_ieps: Optional[bool] = Field(None, description="Apply IEPS (beer items only)")
+    include_iva: Optional[bool] = Field(None, description="Apply IVA")
     notes: Optional[str] = Field(None, max_length=500)
     created_by: Optional[str] = Field(None, max_length=100)
     items: list[SalesNoteItemCreate] = Field(..., min_length=1)
@@ -38,6 +43,8 @@ class SalesNoteCreate(BaseModel):
                 "channel": "B2B",
                 "payment_method": "TRANSFERENCIA",
                 "include_taxes": False,
+                "include_ieps": False,
+                "include_iva": False,
                 "items": [
                     {
                         "product_name": "Litro Carnotaurus (Amber Lager)",
@@ -74,6 +81,8 @@ class SalesNoteUpdate(BaseModel):
     client_name: Optional[str] = Field(None, max_length=200)
     payment_method: Optional[str] = Field(None, max_length=30)
     include_taxes: Optional[bool] = None
+    include_ieps: Optional[bool] = None
+    include_iva: Optional[bool] = None
     notes: Optional[str] = Field(None, max_length=500)
 
 
@@ -112,6 +121,8 @@ class SalesNoteResponse(BaseModel):
     issuer_address: str
     issuer_phone: str
     include_taxes: bool
+    include_ieps: bool
+    include_iva: bool
     subtotal: float
     ieps_total: float
     iva_total: float

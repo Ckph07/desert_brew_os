@@ -1,0 +1,30 @@
+cerveceria
+*DESERT BREW CO®
+= Saltillo, Coahuila ce
+PEDIDO:
+FECHA:
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: DUBLIN
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+24
+Descripción
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+P.U.
+40.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+00000237
+13/08/25
+Precio
+$ 960.00
+$
+960.00
+$
+960.00

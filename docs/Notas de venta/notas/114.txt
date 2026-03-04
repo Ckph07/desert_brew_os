@@ -1,0 +1,55 @@
+cervecería
+*DESERT BREW CO*
+- Saltillo, Coahuila ate
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: DESERT BREW TAP
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+54
+Descripción
+Litro Carnotaurus (Amber Lager)
+36
+Litro T-Rex (American Stout)
+72
+Litro Velafrons (Mexican Pale Lager)
+72
+Litro Coahuilaceratops (Imperial Indian Pale Ale)
+48
+Botella 355 cm3 T-Rex (American Stout)
+48
+Botella 355 cm3 Carnotaurus (Amber Lager)
+268.08 L
+PEDIDO:
+FECHA:
+00000273
+09/11/25
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+$
+$
+$
+$
+P.U.
+80.00
+80.00
+80.00
+80.00
+40.00
+40.00
+Precio
+$ 4,320.00
+$ 2,880.00
+$
+5,760.00
+$ 5,760.00
+$ 1,920.00
+$ 1,920.00
+$ 22,560.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+$ 22,560.00

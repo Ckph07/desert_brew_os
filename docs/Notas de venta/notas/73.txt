@@ -1,0 +1,28 @@
+cervecería
+*DESERT BREW CO®
+= Saltillo, Coahuila de
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: DBC Tap
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+Descripción
+18 u
+Litro Velafrons (Mexican Pale Lager)
+PEDIDO:
+FECHA:
+00000230
+28/07/25
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+P.U.
+80.00
+Precio
+$ 1,440.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+$ 1,440.00
+$ 1,440.00

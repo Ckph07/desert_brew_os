@@ -179,9 +179,11 @@ class NoteRenderer:
         total_liters = float(note.total_liters or 0)
         liters_str = f"{int(total_liters)}  L" if total_liters == int(total_liters) else f"{total_liters:.1f}  L"
 
+        include_ieps = bool(getattr(note, "include_ieps", note.include_taxes))
+        include_iva = bool(getattr(note, "include_iva", note.include_taxes))
         subtotal_str = f"${float(note.subtotal):,.2f}"
-        ieps_str = f"${float(note.ieps_total):,.2f}" if note.include_taxes and float(note.ieps_total) > 0 else ""
-        iva_str = f"${float(note.iva_total):,.2f}" if note.include_taxes and float(note.iva_total) > 0 else ""
+        ieps_str = f"${float(note.ieps_total):,.2f}" if include_ieps and float(note.ieps_total) > 0 else ""
+        iva_str = f"${float(note.iva_total):,.2f}" if include_iva and float(note.iva_total) > 0 else ""
         total_str = f"$ {float(note.total):>10,.2f}"
 
         totals_data = [
@@ -298,13 +300,16 @@ class NoteRenderer:
         draw.text((right_col + int(dpi * 0.8), y), f"${float(note.subtotal):,.2f}", fill=black, font=font)
         y += int(dpi * 0.13)
 
+        include_ieps = bool(getattr(note, "include_ieps", note.include_taxes))
+        include_iva = bool(getattr(note, "include_iva", note.include_taxes))
+
         draw.text((right_col, y), "I.E.P.S", fill=black, font=font_bold)
-        if note.include_taxes and float(note.ieps_total or 0) > 0:
+        if include_ieps and float(note.ieps_total or 0) > 0:
             draw.text((right_col + int(dpi * 0.8), y), f"${float(note.ieps_total):,.2f}", fill=black, font=font)
         y += int(dpi * 0.13)
 
         draw.text((right_col, y), "I.V.A", fill=black, font=font_bold)
-        if note.include_taxes and float(note.iva_total or 0) > 0:
+        if include_iva and float(note.iva_total or 0) > 0:
             draw.text((right_col + int(dpi * 0.8), y), f"${float(note.iva_total):,.2f}", fill=black, font=font)
         y += int(dpi * 0.2)
 

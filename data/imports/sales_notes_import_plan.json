@@ -1,0 +1,2620 @@
+{
+  "generated_at": "2026-03-04T20:31:31.994304",
+  "dry_run": false,
+  "notes_root": "docs/Notas de venta",
+  "source_counts": {
+    "gestion_pdf": 60,
+    "ocr_txt": 111,
+    "ocr_pdf_page": 142
+  },
+  "parsed_notes": 204,
+  "resolved_notes": 203,
+  "planned_notes": 0,
+  "planned_items": 0,
+  "planned_clients": 0,
+  "skipped_existing_notes": 203,
+  "planned_rows": [],
+  "created_clients": [],
+  "issues": [
+    {
+      "severity": "skip",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/13.txt",
+      "reason": "missing_note_number",
+      "note_number": null,
+      "details": "Could not parse note number from document."
+    },
+    {
+      "severity": "skip",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/88.txt",
+      "reason": "missing_note_number",
+      "note_number": null,
+      "details": "Could not parse note number from document."
+    },
+    {
+      "severity": "skip",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/102.txt",
+      "reason": "missing_date",
+      "note_number": "00000261",
+      "details": "Could not parse date from document."
+    },
+    {
+      "severity": "skip",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/103.txt",
+      "reason": "missing_date",
+      "note_number": "00000262",
+      "details": "Could not parse date from document."
+    },
+    {
+      "severity": "skip",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=4",
+      "reason": "missing_note_number",
+      "note_number": null,
+      "details": "Could not parse note number from document."
+    },
+    {
+      "severity": "skip",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=19",
+      "reason": "missing_date",
+      "note_number": "00000175",
+      "details": "Could not parse date from document."
+    },
+    {
+      "severity": "skip",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=92",
+      "reason": "missing_note_number",
+      "note_number": null,
+      "details": "Could not parse note number from document."
+    },
+    {
+      "severity": "skip",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=106",
+      "reason": "missing_date",
+      "note_number": "00000261",
+      "details": "Could not parse date from document."
+    },
+    {
+      "severity": "skip",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=107",
+      "reason": "missing_date",
+      "note_number": "00000262",
+      "details": "Could not parse date from document."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=1",
+      "reason": "fallback_not_needed",
+      "note_number": "00000158",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=2",
+      "reason": "fallback_not_needed",
+      "note_number": "00000159",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=3",
+      "reason": "fallback_not_needed",
+      "note_number": "00000160",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=5",
+      "reason": "fallback_not_needed",
+      "note_number": "00000163",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=6",
+      "reason": "fallback_not_needed",
+      "note_number": "00000162",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=7",
+      "reason": "fallback_not_needed",
+      "note_number": "00000163",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=8",
+      "reason": "fallback_not_needed",
+      "note_number": "00000164",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=9",
+      "reason": "fallback_not_needed",
+      "note_number": "00000165",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=10",
+      "reason": "fallback_not_needed",
+      "note_number": "00000166",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=11",
+      "reason": "fallback_not_needed",
+      "note_number": "00000167",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=12",
+      "reason": "fallback_not_needed",
+      "note_number": "00000169",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=13",
+      "reason": "fallback_not_needed",
+      "note_number": "00000170",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=15",
+      "reason": "fallback_not_needed",
+      "note_number": "00000171",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=16",
+      "reason": "fallback_not_needed",
+      "note_number": "00000172",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=17",
+      "reason": "fallback_not_needed",
+      "note_number": "00000173",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=18",
+      "reason": "fallback_not_needed",
+      "note_number": "00000174",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=20",
+      "reason": "fallback_not_needed",
+      "note_number": "00000176",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=21",
+      "reason": "fallback_not_needed",
+      "note_number": "00000177",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=23",
+      "reason": "fallback_not_needed",
+      "note_number": "00000178",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=24",
+      "reason": "fallback_not_needed",
+      "note_number": "00000179",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=25",
+      "reason": "fallback_not_needed",
+      "note_number": "00000180",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=26",
+      "reason": "fallback_not_needed",
+      "note_number": "00000181",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=27",
+      "reason": "fallback_not_needed",
+      "note_number": "00000182",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=28",
+      "reason": "fallback_not_needed",
+      "note_number": "00000183",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=29",
+      "reason": "fallback_not_needed",
+      "note_number": "00000184",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=30",
+      "reason": "fallback_not_needed",
+      "note_number": "00000185",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=31",
+      "reason": "fallback_not_needed",
+      "note_number": "00000186",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=32",
+      "reason": "fallback_not_needed",
+      "note_number": "00000187",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=33",
+      "reason": "fallback_not_needed",
+      "note_number": "00000188",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=34",
+      "reason": "fallback_not_needed",
+      "note_number": "00000189",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=35",
+      "reason": "fallback_not_needed",
+      "note_number": "00000190",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=36",
+      "reason": "fallback_not_needed",
+      "note_number": "00000191",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=37",
+      "reason": "fallback_not_needed",
+      "note_number": "00000192",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=38",
+      "reason": "fallback_not_needed",
+      "note_number": "00000193",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=39",
+      "reason": "fallback_not_needed",
+      "note_number": "00000194",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=40",
+      "reason": "fallback_not_needed",
+      "note_number": "00000195",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=41",
+      "reason": "fallback_not_needed",
+      "note_number": "00000196",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=42",
+      "reason": "fallback_not_needed",
+      "note_number": "00000197",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=43",
+      "reason": "fallback_not_needed",
+      "note_number": "00000198",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=44",
+      "reason": "fallback_not_needed",
+      "note_number": "00000199",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=45",
+      "reason": "fallback_not_needed",
+      "note_number": "00000200",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=46",
+      "reason": "fallback_not_needed",
+      "note_number": "00000201",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=47",
+      "reason": "fallback_not_needed",
+      "note_number": "00000202",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=48",
+      "reason": "fallback_not_needed",
+      "note_number": "00000203",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=49",
+      "reason": "fallback_not_needed",
+      "note_number": "00000204",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=50",
+      "reason": "fallback_not_needed",
+      "note_number": "00000205",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=51",
+      "reason": "fallback_not_needed",
+      "note_number": "00000206",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=52",
+      "reason": "fallback_not_needed",
+      "note_number": "00000207",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=53",
+      "reason": "fallback_not_needed",
+      "note_number": "00000208",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=54",
+      "reason": "fallback_not_needed",
+      "note_number": "00000209",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=55",
+      "reason": "fallback_not_needed",
+      "note_number": "00000210",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=56",
+      "reason": "fallback_not_needed",
+      "note_number": "00000211",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=58",
+      "reason": "fallback_not_needed",
+      "note_number": "00000212",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=59",
+      "reason": "fallback_not_needed",
+      "note_number": "00000213",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=60",
+      "reason": "fallback_not_needed",
+      "note_number": "00000214",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=61",
+      "reason": "fallback_not_needed",
+      "note_number": "00000215",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=62",
+      "reason": "fallback_not_needed",
+      "note_number": "00000216",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=63",
+      "reason": "fallback_not_needed",
+      "note_number": "00000217",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=64",
+      "reason": "fallback_not_needed",
+      "note_number": "00000218",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=65",
+      "reason": "fallback_not_needed",
+      "note_number": "00000219",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=66",
+      "reason": "fallback_not_needed",
+      "note_number": "00000220",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=67",
+      "reason": "fallback_not_needed",
+      "note_number": "00000221",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=68",
+      "reason": "fallback_not_needed",
+      "note_number": "00000222",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=69",
+      "reason": "fallback_not_needed",
+      "note_number": "00000223",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=70",
+      "reason": "fallback_not_needed",
+      "note_number": "00000224",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=71",
+      "reason": "fallback_not_needed",
+      "note_number": "00000225",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=72",
+      "reason": "fallback_not_needed",
+      "note_number": "00000226",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=73",
+      "reason": "fallback_not_needed",
+      "note_number": "00000227",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=74",
+      "reason": "fallback_not_needed",
+      "note_number": "00000228",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=75",
+      "reason": "fallback_not_needed",
+      "note_number": "00000229",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=76",
+      "reason": "fallback_not_needed",
+      "note_number": "00000230",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=77",
+      "reason": "fallback_not_needed",
+      "note_number": "00000231",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=78",
+      "reason": "fallback_not_needed",
+      "note_number": "00000232",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=80",
+      "reason": "fallback_not_needed",
+      "note_number": "00000233",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=81",
+      "reason": "fallback_not_needed",
+      "note_number": "00000234",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=82",
+      "reason": "fallback_not_needed",
+      "note_number": "00000235",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=83",
+      "reason": "fallback_not_needed",
+      "note_number": "00000236",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=84",
+      "reason": "fallback_not_needed",
+      "note_number": "00000237",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=85",
+      "reason": "fallback_not_needed",
+      "note_number": "00000238",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=86",
+      "reason": "fallback_not_needed",
+      "note_number": "00000239",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=87",
+      "reason": "fallback_not_needed",
+      "note_number": "00000240",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=88",
+      "reason": "fallback_not_needed",
+      "note_number": "00000241",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=89",
+      "reason": "fallback_not_needed",
+      "note_number": "00000243",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=90",
+      "reason": "fallback_not_needed",
+      "note_number": "00000244",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=91",
+      "reason": "fallback_not_needed",
+      "note_number": "00000245",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=93",
+      "reason": "fallback_not_needed",
+      "note_number": "00000247",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=94",
+      "reason": "fallback_not_needed",
+      "note_number": "00000248",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=95",
+      "reason": "fallback_not_needed",
+      "note_number": "00000249",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=96",
+      "reason": "fallback_not_needed",
+      "note_number": "00000250",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=97",
+      "reason": "fallback_not_needed",
+      "note_number": "00000251",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=98",
+      "reason": "fallback_not_needed",
+      "note_number": "00000253",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=99",
+      "reason": "fallback_not_needed",
+      "note_number": "00000254",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=100",
+      "reason": "fallback_not_needed",
+      "note_number": "00000255",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=101",
+      "reason": "fallback_not_needed",
+      "note_number": "00000256",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=102",
+      "reason": "fallback_not_needed",
+      "note_number": "00000257",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=103",
+      "reason": "fallback_not_needed",
+      "note_number": "00000258",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=104",
+      "reason": "fallback_not_needed",
+      "note_number": "00000259",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=105",
+      "reason": "fallback_not_needed",
+      "note_number": "00000260",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=108",
+      "reason": "fallback_not_needed",
+      "note_number": "00000263",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=109",
+      "reason": "fallback_not_needed",
+      "note_number": "00000264",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=110",
+      "reason": "fallback_not_needed",
+      "note_number": "00000265",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=111",
+      "reason": "fallback_not_needed",
+      "note_number": "00000266",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=112",
+      "reason": "fallback_not_needed",
+      "note_number": "00000267",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=113",
+      "reason": "fallback_not_needed",
+      "note_number": "00000268",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=114",
+      "reason": "fallback_not_needed",
+      "note_number": "00000269",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=115",
+      "reason": "fallback_not_needed",
+      "note_number": "00000270",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=116",
+      "reason": "fallback_not_needed",
+      "note_number": "00000271",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=117",
+      "reason": "fallback_not_needed",
+      "note_number": "00000272",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=118",
+      "reason": "fallback_not_needed",
+      "note_number": "00000273",
+      "details": "Dropped OCR page because same note number exists in higher-priority source."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000033.pdf",
+      "reason": "duplicate_identical_collapsed",
+      "note_number": "00000033",
+      "details": "Kept canonical source gestion_pdf:docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000033.pdf."
+    },
+    {
+      "severity": "warning",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_000000158.pdf",
+      "reason": "duplicate_conflict_kept",
+      "note_number": "00000158-DUP1",
+      "details": "Preserved conflict against canonical 00000158. Stored as 00000158-DUP1."
+    },
+    {
+      "severity": "warning",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/0.txt",
+      "reason": "duplicate_conflict_kept",
+      "note_number": "00000158-DUP2",
+      "details": "Preserved conflict against canonical 00000158. Stored as 00000158-DUP2."
+    },
+    {
+      "severity": "warning",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/6.txt",
+      "reason": "duplicate_conflict_kept",
+      "note_number": "00000163-DUP1",
+      "details": "Preserved conflict against canonical 00000163. Stored as 00000163-DUP1."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000005.pdf",
+      "reason": "already_exists",
+      "note_number": "00000005",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000022.pdf",
+      "reason": "already_exists",
+      "note_number": "00000022",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000033.pdf",
+      "reason": "already_exists",
+      "note_number": "00000033",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000038.pdf",
+      "reason": "already_exists",
+      "note_number": "00000038",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000040.pdf",
+      "reason": "already_exists",
+      "note_number": "00000040",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000052.pdf",
+      "reason": "already_exists",
+      "note_number": "00000052",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000053.pdf",
+      "reason": "already_exists",
+      "note_number": "00000053",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000059.pdf",
+      "reason": "already_exists",
+      "note_number": "00000059",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000065.pdf",
+      "reason": "already_exists",
+      "note_number": "00000065",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000066.pdf",
+      "reason": "already_exists",
+      "note_number": "00000066",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000067.pdf",
+      "reason": "already_exists",
+      "note_number": "00000067",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000068.pdf",
+      "reason": "already_exists",
+      "note_number": "00000068",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000069.pdf",
+      "reason": "already_exists",
+      "note_number": "00000069",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000070.pdf",
+      "reason": "already_exists",
+      "note_number": "00000070",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000073.pdf",
+      "reason": "already_exists",
+      "note_number": "00000073",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000074 .pdf",
+      "reason": "already_exists",
+      "note_number": "00000074",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000076.pdf",
+      "reason": "already_exists",
+      "note_number": "00000076",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000078.pdf",
+      "reason": "already_exists",
+      "note_number": "00000078",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000079.pdf",
+      "reason": "already_exists",
+      "note_number": "00000079",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000083.pdf",
+      "reason": "already_exists",
+      "note_number": "00000083",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000085.pdf",
+      "reason": "already_exists",
+      "note_number": "00000085",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000087.pdf",
+      "reason": "already_exists",
+      "note_number": "00000087",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000091.pdf",
+      "reason": "already_exists",
+      "note_number": "00000091",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000093.pdf",
+      "reason": "already_exists",
+      "note_number": "00000093",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000099.pdf",
+      "reason": "already_exists",
+      "note_number": "00000099",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000101.pdf",
+      "reason": "already_exists",
+      "note_number": "00000101",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000106.pdf",
+      "reason": "already_exists",
+      "note_number": "00000106",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000107.pdf",
+      "reason": "already_exists",
+      "note_number": "00000107",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000108.pdf",
+      "reason": "already_exists",
+      "note_number": "00000108",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000110.pdf",
+      "reason": "already_exists",
+      "note_number": "00000110",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000116.pdf",
+      "reason": "already_exists",
+      "note_number": "00000116",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000119.pdf",
+      "reason": "already_exists",
+      "note_number": "00000119",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000123.pdf",
+      "reason": "already_exists",
+      "note_number": "00000123",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000125.pdf",
+      "reason": "already_exists",
+      "note_number": "00000125",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000130.pdf",
+      "reason": "already_exists",
+      "note_number": "00000130",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000131.pdf",
+      "reason": "already_exists",
+      "note_number": "00000131",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000132.pdf",
+      "reason": "already_exists",
+      "note_number": "00000132",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000133.pdf",
+      "reason": "already_exists",
+      "note_number": "00000133",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000134.pdf",
+      "reason": "already_exists",
+      "note_number": "00000134",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000135.pdf",
+      "reason": "already_exists",
+      "note_number": "00000135",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000136.pdf",
+      "reason": "already_exists",
+      "note_number": "00000136",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000140.pdf",
+      "reason": "already_exists",
+      "note_number": "00000140",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000142.pdf",
+      "reason": "already_exists",
+      "note_number": "00000142",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000143.pdf",
+      "reason": "already_exists",
+      "note_number": "00000143",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000144.pdf",
+      "reason": "already_exists",
+      "note_number": "00000144",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000145.pdf",
+      "reason": "already_exists",
+      "note_number": "00000145",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000146.pdf",
+      "reason": "already_exists",
+      "note_number": "00000146",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000147.pdf",
+      "reason": "already_exists",
+      "note_number": "00000147",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000148.pdf",
+      "reason": "already_exists",
+      "note_number": "00000148",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_00000149.pdf",
+      "reason": "already_exists",
+      "note_number": "00000149",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000150.pdf",
+      "reason": "already_exists",
+      "note_number": "00000150",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000152.pdf",
+      "reason": "already_exists",
+      "note_number": "00000152",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000153.pdf",
+      "reason": "already_exists",
+      "note_number": "00000153",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000154.pdf",
+      "reason": "already_exists",
+      "note_number": "00000154",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000155.pdf",
+      "reason": "already_exists",
+      "note_number": "00000155",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000156.pdf",
+      "reason": "already_exists",
+      "note_number": "00000156",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000157.pdf",
+      "reason": "already_exists",
+      "note_number": "00000157",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido-00000158.pdf",
+      "reason": "already_exists",
+      "note_number": "00000158",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "gestion_pdf",
+      "source_ref": "docs/Notas de venta/notas_gestion_Cervecera/Pedido_000000158.pdf",
+      "reason": "already_exists",
+      "note_number": "00000158-DUP1",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/0.txt",
+      "reason": "already_exists",
+      "note_number": "00000158-DUP2",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/1.txt",
+      "reason": "already_exists",
+      "note_number": "00000159",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/2.txt",
+      "reason": "already_exists",
+      "note_number": "00000160",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/3.txt",
+      "reason": "already_exists",
+      "note_number": "00000161",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/5.txt",
+      "reason": "already_exists",
+      "note_number": "00000162",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/4.txt",
+      "reason": "already_exists",
+      "note_number": "00000163",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/6.txt",
+      "reason": "already_exists",
+      "note_number": "00000163-DUP1",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/7.txt",
+      "reason": "already_exists",
+      "note_number": "00000164",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/8.txt",
+      "reason": "already_exists",
+      "note_number": "00000165",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/9.txt",
+      "reason": "already_exists",
+      "note_number": "00000166",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/10.txt",
+      "reason": "already_exists",
+      "note_number": "00000167",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/11.txt",
+      "reason": "already_exists",
+      "note_number": "00000169",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/12.txt",
+      "reason": "already_exists",
+      "note_number": "00000170",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/14.txt",
+      "reason": "already_exists",
+      "note_number": "00000171",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/15.txt",
+      "reason": "already_exists",
+      "note_number": "00000172",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/16.txt",
+      "reason": "already_exists",
+      "note_number": "00000173",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/17.txt",
+      "reason": "already_exists",
+      "note_number": "00000174",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/18.txt",
+      "reason": "already_exists",
+      "note_number": "00000175",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/19.txt",
+      "reason": "already_exists",
+      "note_number": "00000176",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/20.txt",
+      "reason": "already_exists",
+      "note_number": "00000177",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/21.txt",
+      "reason": "already_exists",
+      "note_number": "00000178",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/22.txt",
+      "reason": "already_exists",
+      "note_number": "00000179",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/23.txt",
+      "reason": "already_exists",
+      "note_number": "00000180",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/24.txt",
+      "reason": "already_exists",
+      "note_number": "00000181",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/25.txt",
+      "reason": "already_exists",
+      "note_number": "00000182",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/26.txt",
+      "reason": "already_exists",
+      "note_number": "00000183",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/27.txt",
+      "reason": "already_exists",
+      "note_number": "00000184",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/28.txt",
+      "reason": "already_exists",
+      "note_number": "00000185",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/29.txt",
+      "reason": "already_exists",
+      "note_number": "00000186",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/30.txt",
+      "reason": "already_exists",
+      "note_number": "00000187",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/31.txt",
+      "reason": "already_exists",
+      "note_number": "00000188",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/32.txt",
+      "reason": "already_exists",
+      "note_number": "00000189",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/33.txt",
+      "reason": "already_exists",
+      "note_number": "00000190",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/34.txt",
+      "reason": "already_exists",
+      "note_number": "00000191",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/35.txt",
+      "reason": "already_exists",
+      "note_number": "00000192",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/36.txt",
+      "reason": "already_exists",
+      "note_number": "00000193",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/37.txt",
+      "reason": "already_exists",
+      "note_number": "00000194",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/38.txt",
+      "reason": "already_exists",
+      "note_number": "00000195",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/39.txt",
+      "reason": "already_exists",
+      "note_number": "00000196",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/40.txt",
+      "reason": "already_exists",
+      "note_number": "00000197",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/41.txt",
+      "reason": "already_exists",
+      "note_number": "00000198",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/42.txt",
+      "reason": "already_exists",
+      "note_number": "00000199",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/43.txt",
+      "reason": "already_exists",
+      "note_number": "00000200",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/44.txt",
+      "reason": "already_exists",
+      "note_number": "00000201",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/45.txt",
+      "reason": "already_exists",
+      "note_number": "00000202",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/46.txt",
+      "reason": "already_exists",
+      "note_number": "00000203",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/47.txt",
+      "reason": "already_exists",
+      "note_number": "00000204",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/48.txt",
+      "reason": "already_exists",
+      "note_number": "00000205",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/49.txt",
+      "reason": "already_exists",
+      "note_number": "00000206",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/50.txt",
+      "reason": "already_exists",
+      "note_number": "00000207",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/51.txt",
+      "reason": "already_exists",
+      "note_number": "00000208",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/52.txt",
+      "reason": "already_exists",
+      "note_number": "00000209",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/53.txt",
+      "reason": "already_exists",
+      "note_number": "00000210",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/54.txt",
+      "reason": "already_exists",
+      "note_number": "00000211",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/55.txt",
+      "reason": "already_exists",
+      "note_number": "00000212",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/56.txt",
+      "reason": "already_exists",
+      "note_number": "00000213",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/57.txt",
+      "reason": "already_exists",
+      "note_number": "00000214",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/58.txt",
+      "reason": "already_exists",
+      "note_number": "00000215",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/59.txt",
+      "reason": "already_exists",
+      "note_number": "00000216",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/60.txt",
+      "reason": "already_exists",
+      "note_number": "00000217",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/61.txt",
+      "reason": "already_exists",
+      "note_number": "00000218",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/62.txt",
+      "reason": "already_exists",
+      "note_number": "00000219",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/63.txt",
+      "reason": "already_exists",
+      "note_number": "00000220",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/64.txt",
+      "reason": "already_exists",
+      "note_number": "00000221",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/65.txt",
+      "reason": "already_exists",
+      "note_number": "00000222",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/66.txt",
+      "reason": "already_exists",
+      "note_number": "00000223",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/67.txt",
+      "reason": "already_exists",
+      "note_number": "00000224",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/68.txt",
+      "reason": "already_exists",
+      "note_number": "00000225",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/69.txt",
+      "reason": "already_exists",
+      "note_number": "00000226",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/70.txt",
+      "reason": "already_exists",
+      "note_number": "00000227",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/71.txt",
+      "reason": "already_exists",
+      "note_number": "00000228",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/72.txt",
+      "reason": "already_exists",
+      "note_number": "00000229",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/73.txt",
+      "reason": "already_exists",
+      "note_number": "00000230",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/74.txt",
+      "reason": "already_exists",
+      "note_number": "00000231",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/75.txt",
+      "reason": "already_exists",
+      "note_number": "00000232",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/76.txt",
+      "reason": "already_exists",
+      "note_number": "00000233",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/77.txt",
+      "reason": "already_exists",
+      "note_number": "00000234",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/78.txt",
+      "reason": "already_exists",
+      "note_number": "00000235",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/79.txt",
+      "reason": "already_exists",
+      "note_number": "00000236",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/80.txt",
+      "reason": "already_exists",
+      "note_number": "00000237",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/81.txt",
+      "reason": "already_exists",
+      "note_number": "00000238",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/82.txt",
+      "reason": "already_exists",
+      "note_number": "00000239",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/83.txt",
+      "reason": "already_exists",
+      "note_number": "00000240",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/84.txt",
+      "reason": "already_exists",
+      "note_number": "00000241",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/85.txt",
+      "reason": "already_exists",
+      "note_number": "00000243",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/86.txt",
+      "reason": "already_exists",
+      "note_number": "00000244",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/87.txt",
+      "reason": "already_exists",
+      "note_number": "00000245",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/89.txt",
+      "reason": "already_exists",
+      "note_number": "00000247",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/90.txt",
+      "reason": "already_exists",
+      "note_number": "00000248",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/91.txt",
+      "reason": "already_exists",
+      "note_number": "00000249",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/92.txt",
+      "reason": "already_exists",
+      "note_number": "00000250",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/93.txt",
+      "reason": "already_exists",
+      "note_number": "00000251",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/94.txt",
+      "reason": "already_exists",
+      "note_number": "00000253",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/95.txt",
+      "reason": "already_exists",
+      "note_number": "00000254",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/96.txt",
+      "reason": "already_exists",
+      "note_number": "00000255",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/97.txt",
+      "reason": "already_exists",
+      "note_number": "00000256",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/98.txt",
+      "reason": "already_exists",
+      "note_number": "00000257",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/99.txt",
+      "reason": "already_exists",
+      "note_number": "00000258",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/100.txt",
+      "reason": "already_exists",
+      "note_number": "00000259",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/101.txt",
+      "reason": "already_exists",
+      "note_number": "00000260",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/104.txt",
+      "reason": "already_exists",
+      "note_number": "00000263",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/105.txt",
+      "reason": "already_exists",
+      "note_number": "00000264",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/106.txt",
+      "reason": "already_exists",
+      "note_number": "00000265",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/107.txt",
+      "reason": "already_exists",
+      "note_number": "00000266",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/108.txt",
+      "reason": "already_exists",
+      "note_number": "00000267",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/109.txt",
+      "reason": "already_exists",
+      "note_number": "00000268",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/110.txt",
+      "reason": "already_exists",
+      "note_number": "00000269",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/111.txt",
+      "reason": "already_exists",
+      "note_number": "00000270",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/112.txt",
+      "reason": "already_exists",
+      "note_number": "00000271",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/113.txt",
+      "reason": "already_exists",
+      "note_number": "00000272",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_txt",
+      "source_ref": "docs/Notas de venta/notas/114.txt",
+      "reason": "already_exists",
+      "note_number": "00000273",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=119",
+      "reason": "already_exists",
+      "note_number": "00000274",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=120",
+      "reason": "already_exists",
+      "note_number": "00000275",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=121",
+      "reason": "already_exists",
+      "note_number": "00000276",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=122",
+      "reason": "already_exists",
+      "note_number": "00000277",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=123",
+      "reason": "already_exists",
+      "note_number": "00000278",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=124",
+      "reason": "already_exists",
+      "note_number": "00000279",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=125",
+      "reason": "already_exists",
+      "note_number": "00000280",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=126",
+      "reason": "already_exists",
+      "note_number": "00000281",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=127",
+      "reason": "already_exists",
+      "note_number": "00000282",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=128",
+      "reason": "already_exists",
+      "note_number": "00000283",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=129",
+      "reason": "already_exists",
+      "note_number": "00000284",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=130",
+      "reason": "already_exists",
+      "note_number": "00000285",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=131",
+      "reason": "already_exists",
+      "note_number": "00000286",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=132",
+      "reason": "already_exists",
+      "note_number": "00000287",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=133",
+      "reason": "already_exists",
+      "note_number": "00000288",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=134",
+      "reason": "already_exists",
+      "note_number": "00000289",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=135",
+      "reason": "already_exists",
+      "note_number": "00000290",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=136",
+      "reason": "already_exists",
+      "note_number": "00000291",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=137",
+      "reason": "already_exists",
+      "note_number": "00000292",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=138",
+      "reason": "already_exists",
+      "note_number": "00000293",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=139",
+      "reason": "already_exists",
+      "note_number": "00000294",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=140",
+      "reason": "already_exists",
+      "note_number": "00000295",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=141",
+      "reason": "already_exists",
+      "note_number": "00000296",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=142",
+      "reason": "already_exists",
+      "note_number": "00000297",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=143",
+      "reason": "already_exists",
+      "note_number": "00000298",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=144",
+      "reason": "already_exists",
+      "note_number": "00000299",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=145",
+      "reason": "already_exists",
+      "note_number": "00000300",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=146",
+      "reason": "already_exists",
+      "note_number": "00000301",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=147",
+      "reason": "already_exists",
+      "note_number": "00000302",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=148",
+      "reason": "already_exists",
+      "note_number": "00000303",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=149",
+      "reason": "already_exists",
+      "note_number": "00000304",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=150",
+      "reason": "already_exists",
+      "note_number": "00000305",
+      "details": "Skipped because note_number already exists in DB."
+    },
+    {
+      "severity": "info",
+      "source": "ocr_pdf_page",
+      "source_ref": "docs/Notas de venta/Notas de venta__OCR.pdf#page=151",
+      "reason": "already_exists",
+      "note_number": "00000306",
+      "details": "Skipped because note_number already exists in DB."
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+cerveceria
+*DESERT BREW CO®
+= Saltillo, Coahuila ce
+PEDIDO:
+FECHA:
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Dinoquesadillas
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+Cantidad
+24 u
+24 u
+24 u
+24 u
+Descripción
+Botella 355 cm3 Carnotaurus (Amber Lager)
+Botella 355 cm3 T-Rex (American Stout)
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+$
+$
+$
+P.U.
+40.00
+40.00
+40.00
+40.00
+Subtotal
+Descuento
+TOTAL
+00000183
+17/04/25
+Precio
+$ 960.00
+$ 960.00
+$ 960.00
+$ 960.00
+$ 3,840.00
+$ 3,840.00

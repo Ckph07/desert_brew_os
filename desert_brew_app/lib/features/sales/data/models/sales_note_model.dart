@@ -41,6 +41,8 @@ class SalesNoteModel extends SalesNote {
     required super.issuerName,
     required super.issuerRfc,
     required super.includeTaxes,
+    required super.includeIeps,
+    required super.includeIva,
     required super.subtotal,
     required super.iepsTotal,
     required super.ivaTotal,
@@ -61,9 +63,10 @@ class SalesNoteModel extends SalesNote {
   });
 
   factory SalesNoteModel.fromJson(Map<String, dynamic> json) {
-    final itemsList = (json['items'] as List<dynamic>? ?? [])
-        .map((e) => SalesNoteItemModel.fromJson(e as Map<String, dynamic>))
-        .toList();
+    final itemsList =
+        (json['items'] as List<dynamic>? ?? [])
+            .map((e) => SalesNoteItemModel.fromJson(e as Map<String, dynamic>))
+            .toList();
 
     return SalesNoteModel(
       id: json['id'] as int,
@@ -71,6 +74,12 @@ class SalesNoteModel extends SalesNote {
       issuerName: json['issuer_name'] as String,
       issuerRfc: json['issuer_rfc'] as String,
       includeTaxes: json['include_taxes'] as bool? ?? false,
+      includeIeps:
+          json['include_ieps'] as bool? ??
+          (json['include_taxes'] as bool? ?? false),
+      includeIva:
+          json['include_iva'] as bool? ??
+          (json['include_taxes'] as bool? ?? false),
       subtotal: (json['subtotal'] as num).toDouble(),
       iepsTotal: (json['ieps_total'] as num).toDouble(),
       ivaTotal: (json['iva_total'] as num).toDouble(),
@@ -87,9 +96,10 @@ class SalesNoteModel extends SalesNote {
       clientName: json['client_name'] as String?,
       notes: json['notes'] as String?,
       createdBy: json['created_by'] as String?,
-      confirmedAt: json['confirmed_at'] != null
-          ? DateTime.parse(json['confirmed_at'] as String)
-          : null,
+      confirmedAt:
+          json['confirmed_at'] != null
+              ? DateTime.parse(json['confirmed_at'] as String)
+              : null,
     );
   }
 }

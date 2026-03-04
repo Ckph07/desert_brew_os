@@ -1,0 +1,48 @@
+cerveceria
+* DESERT BREW CO*
+PEDIDO:
+FECHA:
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: DESERT BREW TAP
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+Cantidad
+20 u
+24 u
+28 u
+24 u
+18 L
+18 L
+Descripción
+Botella 355 cm3 Carnotaurus (Amber Lager)
+Botella 355 cm3 T-Rex (American Stout)
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+Litro Velafrons (Mexican Pale Lager)
+Litro Coahuilaceratops (Imperial Indian Pale Ale)
+$
+$
+$
+$
+$
+P.U.
+40.00
+40.00
+40.00
+40.00
+80.00
+80.00
+Subtotal
+TOTAL
+00000189
+06/05/25
+Precio
+$ 800.00
+$ 960.00
+$1,120.00
+$ 960.00
+$1,440.00
+$1,440.00
+$6,720.00
+$6,720.00

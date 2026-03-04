@@ -1,0 +1,30 @@
+cervecería
+20
+* DESERT BREW CO=
+- Saltillo, Coahuila de-
+PEDIDO:
+FECHA:
+00000167-COT
+03/04/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+CLIENTE: Tec Milenio
+Centro comercial Plaza Santa Isabel, Blvd. Nazario Ortiz Garza, Plaza, Santa Isabel #2060,
+int. #141, 25253 Saltillo, Coah.
+Cantidad
+Descripción
+Precio
+1 u
+Servicio de catering 15 personas
+3 estilos 90 mL por estilo. P.U. $90 MXN
+ESTILOS: Neo Mexican Lager
+Amber lager, American Stout
+$1,350.00
+SUBTOTAL
+I.V.A
+TOTAL
+$1,350.00
+$216.00
+$1,566.00

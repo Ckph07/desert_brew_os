@@ -1,0 +1,32 @@
+cerveceria
+*DESERT BREW CO®
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Big Slices
+Cantidad
+1
+1
+Descripción
+Descripcion
+Barril PET Coahuilaceratops (Imperial Indian Pale Ale)
+Envío MTY
+PEDIDO:
+FECHA:
+00000182
+17/04/25
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+P.U.
+Precio Unitario
+$ 2,109.00
+$
+327.00
+Precio
+$ 2,109.00
+$ 327.00
+Subtotal
+I.V.A (16%)
+TOTAL
+$ 2,436.00
+$ 389.76
+$ 2,825.76

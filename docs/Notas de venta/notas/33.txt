@@ -1,0 +1,23 @@
+cerveceria
+*DESERT BREW CO®
+PEDIDO:
+FECHA:
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: DUBLIN
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+Cantidad
+24 u
+Descripción
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+P.U.
+40.00
+Subtotal
+TOTAL
+00000190
+06/05/25
+Precio
+$ 960.00
+$ 960.00
+$ 960.00

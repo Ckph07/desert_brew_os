@@ -1,0 +1,34 @@
+cerveceria
+* DESERT BREW CO=
+Saltillo, Coahulla de
+PEDIDO:
+FECHA:
+00000165
+31/03/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+CLIENTE: Asador 9
+Boulevard Venustiano Carranza, Carr. Monterrey Saltillo 5015, 25210 Saltillo, Coah.
+Cantidad
+Descripción
+Precio
+6 u
+12 u
+12 u
+Botella 355 cm3 Carnotaurus (Amber
+Lager) P.Unit. $40.00
+Botella 355 cm3 T-Rex (American Stout)
+P.Unit. $40.00
+Botella 355 cm3 Velafrons (Mexican
+Pale Lager) P.Unit. $40.00
+$240.00
+$480.00
+$480.00
+SUBTOTAL
+DESCUENTO
+TOTAL
+$1,200.00
+$125.00
+$1,075.00

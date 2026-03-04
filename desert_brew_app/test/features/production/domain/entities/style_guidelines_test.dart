@@ -2,6 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:desert_brew_app/features/production/domain/entities/style_guidelines.dart';
 
 void main() {
+  setUp(BeerStyleGuidelines.resetForTesting);
+  tearDown(BeerStyleGuidelines.resetForTesting);
+
   test('BeerStyleGuidelines matches known styles by alias', () {
     final ipa = BeerStyleGuidelines.match('West Coast IPA');
     final lager = BeerStyleGuidelines.match('Mexican Lager');

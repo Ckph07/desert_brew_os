@@ -1,0 +1,27 @@
+cervecería
+*DESERT BREW CO*
+= Saltillo, Coahuila det
+PEDIDO:
+FECHA:
+00000163
+13/03/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Beer Garden
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+Cantidad
+48 U
+38 L
+Descripción
+Botella 355 ml Surtido P.U. $40
+12 u x estilo (4 estilos)
+Barril 20L Velafrons (Mexican Pale
+Lager) P.U. $90.00
+Precio
+$1,920.00
+$3,420.00
+SUBTOTAL
+TOTAL
+$5,340.00
+$5,340.00

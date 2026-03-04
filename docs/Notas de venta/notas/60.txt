@@ -1,0 +1,34 @@
+cerveceria
+*DESERT BREW CO®
+= Saltillo, Conhuila de
+PEDIDO:
+FECHA:
+00000217
+11/06/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Tavola
+FORMA DE PAGO: Efectivo
+Cantidad
+Descripción
+15 u
+15 u
+Botella 355 cm3 T-Rex (American Stout)
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+P.U.
+40.00
+40.00
+Precio
+$ 600.00
+$ 600.00
+Subtotal
+I.E.P.S
+I.V.A
+Descuento
+TOTAL
+$ 1,200.00
+$ 192.00
+$ 1,392.00

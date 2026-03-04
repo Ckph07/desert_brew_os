@@ -1,0 +1,23 @@
+cervecería
+* DESERT BREW CO*
+= Saltillo, Coahuila dete
+PEDIDO:
+FECHA:
+00000160
+13/03/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Dublin
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+Cantidad
+56 L
+Descripción
+Barril 56L Velafrons (Mexican Pale
+Lager) P.U. $90.00
+Precio
+$5,040
+SUBTOTAL
+TOTAL
+$5,040.00
+$5,040.00

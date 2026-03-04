@@ -1,0 +1,42 @@
+cerveceria
+• DESERT BREW CO®
+- Saltillo, Coahuila de
+PEDIDO:
+FECHA:
+00000233
+01/08/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Akari
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+18
+Descripción
+Botella 355 cm3 Carnotaurus (Amber Lager)
+18
+Botella 355 cm3 T-Rex (American Stout)
+18
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+$
+P.U.
+38.00
+38.00
+38.00
+Precio
+$ 684.00
+$ 684.00
+$ 684.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+$ 2,052.00
+$
+543.78
+$
+415.32
+$ 3,011.10

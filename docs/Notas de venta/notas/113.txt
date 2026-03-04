@@ -1,0 +1,44 @@
+cervecería
+* DESERT BREW CO®
+- Saltillo, Coahuila ate
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: CERDO DE BABEL
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+24
+24
+Descripción
+Botella 355 cm3 T-Rex (American Stout)
+Botella 355 cm3 Carnotaurus (Amber Lager)
+48
+Retorno de botella
+17.04 L
+PEDIDO:
+FECHA:
+00000272
+07/11/25
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+-$
+P.U.
+38.00
+38.00
+3.00
+$
+$
+-$
+Precio
+912.00
+912.00
+144.00
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+$ 1,680.00
+$
+268.80
+$ 1,948.80

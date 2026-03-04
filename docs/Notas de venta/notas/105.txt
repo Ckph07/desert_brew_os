@@ -1,0 +1,35 @@
+cervecería
+*DESERT BREW CO*
+= Satillo, Coahuila c
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Asador 9
+FORMA DE PAGO: Efectivo
+Cantidad
+12
+12
+Descripción
+Botella 355 cm3 Carnotaurus (Amber Lager)
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+8.52 L
+PEDIDO:
+FECHA:
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+P.U.
+40.00
+40.00
+Descuento
+Subtotal
+I.E.P.S
+IV.A
+TOTAL
+00000264
+27/09/25
+Precio
+$ 480.00
+$ 480.00
+$ 960.00
+$ 960.00

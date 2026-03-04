@@ -55,6 +55,8 @@ class SalesNoteBloc extends Bloc<SalesNoteEvent, SalesNoteState> {
         channel: event.channel,
         paymentMethod: event.paymentMethod,
         includeTaxes: event.includeTaxes,
+        includeIeps: event.includeIeps,
+        includeIva: event.includeIva,
         notes: event.notes,
         createdBy: event.createdBy,
       );

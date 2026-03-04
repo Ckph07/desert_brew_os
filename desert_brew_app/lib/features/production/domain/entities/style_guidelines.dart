@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
+import 'package:flutter/services.dart';
 
 class NumericRange extends Equatable {
   const NumericRange(this.min, this.max);
@@ -263,8 +266,15 @@ class BeerStyleProfile extends Equatable {
 
 class BeerStyleGuidelines {
   static const List<String> waterKeys = ['ca', 'mg', 'na', 'cl', 'so4', 'hco3'];
+  static const String defaultAssetPath = 'assets/data/ba_beer_styles_2025.json';
 
-  static const List<BeerStyleProfile> profiles = [
+  static bool _didAttemptAssetLoad = false;
+  static bool _loadedFromAsset = false;
+
+  static bool get loadedFromAsset => _loadedFromAsset;
+  static List<BeerStyleProfile> get profiles => List.unmodifiable(_profiles);
+
+  static const List<BeerStyleProfile> _fallbackProfiles = [
     BeerStyleProfile(
       name: 'American IPA',
       aliases: [
@@ -552,6 +562,52 @@ class BeerStyleGuidelines {
     ),
   ];
 
+  static List<BeerStyleProfile> _profiles = List<BeerStyleProfile>.from(
+    _fallbackProfiles,
+  );
+  static final Map<String, BeerStyleProfile> _fallbackByName = {
+    for (final profile in _fallbackProfiles) profile.name: profile,
+  };
+
+  static Future<void> initialize({
+    AssetBundle? bundle,
+    String assetPath = defaultAssetPath,
+    bool forceReload = false,
+  }) async {
+    if (_didAttemptAssetLoad && !forceReload) {
+      return;
+    }
+    _didAttemptAssetLoad = true;
+
+    try {
+      final sourceBundle = bundle ?? rootBundle;
+      final raw = await sourceBundle.loadString(assetPath);
+      final runtimeProfiles = _profilesFromCatalogJson(raw);
+      if (runtimeProfiles.isNotEmpty) {
+        _profiles = runtimeProfiles;
+        _loadedFromAsset = true;
+      } else {
+        _profiles = List<BeerStyleProfile>.from(_fallbackProfiles);
+        _loadedFromAsset = false;
+      }
+    } catch (_) {
+      _profiles = List<BeerStyleProfile>.from(_fallbackProfiles);
+      _loadedFromAsset = false;
+    }
+  }
+
+  static void resetForTesting() {
+    _didAttemptAssetLoad = false;
+    _loadedFromAsset = false;
+    _profiles = List<BeerStyleProfile>.from(_fallbackProfiles);
+  }
+
+  static void overrideProfilesForTesting(List<BeerStyleProfile> profiles) {
+    _didAttemptAssetLoad = true;
+    _loadedFromAsset = false;
+    _profiles = List<BeerStyleProfile>.from(profiles);
+  }
+
   static BeerStyleProfile? match(String? rawStyle) {
     final style = _normalize(rawStyle);
     if (style.isEmpty) return null;
@@ -580,6 +636,207 @@ class BeerStyleGuidelines {
       }
     }
     return bestMatch;
+  }
+
+  static List<BeerStyleProfile> _profilesFromCatalogJson(String rawJson) {
+    final decoded = json.decode(rawJson);
+    if (decoded is! Map<String, dynamic>) {
+      return const [];
+    }
+
+    final rows = decoded['styles'];
+    if (rows is! List) {
+      return const [];
+    }
+
+    final runtimeProfiles = <BeerStyleProfile>[];
+    final runtimeNames = <String>{};
+    for (final item in rows) {
+      if (item is! Map) {
+        continue;
+      }
+      final row = Map<String, dynamic>.from(item);
+      final profile = _profileFromCatalogRow(row);
+      if (profile == null) {
+        continue;
+      }
+      final key = _normalize(profile.name);
+      if (runtimeNames.add(key)) {
+        runtimeProfiles.add(profile);
+      }
+    }
+
+    if (runtimeProfiles.isEmpty) {
+      return const [];
+    }
+
+    final merged = List<BeerStyleProfile>.from(runtimeProfiles);
+    final mergedKeys = runtimeProfiles.map((p) => _normalize(p.name)).toSet();
+    for (final fallback in _fallbackProfiles) {
+      final key = _normalize(fallback.name);
+      if (mergedKeys.add(key)) {
+        merged.add(fallback);
+      }
+    }
+    return merged;
+  }
+
+  static BeerStyleProfile? _profileFromCatalogRow(Map<String, dynamic> row) {
+    final name = (row['name'] as String?)?.trim();
+    if (name == null || name.isEmpty) {
+      return null;
+    }
+
+    final ogMin = _toDouble(row['og_min']);
+    final ogMax = _toDouble(row['og_max']);
+    final fgMin = _toDouble(row['fg_min']);
+    final fgMax = _toDouble(row['fg_max']);
+    final abvMin = _toDouble(row['abv_min']);
+    final abvMax = _toDouble(row['abv_max']);
+    final ibuMin = _toDouble(row['ibu_min']);
+    final ibuMax = _toDouble(row['ibu_max']);
+    final srmMin = _toDouble(row['srm_min']);
+    final srmMax = _toDouble(row['srm_max']);
+
+    // Skip styles with non-numeric ranges (for example "Varies with style").
+    if (ogMin == null ||
+        ogMax == null ||
+        fgMin == null ||
+        fgMax == null ||
+        abvMin == null ||
+        abvMax == null ||
+        ibuMin == null ||
+        ibuMax == null ||
+        srmMin == null ||
+        srmMax == null) {
+      return null;
+    }
+
+    if (ogMin > ogMax ||
+        fgMin > fgMax ||
+        abvMin > abvMax ||
+        ibuMin > ibuMax ||
+        srmMin > srmMax) {
+      return null;
+    }
+
+    final archetype = _archetypeForStyle(name);
+    return BeerStyleProfile(
+      name: name,
+      aliases: _aliasesForStyle(name),
+      ogRange: NumericRange(ogMin, ogMax),
+      fgRange: NumericRange(fgMin, fgMax),
+      abvRange: NumericRange(abvMin, abvMax),
+      ibuRange: NumericRange(ibuMin, ibuMax),
+      srmRange: NumericRange(srmMin, srmMax),
+      minScaleFactor: archetype.minScaleFactor,
+      maxScaleFactor: archetype.maxScaleFactor,
+      waterProfileRanges: Map<String, NumericRange>.from(
+        archetype.waterProfileRanges,
+      ),
+      waterProfileTarget: archetype.waterProfileTarget,
+    );
+  }
+
+  static List<String> _aliasesForStyle(String styleName) {
+    final style = _normalize(styleName);
+    final aliases = <String>{styleName.toUpperCase()};
+
+    if (style == 'AMERICAN STYLE INDIA PALE ALE') {
+      aliases.addAll(const ['AMERICAN IPA', 'WEST COAST IPA', 'IPA']);
+    }
+    if (style == 'JUICY OR HAZY INDIA PALE ALE') {
+      aliases.addAll(const ['HAZY IPA', 'NEW ENGLAND IPA', 'NEIPA']);
+    }
+    if (style == 'GOLDEN OR BLONDE ALE') {
+      aliases.addAll(const ['BLONDE ALE', 'GOLDEN ALE']);
+    }
+    if (style == 'SESSION INDIA PALE ALE') {
+      aliases.add('SESSION IPA');
+    }
+    if (style == 'AMERICAN STYLE PALE ALE') {
+      aliases.add('APA');
+    }
+    if (style.contains('WITBIER')) {
+      aliases.addAll(const ['WITBIER', 'WHEAT BEER']);
+    }
+    if (style.contains('TRIPEL')) {
+      aliases.addAll(const ['BELGIAN TRIPEL', 'TRIPEL']);
+    }
+    if (style.contains('WEST COAST STYLE INDIA PALE ALE')) {
+      aliases.add('WEST COAST IPA');
+    }
+    if (style.contains('GERMAN STYLE MAERZEN')) {
+      aliases.addAll(const ['GERMAN-STYLE MARZEN', 'GERMAN-STYLE MÄRZEN']);
+    }
+    return aliases.toList(growable: false);
+  }
+
+  static BeerStyleProfile _archetypeForStyle(String styleName) {
+    final style = _normalize(styleName);
+
+    if (style.contains('JUICY') &&
+        style.contains('HAZY') &&
+        style.contains('INDIA PALE ALE')) {
+      return _getFallback('Hazy IPA');
+    }
+    if (style.contains('TRIPEL')) {
+      return _getFallback('Belgian Tripel');
+    }
+    if (_containsAny(style, const ['WITBIER', 'WEIZEN', 'WHEAT', 'GOSE'])) {
+      return _getFallback('Wheat Beer');
+    }
+    if (style.contains('STOUT')) {
+      return _getFallback('Stout');
+    }
+    if (style.contains('PORTER')) {
+      return _getFallback('Porter');
+    }
+    if (_containsAny(style, const ['BLONDE', 'GOLDEN'])) {
+      return _getFallback('Blonde Ale');
+    }
+    if (_containsAny(style, const ['INDIA PALE ALE', ' IPA', 'IPA'])) {
+      if (_containsAny(style, const ['JUICY', 'HAZY', 'NEIPA'])) {
+        return _getFallback('Hazy IPA');
+      }
+      return _getFallback('American IPA');
+    }
+    if (style.contains('PALE ALE')) {
+      return _getFallback('American Pale Ale');
+    }
+    if (_containsAny(style, const [
+      'LAGER',
+      'PILS',
+      'BOCK',
+      'MARZEN',
+      'MÄRZEN',
+      'DUNKEL',
+      'HELLES',
+      'SCHWARZBIER',
+      'OKTOBERFEST',
+    ])) {
+      return _getFallback('Lager');
+    }
+    return _getFallback('American Pale Ale');
+  }
+
+  static BeerStyleProfile _getFallback(String name) =>
+      _fallbackByName[name] ?? _fallbackProfiles.first;
+
+  static bool _containsAny(String value, List<String> terms) {
+    for (final term in terms) {
+      if (value.contains(term)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static double? _toDouble(dynamic value) {
+    if (value is num) {
+      return value.toDouble();
+    }
+    return null;
   }
 
   static String _normalize(String? value) {

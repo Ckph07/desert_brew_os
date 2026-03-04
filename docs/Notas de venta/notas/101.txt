@@ -1,0 +1,37 @@
+cerveceria
+*DESERT BREW CO*
+PEDIDO:
+FECHA:
+00000260
+12/09/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: DB TAP
+FORMA DE PAGO: TRANSFERENCIA
+Cantidad
+18
+18
+24
+Descripción
+Litro Coahuilaceratops (Imperial Indian Pale Ale)
+Litro Velafrons (Mexican Pale Lager)
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+P.U.
+80.00
+80.00
+40.00
+Precio
+$ 1,440.00
+$ 1,440.00
+$ 960.00
+44.52 L
+Subtotal
+I.E.P.S
+I.V.A
+TOTAL
+$ 3,840.00
+$ 3,840.00

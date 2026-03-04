@@ -1,0 +1,43 @@
+cervecería
+*DESERT BREW CO®
+= Saltillo, Coahuila de
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: ESTACIÓN COYOACÁN
+Cantidad
+12 u
+6 u
+6 u
+19 L
+Descripción
+Botella 355 сm3 Carnotaurus (Amber Lager)
+Botella 355 cm3 T-Rex (American Stout)
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+Litro T-Rex (American Stout)
+PEDIDO:
+FECHA:
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+$
+$
+$
+$
+P.U.
+40.00
+40.00
+40.00
+95.00
+Subtotal
+Descuento
+TOTAL
+00000185
+22/04/25
+Precio
+$ 480.00
+$ 240.00
+$ 240.00
+$ 1,805.00
+$ 2,765.00
+-$
+7200
+$ 2,693.00

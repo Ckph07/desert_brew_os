@@ -17,10 +17,16 @@ class _LineItem {
   final priceCtrl = TextEditingController();
   int? productId;
   String? productSku;
+  String? productCategory;
+  double? productIepsRate;
+  double? productIvaRate;
   String unit = 'LITROS';
   double discount = 0;
 
-  Map<String, dynamic> toPayload() => {
+  Map<String, dynamic> toPayload({
+    required bool includeIeps,
+    required bool includeIva,
+  }) => {
     if (productId != null) 'product_id': productId,
     if (productSku != null) 'sku': productSku,
     'product_name': nameCtrl.text.trim(),
@@ -28,8 +34,12 @@ class _LineItem {
     'quantity': double.tryParse(qtyCtrl.text) ?? 0,
     'unit_price': double.tryParse(priceCtrl.text) ?? 0,
     'discount_pct': discount,
-    'ieps_rate': 0,
-    'iva_rate': 0.16,
+    'ieps_rate':
+        (includeIeps &&
+                ((productCategory ?? '').toUpperCase().startsWith('BEER')))
+            ? (productIepsRate ?? 0)
+            : 0,
+    'iva_rate': includeIva ? (productIvaRate ?? 0.16) : 0,
   };
 
   double get lineTotal {
@@ -60,7 +70,8 @@ class _CreateSalesNotePageState extends State<CreateSalesNotePage> {
 
   String _channel = 'B2B';
   String _paymentMethod = 'TRANSFERENCIA';
-  bool _includeTaxes = false;
+  bool _includeIeps = false;
+  bool _includeIva = false;
   int? _selectedClientId;
   final List<_LineItem> _items = [_LineItem()];
 
@@ -206,11 +217,24 @@ class _CreateSalesNotePageState extends State<CreateSalesNotePage> {
                 ),
                 const SizedBox(height: 8),
                 SwitchListTile(
-                  value: _includeTaxes,
-                  onChanged: (v) => setState(() => _includeTaxes = v),
-                  title: const Text('Incluir IEPS/IVA en la nota'),
+                  value: _includeIva,
+                  onChanged: (v) => setState(() => _includeIva = v),
+                  title: const Text('Incluir IVA en la nota'),
                   subtitle: const Text(
-                    'Actívalo si requiere desglose fiscal',
+                    'Aplica IVA a todas las líneas de la nota',
+                    style: TextStyle(
+                      color: DesertBrewColors.textHint,
+                      fontSize: 11,
+                    ),
+                  ),
+                  dense: true,
+                ),
+                SwitchListTile(
+                  value: _includeIeps,
+                  onChanged: (v) => setState(() => _includeIeps = v),
+                  title: const Text('Incluir IEPS (solo cerveza)'),
+                  subtitle: const Text(
+                    'IEPS se calcula únicamente en productos categoría BEER_*',
                     style: TextStyle(
                       color: DesertBrewColors.textHint,
                       fontSize: 11,
@@ -363,7 +387,15 @@ class _CreateSalesNotePageState extends State<CreateSalesNotePage> {
     }
     context.read<SalesNoteBloc>().add(
       SalesNoteCreateSubmitted(
-        items: validItems.map((i) => i.toPayload()).toList(),
+        items:
+            validItems
+                .map(
+                  (i) => i.toPayload(
+                    includeIeps: _includeIeps,
+                    includeIva: _includeIva,
+                  ),
+                )
+                .toList(),
         clientId: _selectedClientId,
         clientName:
             _clientNameCtrl.text.trim().isNotEmpty
@@ -371,7 +403,9 @@ class _CreateSalesNotePageState extends State<CreateSalesNotePage> {
                 : null,
         channel: _channel,
         paymentMethod: _paymentMethod,
-        includeTaxes: _includeTaxes,
+        includeTaxes: _includeIeps || _includeIva,
+        includeIeps: _includeIeps,
+        includeIva: _includeIva,
         notes:
             _notesCtrl.text.trim().isNotEmpty ? _notesCtrl.text.trim() : null,
         createdBy:
@@ -458,6 +492,9 @@ class _LineItemCard extends StatelessWidget {
                         );
                         item.productId = product.id;
                         item.productSku = product.sku;
+                        item.productCategory = product.category;
+                        item.productIepsRate = product.iepsRate;
+                        item.productIvaRate = product.ivaRate;
                         item.nameCtrl.text = product.productName;
                         if ((double.tryParse(item.priceCtrl.text) ?? 0) <= 0 &&
                             product.displayPrice > 0) {

@@ -67,6 +67,8 @@ class TestSalesNoteAPI:
         data = response.json()
         assert data["note_number"] == "00000001"
         assert data["include_taxes"] is False
+        assert data["include_ieps"] is False
+        assert data["include_iva"] is False
         assert data["ieps_total"] == 0.0
         assert data["iva_total"] == 0.0
         assert data["total_liters"] == 36.0
@@ -98,10 +100,60 @@ class TestSalesNoteAPI:
         assert response.status_code == 201
         data = response.json()
         assert data["include_taxes"] is True
+        assert data["include_ieps"] is True
+        assert data["include_iva"] is True
         assert data["subtotal"] == 1000.00
         assert data["ieps_total"] == 100.00  # 1000 × 0.10
         assert data["iva_total"] == 160.00   # 1000 × 0.16
         assert data["total"] == 1260.00      # 1000 + 100 + 160
+
+    def test_create_sales_note_split_taxes_ieps_only_for_beer(self, client):
+        """IEPS applies only to beer lines, IVA can apply to all lines."""
+        cl, beer = self._create_client_and_product(client)
+        shipping = client.post("/api/v1/sales/products", json={
+            "sku": "SHIP-01",
+            "product_name": "Envio",
+            "category": "SHIPPING",
+            "origin_type": "COMMERCIAL",
+            "unit_measure": "UNITS",
+            "fixed_price": 100.00,
+        }).json()
+
+        response = client.post("/api/v1/sales/notes", json={
+            "client_id": cl["id"],
+            "client_name": cl["business_name"],
+            "include_ieps": True,
+            "include_iva": True,
+            "items": [
+                {
+                    "product_id": beer["id"],
+                    "product_name": beer["product_name"],
+                    "unit_measure": "LITROS",
+                    "quantity": 10,
+                    "unit_price": 100.00,
+                    "ieps_rate": 0.10,
+                    "iva_rate": 0.16,
+                },
+                {
+                    "product_id": shipping["id"],
+                    "product_name": shipping["product_name"],
+                    "unit_measure": "UNITS",
+                    "quantity": 1,
+                    "unit_price": 200.00,
+                    "ieps_rate": 0.10,
+                    "iva_rate": 0.16,
+                },
+            ],
+        })
+        assert response.status_code == 201
+        data = response.json()
+        assert data["include_taxes"] is True
+        assert data["include_ieps"] is True
+        assert data["include_iva"] is True
+        assert data["subtotal"] == 1200.00
+        assert data["ieps_total"] == 100.00  # Only beer line: 1000 × 0.10
+        assert data["iva_total"] == 192.00   # Both lines: 1200 × 0.16
+        assert data["total"] == 1492.00
 
     def test_list_sales_notes(self, client):
         """Test listing sales notes."""
@@ -182,6 +234,8 @@ class TestSalesNoteAPI:
         assert data["client_name"] == "Cliente Editado"
         assert data["payment_method"] == "EFECTIVO"
         assert data["include_taxes"] is True
+        assert data["include_ieps"] is True
+        assert data["include_iva"] is True
         assert data["notes"] == "Actualizado"
 
     def test_cancel_note(self, client):

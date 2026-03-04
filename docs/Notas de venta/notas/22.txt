@@ -1,0 +1,41 @@
+cerveceria
+*DESERT BREW CO®
+PEDIDO:
+FECHA:
+00000179
+07/04/25
+Razón social: César Krisabd Padilla Hernández
+RFC:PAHC980207LA1
+CLIENTE: Akari
+Dirección: SERPENTIS 178
+Teléfono: 8443823737
+Cantidad
+12 u
+12 u
+12 u
+12 u
+Descripción
+Botella 355 cm3 Carnotaurus (Amber Lager)
+Botella 355 cm3 T-Rex (American Stout)
+Botella 355 cm3 Velafrons (Mexican Pale Lager)
+Botella 355 cm3 Coahuilaceratops (Imperial Indian Pale Ale)
+$
+$
+$
+P.U.
+36.00
+36.00
+36.00
+36.00
+Precio
+$ 432.00
+$ 432.00
+$ 432.00
+$ 432.00
+Subtotal
+$ 1,728.00
+I.E.P.S (26.5%) $ 457.92
+I.V.A (16%)
+$ 349.75
+TOTAL
+$ 2,535.67

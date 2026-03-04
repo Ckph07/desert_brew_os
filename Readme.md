@@ -1,8 +1,64 @@
-# Desert Brew OS
+# 🍺 Desert Brew OS
 
 > **Sistema de Ejecución de Manufactura (MES) y ERP Modular para Cervecería Artesanal de Alta Eficiencia**
 
 ---
+
+## 🚀 Arranque Rápido
+
+### Todo (backend + frontend)
+
+```bash
+chmod +x dev_launcher.sh
+./dev_launcher.sh
+```
+
+### Solo backend (6 microservicios FastAPI)
+
+```bash
+./dev_launcher.sh --backend-only
+```
+
+### Solo frontend (Flutter Web)
+
+```bash
+./dev_launcher.sh --frontend-only
+```
+
+> **Ctrl+C** detiene todos los procesos limpiamente.
+
+### URLs
+
+| Servicio | Puerto | Swagger | Estado Frontend |
+|----------|:------:|:-------:|:---------------:|
+| Inventory | **8001** | [/docs](http://localhost:8001/docs) | ✅ F1 + F2 |
+| Sales | **8002** | [/docs](http://localhost:8002/docs) | ✅ F3 + F3+ |
+| Security | **8003** | [/docs](http://localhost:8003/docs) | ⏳ F6 |
+| Production | **8004** | [/docs](http://localhost:8004/docs) | ✅ F4 |
+| Finance | **8005** | [/docs](http://localhost:8005/docs) | ⏳ F5 |
+| Payroll | **8006** | [/docs](http://localhost:8006/docs) | ⏳ F6 |
+| Flutter Web | **5000** | — | ✅ |
+
+Logs en vivo: `/tmp/desert_brew_<servicio>.log`
+
+---
+
+## ✅ Estado Sprints Frontend
+
+| Sprint | Módulo | Estado |
+|--------|--------|:------:|
+| F1 | Inventory Core (stock FIFO + proveedores) | ✅ |
+| F2 | Kegs FSM + Producto Terminado + Cámara Fría | ✅ |
+| F3 | Sales — Clientes + Catálogo + Notas de Venta | ✅ |
+| F3+ | Analytics: Litros × Estilo | ✅ |
+| F4 | Production (recetas + batches FSM + costos FIFO) | ✅ |
+| F5 | Finance (ingresos + egresos + balance) | ✅ |
+| F6 | Payroll + Security (device enrollment Ed25519) | ⏳ |
+| F7 | Dashboard KPIs global + Offline (Isar + Outbox) | ⏳ |
+| F8 | Portal B2B + Auth (RBAC) | ⏳ |
+
+---
+
 
 ## 🏭 Contexto Operativo
 

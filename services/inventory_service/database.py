@@ -2,9 +2,14 @@
 Database configuration for Inventory Service.
 """
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.pool import QueuePool
+
+# Load .env file (if present) before reading env vars
+load_dotenv(dotenv_path=Path(__file__).parent / ".env")
 
 # Get database URL from environment
 DATABASE_URL = os.getenv(

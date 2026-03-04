@@ -3,7 +3,7 @@
 # Desert Brew OS — Development Launcher
 # ============================================
 # Launches ALL backend microservices + Flutter frontend
-# Usage: ./dev_launcher.sh [--backend-only | --frontend-only | --all]
+# Usage: `./dev_launcher.sh` [--backend-only | --frontend-only | --all]
 #
 # Ctrl+C to stop all services
 # ============================================
@@ -43,35 +43,14 @@ launch_backend() {
     echo -e "${YELLOW}  🍺 Desert Brew OS — Backend       ${NC}"
     echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 
-    declare -A services=(
-        ["inventory_service"]="8001"
-        ["sales_service"]="8002"
-        ["security_service"]="8003"
-        ["production_service"]="8004"
-        ["finance_service"]="8005"
-        ["payroll_service"]="8006"
-    )
-
-    for service in inventory_service sales_service security_service production_service finance_service payroll_service; do
-        port="${services[$service]}"
-        echo -e "${BLUE}  Starting $service on :$port ...${NC}"
-        cd "$SERVICES_DIR/$service"
-        python main.py > /tmp/desert_brew_${service}.log 2>&1 &
-        PIDS+=($!)
-        echo -e "${GREEN}  ✓ $service (PID: $!) → http://localhost:$port/docs${NC}"
-    done
-
-    echo ""
-    echo -e "${GREEN}  All 6 backend services running!${NC}"
-    echo -e "${GREEN}  Swagger docs:${NC}"
-    echo -e "    📦 Inventory  → http://localhost:8001/docs"
-    echo -e "    💰 Sales      → http://localhost:8002/docs"
-    echo -e "    🔐 Security   → http://localhost:8003/docs"
-    echo -e "    🏭 Production → http://localhost:8004/docs"
-    echo -e "    📊 Finance    → http://localhost:8005/docs"
-    echo -e "    👥 Payroll    → http://localhost:8006/docs"
+    # Use the robust python launcher
+    conda run -n base python /tmp/launch_services.py &
+    PIDS+=($!)
+    
+    echo -e "${GREEN}  ✓ Backend launch script triggered${NC}"
     echo ""
 }
+
 
 launch_frontend() {
     echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
@@ -79,10 +58,11 @@ launch_frontend() {
     echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 
     cd "$FLUTTER_APP_DIR"
-    echo -e "${BLUE}  Starting Flutter on Chrome...${NC}"
-    flutter run -d chrome &
+    echo -e "${BLUE}  Starting Flutter on Web Server (Port 3000)...${NC}"
+    # Use web-server instead of chrome to avoid hanging on debug service
+    flutter run -d web-server --web-hostname 127.0.0.1 --web-port 3000 &
     PIDS+=($!)
-    echo -e "${GREEN}  ✓ Flutter web started${NC}"
+    echo -e "${GREEN}  ✓ Flutter web started at http://localhost:3000${NC}"
     echo ""
 }
 

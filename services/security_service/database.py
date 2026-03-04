@@ -5,8 +5,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 
 # Database URL from environment
+load_dotenv(dotenv_path=Path(__file__).parent / ".env")
+
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
     "postgresql://desertbrew:brewmaster2024@localhost:5432/desertbrew_security"
